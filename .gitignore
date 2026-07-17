@@ -1,0 +1,44 @@
+# _private 폴더 전체 제외 (개인정보, 자격증명 등)
+_private/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# Environment
+.env
+.env.local
+
+# Data (대용량 데이터는 별도 관리 권장)
+data/raw/
+data/temp/
+
+# 테스트/임시 파일
+*.tmp
+*.log
+/.claude/
+
+# macOS
+.Spotlight-V100
+.Trashes
