@@ -6,9 +6,9 @@ tags: [guide, setup, beginner]
 timestamp: 2026-07-17T00:00:00Z
 ---
 
-# Getting Started with Solar Open2
+# Getting Started with Solar Open 2
 
-This guide walks you through setting up your environment to work with Solar Open2 using Claude Code and Hermes Agent.
+This guide walks you through setting up your environment to work with Solar Open 2 using Claude Code and Hermes Agent.
 
 ## Prerequisites
 

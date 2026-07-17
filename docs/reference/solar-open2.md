@@ -7,9 +7,9 @@ timestamp: 2026-07-17T00:00:00Z
 resource: https://docs.upstage.ai/
 ---
 
-# Solar Open2
+# Solar Open 2
 
-Solar Open2 is Upstage's open-weight large language model designed for efficient inference and strong performance across a wide range of tasks.
+Solar Open 2 is Upstage's open-weight large language model designed for efficient inference and strong performance across a wide range of tasks.
 
 ## Overview
 
