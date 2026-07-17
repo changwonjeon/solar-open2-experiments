@@ -1,0 +1,19 @@
+[project]
+name = "upstage-solar-test"
+version = "0.1.0"
+description = "Upstage Solar Open 2 testing workspace"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+]
+
+[tool.uv]
+# uv-specific settings
