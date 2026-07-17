@@ -71,6 +71,23 @@ _upstage/
 | **API 엔드포인트** | https://api.upstage.ai/v1 |
 | **문서** | https://docs.upstage.ai/ |
 
+## 🧪 Solar Open 2 비교 실험 프로젝트
+
+### 랄프톤(Ralphthon) 재현 실험
+
+랄프톤 해커톤(ICML 2026)에서 Codex CLI가 자율적으로 수행한 **랄프루프(Ralph Loop)**를 Solar Open 2 + Claude Code로 재현하여 두 모델의 자율 실행 능력을 비교 분석합니다.
+
+**실험 개요:**
+- **목표**: 랄프톤에서 Codex가 3시간 동안 autonomously 수행한 P0 deliverables를 Solar Open 2로 재현
+- **프롬프트**: `$ralph\n\n<RALPH_GOAL.md>` (랄프톤의 Goal 파일 전체)
+- **비교 방식**: 정성(이해도/수행력) + 과정(로그/체크포인트) + 정량(P0 완료율/schema 준수율/시간)
+
+**실험 자료:** [`docs/notes/notes/ralphthon-solar-comparison.md`](docs/notes/notes/ralphthon-solar-comparison.md)
+
+**진행 상태:** 🟡 Planning → Phase 1: 랄프톤 자료 복사 대기 중
+
+---
+
 ## 🗓️ Stage 1 일정
 
 | 기간 | 내용 |
