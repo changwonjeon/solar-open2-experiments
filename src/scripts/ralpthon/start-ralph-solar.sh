@@ -28,7 +28,7 @@ echo "[DEBUG] RALPH_GOAL_PATH=$ROOT/docs/experiments/ralphthon/RALPH_GOAL.md" >&
 # Ensure output directories exist
 mkdir -p "$ROOT/data/results/ralpthon/solar/checkpoints"
 mkdir -p "$ROOT/data/results/ralpthon/solar"
-exec 2>/dev/tty  # Restore stderr to terminal after debug
+# exec 2>/dev/tty  # REMOVED: nohup 환경에서 /dev/tty 접근 불가, 모든 stderr는 /tmp/ralph-start-debug.log로만 출력
 
 CONFIRMATION="${1:-}"
 RALPH_GOAL_PATH="$ROOT/docs/experiments/ralphthon/RALPH_GOAL.md"
