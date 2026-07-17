@@ -1,0 +1,16 @@
+{
+  "fixture_kind": "synthetic_throughput_corpus",
+  "assigned_count": 10,
+  "papers": [
+    {"paper_id": "paper-001", "paper_path": "fixtures/throughput/paper-001.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-002", "paper_path": "fixtures/throughput/paper-002.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-003", "paper_path": "fixtures/throughput/paper-003.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-004", "paper_path": "fixtures/throughput/paper-004.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-005", "paper_path": "fixtures/throughput/paper-005.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-006", "paper_path": "fixtures/throughput/paper-006.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-007", "paper_path": "fixtures/throughput/paper-007.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-008", "paper_path": "fixtures/throughput/paper-008.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-009", "paper_path": "fixtures/throughput/paper-009.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]},
+    {"paper_id": "paper-010", "paper_path": "fixtures/throughput/paper-010.md", "evidence_paths": ["fixtures/throughput/evidence-bundle.json"]}
+  ]
+}

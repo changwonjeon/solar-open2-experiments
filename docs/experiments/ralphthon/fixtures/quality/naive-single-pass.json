@@ -1,0 +1,17 @@
+{
+  "baseline": "naive-single-pass-v1",
+  "rule": "Emit one finding from the first selected result sentence; do not revisit method or limitations.",
+  "predictions": [
+    {"paper_id": "paper-001", "finding_type": "strength", "locator": "Table 1 (page 3)", "text": "Calibration error is lower."},
+    {"paper_id": "paper-002", "finding_type": "strength", "locator": "Table 2 (page 3)", "text": "Median latency is lower."},
+    {"paper_id": "paper-003", "finding_type": "strength", "locator": "Figure 2 (page 3)", "text": "Flagged cases are available for inspection."},
+    {"paper_id": "paper-004", "finding_type": "strength", "locator": "Table 1 (page 3)", "text": "Reported token accuracy improves."},
+    {"paper_id": "paper-005", "finding_type": "strength", "locator": "Figure 3 (page 3)", "text": "More injected errors are found."},
+    {"paper_id": "paper-006", "finding_type": "strength", "locator": "Table 2 (page 3)", "text": "Error with missing sensors improves."},
+    {"paper_id": "paper-007", "finding_type": "strength", "locator": "Method (page 2)", "text": "The privacy parameters are stated."},
+    {"paper_id": "paper-008", "finding_type": "strength", "locator": "Figure 2 (page 3)", "text": "Bias improves on generated families."},
+    {"paper_id": "paper-009", "finding_type": "strength", "locator": "Table 3 (page 3)", "text": "Accuracy is better than random deletion."},
+    {"paper_id": "paper-010", "finding_type": "strength", "locator": "Table 1 (page 3)", "text": "Trace recovery exceeds note recovery."}
+  ],
+  "expected_metrics": {"tp": 10, "fp": 0, "fn": 10, "precision": 1.0, "recall": 0.5, "f1": 0.666667, "paper_coverage": 1.0, "location_accuracy": 1.0}
+}

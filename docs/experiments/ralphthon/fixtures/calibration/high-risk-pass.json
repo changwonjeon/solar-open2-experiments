@@ -1,0 +1,15 @@
+{
+  "risk_signals": {
+    "paper-001": {"central_evidence_mismatch": true},
+    "paper-002": {"central_evidence_mismatch": true},
+    "paper-003": {"central_evidence_mismatch": true},
+    "paper-004": {"central_evidence_mismatch": true},
+    "paper-005": {"central_evidence_mismatch": true},
+    "paper-006": {"central_evidence_mismatch": true},
+    "paper-007": {"central_evidence_mismatch": true},
+    "paper-008": {"central_evidence_mismatch": true},
+    "paper-009": {"central_evidence_mismatch": true},
+    "paper-010": {"central_evidence_mismatch": true}
+  },
+  "verifier_results": {}
+}

@@ -84,8 +84,15 @@ _upstage/
 
 **실험 자료:** [`docs/notes/notes/ralphthon-solar-comparison.md`](docs/notes/notes/ralphthon-solar-comparison.md)
 
-**진행 상태:** 🟡 Planning → Phase 1: 랄프톤 자료 복사 대기 중
+**진행 상태:** 🟡 Phase 1~3 완료 → Phase 4 실행 중 (Question Mode 전환)
+---
 
+## 🚀 실행 가이드
+
+랄프톤 실험을 바로 실행하려면:
+
+
+또는  스킬을 사용하여 에이전트가 자동으로 실행할 수 있습니다.
 ---
 
 ## 🗓️ Stage 1 일정
