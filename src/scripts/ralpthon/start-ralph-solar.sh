@@ -1,13 +1,37 @@
 #!/bin/zsh
 set -euo pipefail
 
-# Portable path resolution: works in zsh, bash, sh
-SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+# --- Robust SCRIPT_DIR and ROOT resolution ---
+# Resolve SCRIPT_DIR regardless of how the script was invoked (source, ., nohup ./path, etc.)
+if [[ -n "${ZSH_VERSION:-}" ]]; then
+  # zsh-specific: $0:A gives absolute path
+  SCRIPT_DIR="${0:A:h}"
+else
+  # POSIX/bash fallback: cd to dirname of $0 and pwd
+  # If $0 is relative, cd into it from current dir; if absolute, use it directly.
+  _script_path="$0"
+  if [[ "$_script_path" != /* ]]; then
+    _script_path="$(pwd)/$_script_path"
+  fi
+  SCRIPT_DIR="$(cd "$(dirname "$_script_path")" && pwd)"
+fi
 ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
-cd "$ROOT"
+
+# --- Debug logging ---
+exec 2>/tmp/ralph-start-debug.log
+echo "[DEBUG] SCRIPT_DIR=$SCRIPT_DIR" >&2
+echo "[DEBUG] ROOT=$ROOT" >&2
+echo "[DEBUG] pwd=$PWD" >&2
+echo "[DEBUG] \$0=$0" >&2
+echo "[DEBUG] RALPH_GOAL_PATH=$ROOT/docs/experiments/ralphthon/RALPH_GOAL.md" >&2
+
+# Ensure output directories exist
+mkdir -p "$ROOT/data/results/ralpthon/solar/checkpoints"
+mkdir -p "$ROOT/data/results/ralpthon/solar"
+exec 2>/dev/tty  # Restore stderr to terminal after debug
 
 CONFIRMATION="${1:-}"
-RALPH_GOAL_PATH="$ROOT/docs/experiments/ralpthon/RALPH_GOAL.md"
+RALPH_GOAL_PATH="$ROOT/docs/experiments/ralphthon/RALPH_GOAL.md"
 SESSION_LOG="$ROOT/data/results/ralpthon/solar/session.log"
 
 if [[ "$CONFIRMATION" != "START-RALPH" ]]; then
@@ -26,10 +50,6 @@ if [[ -n "$(git status --porcelain --untracked-files=no)" ]]; then
   exit 4
 fi
 
-# Ensure output directories exist
-mkdir -p "$ROOT/data/results/ralpthon/solar/checkpoints"
-mkdir -p "$ROOT/data/results/ralpthon/solar"
-
 echo "[$(date '+%Y-%m-%d %H:%M:%S %Z')] 🟢 Ralph Loop (Solar) starting..." >> "$SESSION_LOG"
 
 # Check tmux sessions
@@ -41,8 +61,6 @@ for session in ralphthon-loop ralphthon-deadline; do
 done
 
 # Launch Ralph Loop in tmux
-# -c "$ROOT": 작업 디렉토리를 프로젝트 루트로 설정
-# run-ralph-solar.sh 내부에서 claude-upstage를 인터랙티브 모드로 실행
 tmux new-session -d -s ralphthon-loop -c "$ROOT" "$ROOT/src/scripts/ralpthon/run-ralph-solar.sh"
 tmux new-session -d -s ralphthon-deadline "$ROOT/src/scripts/ralpthon/ralph-deadline-watchdog.sh"
 
@@ -50,10 +68,8 @@ tmux new-session -d -s ralphthon-deadline "$ROOT/src/scripts/ralpthon/ralph-dead
 sleep 10
 
 # 초기 랄프 프롬프트를 tmux 버퍼에 로드
-# `print`는 zsh 내장 명령어로, \n을 항상 개행으로 해석함 (printf와 달리 %s 없이도 동작)
 BUFFER_NAME="ralph_initial_prompt"
-print -N '$ralph' '' '' | tmux load-buffer -b "$BUFFER_NAME" -
-# RALPH_GOAL.md 내용을 동일한 버퍼에 이어서 추가
+printf '$ralph\n\n' | tmux load-buffer -b "$BUFFER_NAME" -
 cat "$RALPH_GOAL_PATH" | tmux load-buffer -b "$BUFFER_NAME" -a -
 
 # 버퍼를 ralphthon-loop 세션에 붙여넣기
@@ -62,7 +78,7 @@ tmux send-keys -t ralphthon-loop Enter
 sleep 2
 
 # 권한 프롬프트 감지 시 자동 응답 (Question Mode)
-if tmux capture-pane -t ralphthon-loop -p 2>/dev/null | grep -qiE "permission|confirm|permanent|y\/N|abort"; then
+if tmux capture-pane -t ralphthon-loop -p 2>/dev/null | grep -qiE "permission|confirm|permanent|y/N|abort"; then
   tmux send-keys -t ralphthon-loop "y"
   tmux send-keys -t ralphthon-loop Enter
   sleep 2
