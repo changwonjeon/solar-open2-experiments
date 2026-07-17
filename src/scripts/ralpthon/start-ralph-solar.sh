@@ -61,9 +61,10 @@ tmux new-session -d -s ralphthon-deadline "$ROOT/src/scripts/ralpthon/ralph-dead
 sleep 10
 
 # Load initial prompt into tmux buffer
+# FIX: Concatenate $ralph and RALPH_GOAL.md in a single pipeline to avoid load-buffer -a issue
+# The -a flag is not supported in tmux 3.6 load-buffer
 BUFFER_NAME="ralph_initial_prompt"
-printf '\$ralph\n\n' | tmux load-buffer -b "$BUFFER_NAME" -
-cat "$RALPH_GOAL_PATH" | tmux load-buffer -b "$BUFFER_NAME" -a -
+{ printf '\$ralph\n\n'; cat "$RALPH_GOAL_PATH"; } | tmux load-buffer -b "$BUFFER_NAME" -
 
 # Paste buffer into ralphthon-loop session
 tmux paste-buffer -b "$BUFFER_NAME" -t ralphthon-loop
