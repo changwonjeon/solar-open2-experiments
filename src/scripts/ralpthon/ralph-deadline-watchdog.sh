@@ -2,7 +2,7 @@
 set -euo pipefail
 
 SCRIPT_DIR="${0:A:h}"
-ROOT="$(cd "$SCRIPT_DIR/../.." && pwd)"
+ROOT="$(cd "$SCRIPT_DIR/../../.." && pwd)"
 DATA_DIR="$ROOT/data/results/ralpthon/solar"
 SESSION_LOG="$DATA_DIR/session.log"
 WATCHDOG_LOG="$DATA_DIR/watchdog.log"
