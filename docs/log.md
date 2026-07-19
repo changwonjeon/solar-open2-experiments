@@ -2,7 +2,18 @@
 
 Chronological history of changes to this knowledge bundle.
 
-## 2026-07-17
+## 2026-07-19 (일) — Ralph Loop 스크립트 안정화 커밋 및 푸시
+
+* **Update**: Committed and pushed (`git push origin main`) the following changes to the `solar-open2-experiments` repository:
+  - **`.gitignore` update**: Refined to exclude Claude Code's general state (`/.claude/*`) while explicitly tracking project skills (`solar-ralph/`, `git-checkpoint/`) for reproducibility.
+  - **`src/scripts/ralpthon/record-session.sh`**: Added executable permission (`chmod +x`).
+* **Update**: Updated `README.md` — refreshed the "Solar Open 2 Comparison Experiment Project" section with current status (Phase 5 진행 중) and a summary of the recent script stabilization improvements (UTF-8 corruption fix, tmux robustness, nohup compatibility, path hardening, security hardening).
+* **Update**: Updated `docs/log.md` — added today's entry documenting the git push and the Ralph Loop script stabilization work.
+* **Update**: Updated `docs/experiments/experiment-log.md` — added today's entry with details of the script stabilization and workflow improvements.
+* **Commit Log**: `59c7689` — "chore: exclude Claude Code general state but track project skills in .gitignore; make record-session.sh executable"
+  - Builds on previous commit `3c2387d` (fix: tmux load-buffer flag error, UTF-8 corruption elimination), `628876e` (refactor: pure ASCII rewrite), `748b9c4` (fix: nohup-compatible debug logging), `ed24e63` (fix: SCRIPT_DIR/ROOT resolution, tmux/prompt injection hardening), and `918dc92` (fix: tmux load-buffer stdin flag, watchdog path calculation).
+
+### 2026-07-17
 
 * **Initialization**: Established the LLM-Wiki + OKF knowledge bundle structure with LLM-Wiki categories (People, Models, Papers, Projects, Notes, Writing) and OKF-formatted documents (YAML frontmatter + Markdown body). Set up folder hierarchy under `docs/` with guide, reference, experiments, notes, and templates.
 * **Creation**: Added 5 document templates (Model, Paper, Experiment, Person, Project) following OKF conventions.

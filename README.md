@@ -84,7 +84,14 @@ _upstage/
 
 **실험 자료:** [`docs/notes/notes/ralphthon-solar-comparison.md`](docs/notes/notes/ralphthon-solar-comparison.md)
 
-**진행 상태:** 🟡 Phase 1~3 완료 → Phase 4 실행 중 (Question Mode 전환)
+**진행 상태:** 🟢 Phase 1~4 완료 → Phase 5 실행 중 (결과 분석 및 비교 보고서 작성)
+- **최근 개선 사항 (2026.07.19)**: Ralph Loop 스크립트 안정화 완료
+  - `tmux load-buffer` 관련 오류 수정 및 UTF-8 파싱 코럽션 완전 제거
+  - 모든 스크립트를 pure ASCII로 재작성하여 멀티바이트 파싱 문제 해결
+  - `nohup` 호환성을 위한 `exec 2>/dev/tty` 제거
+  - `SCRIPT_DIR/ROOT` 경로 해결 로직 강화 및 tmux/prompt injection 보안 강화
+  - `.gitignore` 갱신: Claude Code 일반 상태는 무시하고 프로젝트 스킬(`solar-ralph`, `git-checkpoint`)은 추적 유지
+  - `record-session.sh` 실행 권한 부여
 ---
 
 ## 🚀 실행 가이드
