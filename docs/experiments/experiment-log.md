@@ -10,6 +10,15 @@ timestamp: 2026-07-17T00:00:00Z
 
 This file maintains a chronological record of all experiments conducted using Solar Open2.
 
+## 2026-07-20 (월) 03:51 — 첫 Git checkpoint 성공 경로 검증
+
+- **Status**: 실행 전 기능 검증 진행 중. 유효한 3시간 본 실행은 아직 시작하지 않음.
+- **Fixes**: preflight 종료 코드 포착, run-state 경로 containment, null sentinel 복원, commit-gate 옵션 가드와 `approved_paths` argv 전달, zsh `read -rA` 호환성을 수정함.
+- **Static validation**: `zsh -n`과 `git diff --check` 통과. malformed JSON, 누락 schema, 절대·대시 시작·디렉터리·저장소 밖 run-state 경로가 예상한 non-zero 코드로 거부됨.
+- **Functional validation**: 격리된 임시 Git 저장소에서 first-checkpoint preflight Gate 1~4와 commit gate Gate 0~8 통과. 승인 파일 `deliverable.txt`만 로컬 commit `d0b0e84`에 포함되고 성공 JSON의 `approved_paths`가 `['deliverable.txt']`로 보존됨.
+- **Remaining**: subsequent checkpoint, 공백·유니코드 경로, 실패 cleanup, unapproved path 거부와 runtime soak/rehearsal.
+- **Scope**: 외부 remote 작업 없음. 테스트용 로컬 bare repository만 사용.
+
 ## 2026-07-20 (월) 02:46 — Ralph Loop 스킬 9개 항목 일관성 보정 및 Git 히스토리 정리 (완료)
 
 ### 2026-07-20 — Skill Consistency Correction (9 Items) and Git History Cleanup
