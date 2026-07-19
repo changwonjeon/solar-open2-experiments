@@ -84,7 +84,7 @@ _upstage/
 
 **실험 자료:** [`docs/notes/notes/ralphthon-solar-comparison.md`](docs/notes/notes/ralphthon-solar-comparison.md)
 
-**진행 상태:** 🟢 Phase 1~4 완료 → Phase 5 진행 중 (결과 분석 및 비교 보고서 작성)
+**진행 상태 (2026-07-20 03:51 KST):** 🟡 실행 전 검증 진행 중. 유효한 3시간 본 실행은 아직 시작하지 않았으며, 임시 Git 저장소에서 첫 checkpoint 성공 경로까지 확인한 상태입니다.
 - **스크립트 안정화 히스토리 (2026.07.17~07.20)**:
 
   | 일자 | 커밋 | 내용 |
@@ -100,6 +100,14 @@ _upstage/
   | 07/19 | `3a15443` | Ralph Loop + git-checkpoint 스킬 파일 추가 |
   | 07/20 | `4a8d953` | **9개 항목 스킬 일관성 보정** + Git 히스토리 정리 |
 
+- **03:51 KST 추가 검증 결과**:
+  - `preflight.sh`의 Python 실패 코드 포착을 `set -e`와 안전하게 동작하는 `if` 분기로 변경하고, malformed JSON·누락 필드가 `exit 1`로 fail-closed 처리되는 것을 확인했습니다.
+  - `--run-state`에 저장소 상대 경로만 허용하고 절대 경로, 대시 시작 경로, 디렉터리, 저장소 밖 경로와 symlink component를 거부하도록 보강했습니다.
+  - 첫 checkpoint의 `last_checkpoint_commit: null` sentinel을 올바르게 복원해 first/subsequent checkpoint 판별 오류를 수정했습니다.
+  - `commit-gate.sh`의 옵션 인자 가드, 성공 JSON `approved_paths` argv 전달, zsh 배열 파싱(`read -rA`)을 수정했습니다.
+  - 임시 로컬 Git 저장소와 bare upstream에서 preflight Gate 1~4 및 commit gate Gate 0~8을 통과했고, `P0-1`의 `deliverable.txt`만 로컬 commit `d0b0e84`로 기록됐습니다. 성공 JSON의 `approved_paths`도 정확했습니다.
+  - 후속 checkpoint, 실패 및 cleanup 경로, runtime 연결, soak test와 rehearsal은 다음 작업으로 남았습니다.
+
 - **9개 항목 일관성 보정 (2026.07.20)** — `fix/solar-ralph-skill-consistency` 브랜치:
 
   | 대상 파일 | 항목 | 핵심 보정 |
@@ -109,7 +117,7 @@ _upstage/
   | `SKILL.md` | 2개 | Resume 섹션의 "it may modify" 모순 문장 제거; 비수정 계약("never modifies worktree files or Git history - on success or on failure. No staging, committing, resetting, or file modification occurs as part of resume, regardless of outcome.") 명확화; "twice before" → "once already" 통일 |
   | `state-contract.md` | 1개 | `P0 Item Schema`의 `status` 필드에 `needs-operator` 추가; Resume Consistency Contract (4개 독립 비교) 문서화; Status Transitions 표에 `tests_passed`, `checkpoint_failed`, `needs-operator` 포함; State Write Distinctions(원자적 교체 vs 추가 전용) 정리 |
 
-- **Git 히스토리 정리 (2026.07.20)**: `git rebase -i --root`를 통해 과거 7개 커밋에 포함된 `Co-Authored-By: Claude...` 트레일러 제거 → 히스토리 클린업 완료. `.gitmessage` 템플릿 및 `clean-coauthor.sh` 유틸리티 추가로 향후 재발 방지
+- **Git 히스토리 정리 (2026.07.20)**: `git rebase -i --root`를 통해 과거 7개 커밋에 포함된 `Co-Authored-By: Claude...` 트레일러를 제거했습니다. 이전 기록에 언급된 `.gitmessage`와 `clean-coauthor.sh`는 현재 Git 이력에 존재하지 않아 후속 확인 대상으로 남겼습니다.
 ---
 
 ## 🚀 실행 가이드

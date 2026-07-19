@@ -91,7 +91,7 @@ check_common_rejections() {
 
   # Component-level sensitive path check: _private, credentials, secrets at any depth
   local_compliant=1
-  IFS='/' read -ra COMPONENTS <<< "$raw_path"
+  IFS='/' read -rA COMPONENTS <<< "$raw_path"
   for comp in "${COMPONENTS[@]}"; do
     case "$comp" in
       (_private|credentials|secrets)
@@ -134,7 +134,7 @@ check_symlink_components() {
   local comp
   local first_component=1
 
-  IFS='/' read -ra COMPONENT_ARRAY <<< "$raw_path"
+  IFS='/' read -rA COMPONENT_ARRAY <<< "$raw_path"
 
   for comp in "${COMPONENT_ARRAY[@]}"; do
     [[ -z "$comp" ]] && continue  # skip empty components (leading/trailing slash)
@@ -397,12 +397,20 @@ POSITIONAL_ARGS=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
     --run-state)
+      if [[ $# -lt 2 ]]; then
+        print -r -u2 "ERROR: --run-state requires a path argument" >&2
+        exit 2
+      fi
       RUN_STATE_PATH="$2"
-      shift 2 || { print -r -u2 "ERROR: --run-state requires an argument"; exit 2; }
+      shift 2
       ;;
     --summary)
+      if [[ $# -lt 2 ]]; then
+        print -r -u2 "ERROR: --summary requires a text argument" >&2
+        exit 2
+      fi
       SUMMARY="$2"
-      shift 2 || { print -r -u2 "ERROR: --summary requires an argument"; exit 2; }
+      shift 2
       ;;
     --help|-h)
       print -r -u2 "Usage: commit-gate.sh <p0-id> <approved-path>... --run-state <path> [--summary <text>]"
@@ -889,24 +897,18 @@ TREE_STATUS="$(safe_git status --porcelain)"
 TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
 # Emit exactly one JSON object to stdout
-COMMIT_HASH="$COMMIT_HASH" \
-COMMIT_MSG="$COMMIT_MSG" \
-TREE_STATUS="$TREE_STATUS" \
-P0_ID="$P0_ID" \
-TIMESTAMP="$TIMESTAMP" \
-python3 - "$COMMIT_HASH" "$COMMIT_MSG" "$TREE_STATUS" "$P0_ID" "$TIMESTAMP" <<'PY'
+# approved_paths are passed as argv[6:] (not via stdin/heredoc) so that
+# whitespace, Unicode, and dash-prefixed paths are preserved as array elements.
+python3 - "$COMMIT_HASH" "$COMMIT_MSG" "$TREE_STATUS" "$P0_ID" "$TIMESTAMP" "${APPROVED_PATHS[@]}" <<'PY'
 import json, sys
 
-# Read values from argv (not env vars) to eliminate os.environ usage
-# argv[1] = COMMIT_HASH, argv[2] = COMMIT_MSG, argv[3] = TREE_STATUS
-# argv[4] = P0_ID, argv[5] = TIMESTAMP
-# approved_paths come from stdin (one per line)
 commit_hash = sys.argv[1]
 commit_msg = sys.argv[2]
 tree_status = sys.argv[3]
 p0_id = sys.argv[4]
 timestamp = sys.argv[5]
-approved_paths = [line.strip() for line in sys.stdin if line.strip()]
+# argv[6:] are the approved paths, preserving whitespace, Unicode, and dash-prefixed names
+approved_paths = sys.argv[6:]
 result = {
     'commit_hash': commit_hash,
     'commit_message': commit_msg,

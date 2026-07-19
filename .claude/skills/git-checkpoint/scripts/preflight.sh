@@ -120,6 +120,88 @@ if [[ -z "$REPO_ROOT" ]]; then
 fi
 cd "$REPO_ROOT"
 
+# --- Validate run-state path ---
+# Mirrors commit-gate.sh Gate 4 run-state validation:
+# - reject absolute paths
+# - reject dash-prefixed paths
+# - reject symlink components
+# - require realpath containment under REPO_ROOT
+# - require a regular file (not a directory)
+if [[ "$RUN_STATE_PATH" == /* ]]; then
+  print -r -u2 "ERROR: --run-state path must be repository-relative (not absolute): '$RUN_STATE_PATH'" >&2
+  exit 2
+fi
+
+if [[ "$RUN_STATE_PATH" == -* ]]; then
+  print -r -u2 "ERROR: --run-state path starts with a dash: '$RUN_STATE_PATH'" >&2
+  exit 2
+fi
+
+# Symlink-component walk: build the path component by component from REPO_ROOT
+# and reject any component that is a symlink. For paths where the target does
+# not yet exist, verify the deepest existing parent has no symlinks.
+fn_check_symlink_components() {
+  local raw_path="$1"
+  local accumulated="$REPO_ROOT"
+  local first=1
+
+  local IFS='/'
+  local comp
+  for comp in ${(s:/:)raw_path}; do
+    [[ -z "$comp" ]] && continue
+    accumulated="$accumulated/$comp"
+    # Check for symlinks (including broken ones) before checking regular existence
+    if [[ -L "$accumulated" ]]; then
+      print -r -u2 "ERROR: --run-state path component is a symbolic link: '$comp' in '$raw_path'" >&2
+      return 1
+    fi
+    if [[ -e "$accumulated" ]]; then
+      :
+    else
+      # Past the deepest existing component — stop checking further.
+      break
+    fi
+  done
+
+  # For non-existent targets (e.g. a tracked deletion or a path that does not yet
+  # exist), verify that no existing parent component is a symlink. Walk back up
+  # from the last existing component and check each parent directory.
+  if [[ ! -e "$accumulated" ]]; then
+    local check_dir
+    check_dir="$(dirname "$accumulated")"
+    while [[ "$check_dir" != "$REPO_ROOT" ]] && [[ -d "$check_dir" ]]; do
+      if [[ -L "$check_dir" ]]; then
+        print -r -u2 "ERROR: --run-state parent path component is a symbolic link in '$raw_path'" >&2
+        return 1
+      fi
+      check_dir="$(dirname "$check_dir")"
+    done
+  fi
+  return 0
+}
+
+if ! fn_check_symlink_components "$RUN_STATE_PATH"; then
+  exit 1
+fi
+
+# realpath containment check
+RS_FS_PATH="$REPO_ROOT/$RUN_STATE_PATH"
+RS_REAL="$(realpath -P "$RS_FS_PATH" 2>/dev/null || echo "")"
+if [[ -z "$RS_REAL" ]]; then
+  print -r -u2 "ERROR: --run-state path does not resolve: '$RUN_STATE_PATH'" >&2
+  exit 2
+fi
+if [[ "$RS_REAL" != "$REPO_ROOT" ]] && [[ "$RS_REAL" != "$REPO_ROOT/"* ]]; then
+  print -r -u2 "ERROR: --run-state path is outside the repository: '$RUN_STATE_PATH' resolves to '$RS_REAL'" >&2
+  exit 2
+fi
+
+# Require a regular file (not a directory)
+if [[ -d "$RS_REAL" ]]; then
+  print -r -u2 "ERROR: --run-state path is a directory, not a file: '$RUN_STATE_PATH'" >&2
+  exit 2
+fi
+
 # --- Retrieve and validate values from run-state.json ---
 # Reads 4 fields from run-state.json and validates the schema strictly:
 #   baseline_commit  : required, must be a non-null, non-empty string
@@ -127,19 +209,27 @@ cd "$REPO_ROOT"
 #   run_id           : required, must be a non-null, non-empty string
 #   last_checkpoint_commit: required; null → first checkpoint; non-null string → subsequent checkpoint;
 #                           missing / empty / non-string → error
-# Python is invoked with the path as argv[1] (not via an environment variable).
-# On any validation failure, Python exits non-zero with a redacted diagnostic on stderr.
-# The caller inspects the exit code: non-zero → hard fail, zero → use the 4 printed lines.
+# Python stdout and exit code are decoupled via a temp file so command-substitution
+# exit-code masking under set -e is avoided. On any validation failure, Python
+# exits non-zero with a redacted diagnostic on stderr. The caller inspects the
+# exit code: non-zero → hard fail, zero → read the 4 lines from the temp file.
+# The temp file is created with mktemp and cleaned up via trap.
+TEMPFILE="$(mktemp)"
+trap 'rm -f "$TEMPFILE"' EXIT
 BASELINE_COMMIT=""
 RUN_BRANCH=""
 LAST_CHECKPOINT_COMMIT_FROM_STATE=""
 RUN_ID_RAW=""
-if [[ -f "$RUN_STATE_PATH" ]]; then
-  RS_EXIT=0
-  RS_CONTENT="$(python3 - "$RUN_STATE_PATH" <<'PY' || RS_EXIT=$?
+
+# Use the canonical filesystem path for the Python open() call so that
+# symlinked-but-resolved paths reach the real file.
+RUN_STATE_REALFULL="$RS_REAL"
+if [[ -f "$RUN_STATE_REALFULL" ]]; then
+  if python3 - "$RUN_STATE_REALFULL" "$TEMPFILE" <<'PY'
 import json, sys
 
 rs_path = sys.argv[1]
+out_path = sys.argv[2]
 try:
     with open(rs_path, 'r') as f:
         state = json.load(f)
@@ -157,7 +247,6 @@ for key in REQUIRED_STR_FIELDS:
     if val is None or not isinstance(val, str) or val == "":
         print(f"INVALID:{key}", file=sys.stderr)
         sys.exit(1)
-    print(val)
 
 # last_checkpoint_commit: required field, but null is valid (first checkpoint).
 if 'last_checkpoint_commit' not in state:
@@ -166,32 +255,43 @@ if 'last_checkpoint_commit' not in state:
 val = state['last_checkpoint_commit']
 if val is None:
     # JSON null → first checkpoint sentinel
-    print("__NULL__")
+    lines = [state['baseline_commit'], state['branch'], state['run_id'], '__NULL__']
 elif isinstance(val, str) and val != "":
-    print(val)
+    lines = [state['baseline_commit'], state['branch'], state['run_id'], val]
 else:
     # empty string or non-string type → error
     print("INVALID:last_checkpoint_commit", file=sys.stderr)
     sys.exit(1)
+
+with open(out_path, 'w') as f:
+    for line in lines:
+        f.write(line + '\n')
 PY
-)"
+  then
+    RS_EXIT=0
+  else
+    RS_EXIT=$?
+  fi
   if [[ $RS_EXIT -ne 0 ]]; then
     # Python exited non-zero: schema/parse error. The redacted diagnostic is on
-    # stderr (already emitted by Python). We do not attempt to parse stdout.
+    # stderr (already emitted by Python). We do not attempt to read the temp file.
     print -r -u2 "ERROR: run-state.json schema validation failed" >&2
     print -r -u2 "       The file at $RUN_STATE_PATH is missing required fields,"
     print -r -u2 "       contains null or empty values where strings are required,"
     print -r -u2 "       or has a type mismatch. See Python stderr above for details." >&2
     exit 1
   fi
-  # Parse the 4-line output (always exactly 4 lines on success)
-  RS_LINES=("${(@f)RS_CONTENT}")
+  # Parse the 4-line output from the temp file (always exactly 4 lines on success)
+  RS_LINES=("${(@f)"$(<"$TEMPFILE")"}")
   BASELINE_COMMIT="${RS_LINES[1]}"
   RUN_BRANCH="${RS_LINES[2]}"
   RUN_ID_RAW="${RS_LINES[3]}"
   LAST_CHECKPOINT_COMMIT_FROM_STATE="${RS_LINES[4]}"
+  if [[ "$LAST_CHECKPOINT_COMMIT_FROM_STATE" == "__NULL__" ]]; then
+    LAST_CHECKPOINT_COMMIT_FROM_STATE=""
+  fi
 else
-  print -r -u2 "ERROR: --run-state file does not exist: $RUN_STATE_PATH" >&2
+  print -r -u2 "ERROR: --run-state file does not exist at resolved path: $RUN_STATE_REALFULL" >&2
   exit 2
 fi
 
