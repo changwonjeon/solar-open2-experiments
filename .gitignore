@@ -37,7 +37,16 @@ data/temp/
 # 테스트/임시 파일
 *.tmp
 *.log
-/.claude/
+
+# Claude Code general state (sessions, plans, credentials)
+# EXCEPT: project skills are tracked for reproducibility
+/.claude/*
+!/.claude/skills/
+/.claude/skills/*
+!/.claude/skills/solar-ralph/
+!/.claude/skills/solar-ralph/**
+!/.claude/skills/git-checkpoint/
+!/.claude/skills/git-checkpoint/**
 
 # macOS
 .Spotlight-V100
