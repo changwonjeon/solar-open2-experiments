@@ -10,18 +10,20 @@ timestamp: 2026-07-17T00:00:00Z
 
 This file maintains a chronological record of all experiments conducted using Solar Open2.
 
-## 2026-07-19 (일) 16:00 — Ralph Loop 스크립트 안정화 및 워크플로우 개선
+## 2026-07-20 (월) 01:00 — Ralph Loop 스킬 9개 항목 일관성 보정 및 히스토리 정리
 
-### 2026-07-19 — Script Stabilization and Workflow Improvements
+### 2026-07-20 — Skill Consistency Correction (9 Items) and History Cleanup
 
-- **Update**: Committed and pushed all Ralph Loop script stabilization fixes to `main` branch on `solar-open2-experiments` repository (commit `59c7689`).
-- **Fix**: Resolved tmux `load-buffer -a` unknown flag error and eliminated all UTF-8 multibyte parsing corruption by rewriting scripts in pure ASCII.
-- **Fix**: Removed `exec 2>/dev/tty` from `start-ralph-solar.sh` for nohup compatibility.
-- **Fix**: Hardened `SCRIPT_DIR/ROOT` path resolution and tmux/prompt injection security.
-- **Fix**: Fixed tmux `load-buffer` stdin `-` flag and watchdog root path calculation.
-- **Update**: Refined `.gitignore` to track project skills (`solar-ralph/`, `git-checkpoint/`) while ignoring Claude Code general state for reproducibility.
-- **Update**: Made `src/scripts/ralpthon/record-session.sh` executable.
-- **Status**: Ralph Loop experiment transition from Phase 4 (Question Mode execution) to Phase 5 (result analysis and comparison report writing).
+- **Update**: Completed all 9 consistency corrections across 4 files in the Ralph Loop skill system (branch `fix/solar-ralph-skill-consistency`).
+- **Fix (`commit-gate.sh` Item 2)**: Converted all 3 Python blocks from `os.environ['P0_ID']`/`os.environ['RUN_STATE_PATH']` to `sys.argv[1]`/`sys.argv[2]` argument passing, ensuring argv-based path delivery throughout.
+- **Fix (`commit-gate.sh` Item 6)**: Reordered Gate numbers to match actual execution sequence: Gate 0=Index pollution, Gate 1=Approved path validation, Gate 2=Secret pattern check, Gate 3=Worktree trust, Gate 4=Test evidence, Gate 5=Stage paths, Gate 6=Post-stage containment, Gate 7=Pre-commit validation, Gate 8=Commit+emit JSON.
+- **Verify (`preflight.sh` Items 1, 3-5)**: Confirmed argv-based run-state path delivery (`sys.argv[1]`), no branch bypass in Gate 1, `$# -lt 2` option guards, and all output unified to stderr via `print -r -u2`.
+- **Fix (`SKILL.md` Items 7-9)**: Removed contradictory "it may modify" sentence from resume section; clarified non-modification contract ("never modifies worktree files or Git history - on success or on failure. No staging, committing, resetting, or file modification occurs as part of resume, regardless of outcome."); replaced all "twice before" with "once already" phrasing.
+- **Fix (`state-contract.md` Items 1-9)**: Added `needs-operator` to P0 Item Schema status field; added Resume Consistency Contract documenting 4 independent comparisons; added `tests_passed`, `checkpoint_failed`, `needs-operator` to Status Transitions table; added State Write Distinctions section (atomic replace vs append-only).
+- **Cleanup**: Rewrote full Git history using `git rebase -i --root` to remove `Co-Authored-By: Claude...` trailers from 7 commits, ensuring clean commit history.
+- **Added**: Created `.gitmessage` template to prevent future co-authored-by insertions, and `clean-coauthor.sh` utility script.
+- **Documentation**: Updated `README.md` with detailed progress log for 2026-07-19~20; updated `docs/experiments/experiment-log.md` with comprehensive entry.
+- **Status**: All 9 items verified. Working tree contains 4 modified skill files ready for commit. Temporary files (`.gitmessage`, `clean-coauthor.sh`, `data/`) created for cleanup.
 
 ## 2026-07-17
 

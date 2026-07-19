@@ -81,10 +81,11 @@ Each entry in `p0_items` is an object with the following fields:
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
 | `id` | string | Yes | P0 identifier (e.g., `"P0-3"`). Derived from the task spec. |
-| `status` | string | Yes | One of: `"pending"`, `"active"`, `"tests_passed"`, `"passed"`, `"failed"`, `"checkpoint_failed"`, `"deferred"`. |
+| `status` | string | Yes | One of: `"pending"`, `"active"`, `"tests_passed"`, `"passed"`, `"failed"`, `"checkpoint_failed"`, `"deferred"`, `"needs-operator"`. |
 | | | | `"tests_passed"` — test commands passed but checkpoint commit not yet made. Transitional state. |
 | | | | `"passed"` — test commands passed AND checkpoint commit successfully made. Terminal state. |
-| | | | `"checkpoint_failed"` — test commands passed but checkpoint commit was rejected by `/git-checkpoint`. Retryable. |
+| | | | `"checkpoint_failed"` — test commands passed but checkpoint commit was rejected by `/git-checkpoint`. Retryable once for transient failures only. |
+| | | | `"needs-operator"` — unrecoverable condition requiring human intervention. No auto-retry. |
 | `attempts` | integer | Yes | Number of times this P0 has been attempted (including the current attempt). Incremented each time `step` starts working on this P0. |
 | `acceptance_criteria` | array of strings | Yes | The acceptance criteria for this P0, as extracted from the task spec. Recorded at P0 activation and never modified. |
 | `test_commands` | array of strings | Yes | The shell commands to verify this P0, as extracted from the task spec. Recorded at P0 activation and never modified. |
@@ -95,22 +96,69 @@ Each entry in `p0_items` is an object with the following fields:
 | `failure_signatures` | array of strings | No | Normalized failure signatures accumulated for this P0 (only present if `attempts > 0` and at least one failure occurred). Each entry: `"<p0-id>:<failure-type>:<short-description>"`. |
 | `reduction_plan` | string or null | No | If the P0 was switched to a reduced-scope approach after repeated failure, this field describes the reduction. `null` otherwise. |
 
+### Resume Consistency Contract
+
+When `/solar-ralph resume` reconciles state after a session interruption, the following **four independent comparisons** must **all** succeed to restore a P0 to `passed` status. Each comparison is evaluated separately; a failure on any one is a hard `needs-operator` condition:
+
+| # | Comparison | Left side | Right side |
+|---|-----------|-----------|------------|
+| 1 | P0 commit vs run-state last checkpoint | P0's `commit` field in `p0_items` | `run-state.last_checkpoint_commit` |
+| 2 | HEAD vs run-state last checkpoint | Current Git HEAD (`git rev-parse HEAD`) | `run-state.last_checkpoint_commit` |
+| 3 | Checkpoint event P0 id vs P0 id | `checkpoint_committed` event's `p0_id` field | P0's `id` field in `p0_items` |
+| 4 | Checkpoint event commit vs P0 commit | `checkpoint_committed` event's `commit` field | P0's `commit` field in `p0_items` |
+
+If **any** of these four comparisons fails, do **not** auto-reset, auto-stage, or auto-commit. Record the mismatch, set the run status to `needs-operator`, and terminate.
+
+If the checkpoint event for the P0 is **missing** from `events.jsonl` or **ambiguous** (e.g., duplicate `checkpoint_committed` entries prevent identifying a single authoritative event), do not attempt to infer or reconstruct the event data. Treat this as a `needs-operator` condition immediately.
+
+The resume contract requires **exact equality** on each comparison, not ancestry — `last_checkpoint_commit` must exactly equal HEAD, and `P0.commit` must exactly equal `last_checkpoint_commit`.
+
 ### Status Transitions
 
+| From | To | Trigger |
+|------|----|---------|
+| `pending` | `active` | `step` selects this P0 |
+| `active` | `tests_passed` | Test commands pass; checkpoint not yet committed |
+| `active` | `failed` | Test commands fail on implementation attempt |
+| `active` | `deferred` | Same normalized failure signature repeated; reduction not viable |
+| `tests_passed` | `passed` | Checkpoint commit succeeds via `/git-checkpoint` |
+| `tests_passed` | `checkpoint_failed` | Checkpoint commit rejected by `/git-checkpoint` |
+| `checkpoint_failed` | `tests_passed` | Transient/reparable failure; auto-retry succeeded once |
+| `checkpoint_failed` | `needs-operator` | Same failure signature repeated (2nd occurrence), or failure is not transient (rename/copy, sensitive path, branch/baseline mismatch) |
+| `failed` | `active` | Retry with reduced approach (attempts incremented). Only once for the same failure signature. |
+
 ```
-pending → active     (step selects this P0)
-active → passed      (test commands pass, checkpoint committed)
-active → failed      (test commands fail)
-active → deferred    (same failure signature repeated, reduction not viable)
-failed → active      (retry with reduced approach; attempts incremented)
-deferred → (terminal) (no automatic retry)
-passed → (terminal)  (no retry)
+pending → active → tests_passed → passed
+                  ↘
+                   → failed → deferred
+
+tests_passed → checkpoint_failed → tests_passed  (retry after transient failure)
+                           ↘
+                            → needs-operator  (unrecoverable or repeated failure)
 ```
 
-### Atomic Write Requirement
+**Rules:**
+- There is **no** direct `active → passed` transition. A checkpoint commit is always required.
+- `checkpoint_failed` retries are limited to **once** and only for transient/reparable failures. Same signature twice → `needs-operator`.
+- Rename/copy, sensitive path, unapproved path, or branch/baseline mismatches are **never** auto-retried.
+- `deferred` is terminal for automatic processing; documented in HANDOFF.md for operator follow-up.
 
-- Updates to `run-state.json` must be written atomically: write the new content to a temporary file in the same directory, then `mv` (rename) it over the original. This prevents corruption if the process is interrupted mid-write.
+### State Write Distinctions
+
+Run-state.json and the JSONL files use different write strategies:
+
+#### run-state.json — Atomic Replace
+
+- Updates **must** be written atomically: write the complete new JSON to a temporary file in the same directory, then `mv` (rename) it over the original. This prevents corruption if the process is interrupted mid-write.
+- The temporary file must reside on the same filesystem as the target so that `mv` is atomic (no copy).
 - After each mutation, the new `updated_at` timestamp must be set to the current UTC time.
+
+#### failure-ledger.jsonl and events.jsonl — Append-Only
+
+- These files use **append-only** writes. Each new entry is appended as a single line (`>>` redirection or equivalent).
+- **Do not** read the entire file, modify it, and rewrite it.
+- If the file does not exist, create it with the first entry.
+- Append-only is appropriate because these files are append-centric: new entries are added at the end and existing entries are never modified or reordered.
 
 ---
 
