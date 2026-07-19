@@ -12,15 +12,14 @@ set -euo pipefail
 #
 # Gate summary:
 #   0. Index pollution check -- reject if anything is already staged
-#   1. Position argument validation -- P0 ID + at least one approved path required
-#   2. Approved path validation -- repo-relative, no globs, no symlinks, no sensitive paths
-#   3. Secret pattern content check -- text files only, redacted output
-#   4. Worktree trust -- no changes outside approved paths
-#   5. Test evidence validation -- run-state.json must show tests_passed
-#   6. Stage approved paths (via safe_git wrapper)
-#   7. Post-stage containment check -- staged set must equal approved path set
-#   8. Pre-commit whitespace check (git diff --cached --check)
-#   9. Commit with checkpoint message and emit JSON result to stdout
+#   1. Approved path validation -- repo-relative, no globs, no symlinks, no sensitive paths
+#   2. Secret pattern content check -- text files only, redacted output
+#   3. Worktree trust -- no changes outside approved paths
+#   4. Test evidence validation -- run-state.json must show tests_passed
+#   5. Stage approved paths (via safe_git wrapper)
+#   6. Post-stage containment check -- staged set must equal approved path set
+#   7. Pre-commit whitespace check (git diff --cached --check)
+#   8. Commit with checkpoint message and emit JSON result to stdout
 #
 # Exit codes:
 #   0 -- commit successful; exactly one JSON object emitted to stdout
@@ -314,11 +313,10 @@ read_p0_status() {
   local py_out="/tmp/commit-gate-python-out-$$"
   local py_stderr="/tmp/commit-gate-python-stderr-$$"
 
-  if P0_ID="$expected_p0" RUN_STATE_PATH="$rs_path" \
-      python3 -c "
-import json, sys, os
-p0_id = os.environ['P0_ID']
-run_state_path = os.environ['RUN_STATE_PATH']
+  if python3 -c "
+import json, sys
+p0_id = sys.argv[1]
+run_state_path = sys.argv[2]
 try:
     with open(run_state_path, 'r') as f:
         state = json.load(f)
@@ -332,7 +330,7 @@ except Exception as e:
     print('parse-error', file=sys.stderr)
     print(str(e), file=sys.stderr)
     sys.exit(2)
-" >"$py_out" 2>"$py_stderr"; then
+" "$expected_p0" "$rs_path" >"$py_out" 2>"$py_stderr"; then
     PYTHON_EXIT=0
     P0_STATUS="$(cat "$py_out")"
   else
@@ -430,7 +428,7 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Gate 0: Position argument validation
+# Position argument validation (not a gate; precondition check)
 if [[ ${#POSITIONAL_ARGS[@]} -lt 2 ]]; then
   if [[ ${#POSITIONAL_ARGS[@]} -lt 1 ]]; then
     print -r -u2 "ERROR: Missing required arguments: <p0-id> <approved-path>..."
@@ -759,12 +757,11 @@ PYTHON_RUN_STATE_PATH="$RS_REAL"
 P0_STATUS=""
 PYTHON_EXIT=0
 
-# Use the canonical (realpath -P) path for the Python parser
-if P0_ID="$P0_ID" RUN_STATE_PATH="$PYTHON_RUN_STATE_PATH" \
-    python3 -c "
-import json, sys, os
-p0_id = os.environ['P0_ID']
-run_state_path = os.environ['RUN_STATE_PATH']
+# argv[1] = P0_ID, argv[2] = RUN_STATE_PATH (absolute path, no env vars)
+if python3 -c "
+import json, sys
+p0_id = sys.argv[1]
+run_state_path = sys.argv[2]
 try:
     with open(run_state_path, 'r') as f:
         state = json.load(f)
@@ -778,7 +775,7 @@ except Exception as e:
     print('parse-error', file=sys.stderr)
     print(str(e), file=sys.stderr)
     sys.exit(2)
-" >"/tmp/commit-gate-python-out-$$" 2>"/tmp/commit-gate-python-stderr-$$"; then
+" "$P0_ID" "$PYTHON_RUN_STATE_PATH" >"/tmp/commit-gate-python-out-$$" 2>"/tmp/commit-gate-python-stderr-$$"; then
   PYTHON_EXIT=0
   P0_STATUS="$(cat /tmp/commit-gate-python-out-$$)"
 else
@@ -892,19 +889,23 @@ TREE_STATUS="$(safe_git status --porcelain)"
 TIMESTAMP="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
 # Emit exactly one JSON object to stdout
-printf '%s\n' "${VALIDATED_PATHS[@]}" | \
-  COMMIT_HASH="$COMMIT_HASH" \
-  COMMIT_MSG="$COMMIT_MSG" \
-  TREE_STATUS="$TREE_STATUS" \
-  P0_ID="$P0_ID" \
-  TIMESTAMP="$TIMESTAMP" \
-  python3 -c "
-import json, sys, os
-commit_hash = os.environ['COMMIT_HASH']
-commit_msg = os.environ['COMMIT_MSG']
-tree_status = os.environ['TREE_STATUS']
-p0_id = os.environ['P0_ID']
-timestamp = os.environ['TIMESTAMP']
+COMMIT_HASH="$COMMIT_HASH" \
+COMMIT_MSG="$COMMIT_MSG" \
+TREE_STATUS="$TREE_STATUS" \
+P0_ID="$P0_ID" \
+TIMESTAMP="$TIMESTAMP" \
+python3 - "$COMMIT_HASH" "$COMMIT_MSG" "$TREE_STATUS" "$P0_ID" "$TIMESTAMP" <<'PY'
+import json, sys
+
+# Read values from argv (not env vars) to eliminate os.environ usage
+# argv[1] = COMMIT_HASH, argv[2] = COMMIT_MSG, argv[3] = TREE_STATUS
+# argv[4] = P0_ID, argv[5] = TIMESTAMP
+# approved_paths come from stdin (one per line)
+commit_hash = sys.argv[1]
+commit_msg = sys.argv[2]
+tree_status = sys.argv[3]
+p0_id = sys.argv[4]
+timestamp = sys.argv[5]
 approved_paths = [line.strip() for line in sys.stdin if line.strip()]
 result = {
     'commit_hash': commit_hash,
@@ -915,4 +916,4 @@ result = {
     'timestamp': timestamp
 }
 print(json.dumps(result, indent=2))
-"
+PY

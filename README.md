@@ -85,13 +85,19 @@ _upstage/
 **실험 자료:** [`docs/notes/notes/ralphthon-solar-comparison.md`](docs/notes/notes/ralphthon-solar-comparison.md)
 
 **진행 상태:** 🟢 Phase 1~4 완료 → Phase 5 실행 중 (결과 분석 및 비교 보고서 작성)
-- **최근 개선 사항 (2026.07.19)**: Ralph Loop 스크립트 안정화 완료
+- **최근 개선 사항 (2026.07.19~07.20)**: Ralph Loop 스크립트 안정화 및 스킬 일관성 보정
   - `tmux load-buffer` 관련 오류 수정 및 UTF-8 파싱 코럽션 완전 제거
   - 모든 스크립트를 pure ASCII로 재작성하여 멀티바이트 파싱 문제 해결
   - `nohup` 호환성을 위한 `exec 2>/dev/tty` 제거
   - `SCRIPT_DIR/ROOT` 경로 해결 로직 강화 및 tmux/prompt injection 보안 강화
   - `.gitignore` 갱신: Claude Code 일반 상태는 무시하고 프로젝트 스킬(`solar-ralph`, `git-checkpoint`)은 추적 유지
   - `record-session.sh` 실행 권한 부여
+  - **9개 항목 일관성 보정 (2026.07.20)**:
+    - `commit-gate.sh`: 위치 인자(`$expected_p0`, `$rs_path`)를 환경변수(`os.environ`) 대신 argv로 전달하도록 Python 블록 3곳 수정; Gate 번호를 실행 순서(인덱스 폴루션=0, 승인경로검증=1, 비밀패턴검사=2, 작업트리신뢰도=3, 테스트증거=4, 스테이징=5, 스테이징후검증=6, 사전커밋검증=7, 커밋+JSON출력=8)에 맞게 재정렬
+    - `preflight.sh`: 위치 기반 run-state 경로 전달(`sys.argv[1]`) 확인; 조건부 브랜치 우회 로직 없음 확인; `$# -lt 2` 옵션 가드 확인; 모든 출력이 stderr(`print -r -u2`)로 통일 확인
+    - `SKILL.md`: Resume 섹션의 모순 문장("it may modify") 제거; 비수정 계약("never modifies worktree files or Git history - on success or on failure. No staging, committing, resetting, or file modification occurs as part of resume, regardless of outcome.") 명확화; "twice before" → "once already" 통일
+    - `state-contract.md`: `P0 Item Schema`의 `status` 필드에 `needs-operator` 추가; Resume Consistency Contract (4개 독립 비교) 문서화; Status Transitions 표에 `tests_passed`, `checkpoint_failed`, `needs-operator` 포함; State Write Distinctions (원자적 교체 vs 추가 전용) 정리
+  - **전체 히스토리 co-authored-by 제거 (2026.07.20)**: `git rebase -i --root`를 통해 과거 커밋 7개에 포함된 `Co-Authored-By: Claude...` 트레일러 제거, 히스토리 정리 완료
 ---
 
 ## 🚀 실행 가이드
