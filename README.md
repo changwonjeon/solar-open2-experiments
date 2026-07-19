@@ -84,7 +84,8 @@ _upstage/
 
 **실험 자료:** [`docs/notes/notes/ralphthon-solar-comparison.md`](docs/notes/notes/ralphthon-solar-comparison.md)
 
-**진행 상태 (2026-07-20 03:51 KST):** 🟡 실행 전 검증 진행 중. 유효한 3시간 본 실행은 아직 시작하지 않았으며, 임시 Git 저장소에서 첫 checkpoint 성공 경로까지 확인한 상태입니다.
+**진행 상태 (2026-07-20 03:52 KST):** 🟢 Git checkpoint 7개 blocker 수정 완료. 임시 Git 저장소에서 첫 checkpoint 성공 경로(full end-to-end) 검증했습니다. 후속 checkpoint·재시도·failure cleanup·runtime 연결은 다음 작업으로 남았습니다.
+
 - **스크립트 안정화 히스토리 (2026.07.17~07.20)**:
 
   | 일자 | 커밋 | 내용 |
@@ -99,14 +100,18 @@ _upstage/
   | 07/19 | `2fcaf08` | README 및 실험로그에 07/19 안정화 내용 동기화 |
   | 07/19 | `3a15443` | Ralph Loop + git-checkpoint 스킬 파일 추가 |
   | 07/20 | `4a8d953` | **9개 항목 스킬 일관성 보정** + Git 히스토리 정리 |
+  | 07/20 | `5b68b93` | **Git checkpoint blocker 7건 수정** (`preflight.sh` 종료코드·경로검증·null sentinel, `commit-gate.sh` 인자 가드·argv approved_paths·zsh `read -rA`) + `README.md`/`docs/log.md`/`docs/experiments/experiment-log.md` 동기화 |
 
-- **03:51 KST 추가 검증 결과**:
-  - `preflight.sh`의 Python 실패 코드 포착을 `set -e`와 안전하게 동작하는 `if` 분기로 변경하고, malformed JSON·누락 필드가 `exit 1`로 fail-closed 처리되는 것을 확인했습니다.
-  - `--run-state`에 저장소 상대 경로만 허용하고 절대 경로, 대시 시작 경로, 디렉터리, 저장소 밖 경로와 symlink component를 거부하도록 보강했습니다.
-  - 첫 checkpoint의 `last_checkpoint_commit: null` sentinel을 올바르게 복원해 first/subsequent checkpoint 판별 오류를 수정했습니다.
-  - `commit-gate.sh`의 옵션 인자 가드, 성공 JSON `approved_paths` argv 전달, zsh 배열 파싱(`read -rA`)을 수정했습니다.
-  - 임시 로컬 Git 저장소와 bare upstream에서 preflight Gate 1~4 및 commit gate Gate 0~8을 통과했고, `P0-1`의 `deliverable.txt`만 로컬 commit `d0b0e84`로 기록됐습니다. 성공 JSON의 `approved_paths`도 정확했습니다.
-  - 후속 checkpoint, 실패 및 cleanup 경로, runtime 연결, soak test와 rehearsal은 다음 작업으로 남았습니다.
+- **03:52 KST 검증 결과 (7개 blocker 수정)**:
+  - `preflight.sh`: Python 종료 코드가 `set -e`에 의해 소멸되던 문제를 `if python3 ...; then ... else RS_EXIT=$?; fi` 분기로 해결하고, `mktemp` + `trap` 정리 + temp file 디코딩으로 stdout/종료코드 분리 처리. malformed JSON·누락 필드·잘못된 타입에서 `exit 1` fail-closed 동작 확인.
+  - `preflight.sh`: `--run-state` 경로를 저장소 상대 경로만 허용하고 절대 경로·대시 시작 경로·디렉터리·저장소 밖 resolve·symlink component를 `exit 1`~`exit 2`로 거부하는 경로 containment 게이트 신설. `run-state.json`은 canonical realpath(`$RS_REAL`)로 Python에 전달해 symlinked-but-resolved 경로도 정상 처리.
+  - `preflight.sh`: 첫 checkpoint의 `last_checkpoint_commit: null`이 Python에서 `__NULL__` sentinel로 출력된 뒤 쉘에서 복원되지 않아 subsequent checkpoint로 오인되던 문제를 `[[ "$LAST_CHECKPOINT_COMMIT_FROM_STATE" == "__NULL__" ]] → ""` 변환으로 수정.
+  - `commit-gate.sh`: `--run-state`·`--summary` 옵션 처리 시 `$2` 읽기 전 `$# -lt 2` 검사 및 stderr 오류·`exit 2` 처리 추가.
+  - `commit-gate.sh`: 성공 JSON의 `approved_paths`를 heredoc stdin 대신 `sys.argv[6:]` argv slice로 전달해 공백·유니코드·대시 시작 경로가 배열 원소로 보존되도록 수정.
+  - `commit-gate.sh`: Bash 전용 `read -ra`를 zsh 호환 `read -rA`로 수정(2개 위치: line 94 COMPONENTS, line 137 COMPONENT_ARRAY).
+  - 정적 검증: 전체 대상 script `zsh -n`·`git diff --check` 통과. malformed JSON·누락 schema·절대·대시 시작·디렉터리·저장소 밖 run-state 경로가 예상한 non-zero 코드로 거부됨 확인. `--run-state`에 `__NULL__` sentinel 복원 전후 첫/checkpoint 판별 정상 동작 확인.
+  - 함수 검증: `/tmp` 격리 Git 저장소와 로컬 bare upstream에서 first-checkpoint preflight Gate 1~4와 commit gate Gate 0~8 전체 통과. `P0-1`의 승인 경로 `deliverable.txt`만 로컬 commit에 포함되고 성공 JSON의 `approved_paths`가 정확한 배열로 출력됨 확인.
+  - 범위: 외부 remote 작업 없음. 테스트용 로컬 bare repository만 사용.
 
 - **9개 항목 일관성 보정 (2026.07.20)** — `fix/solar-ralph-skill-consistency` 브랜치:
 

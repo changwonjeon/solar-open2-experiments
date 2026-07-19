@@ -10,14 +10,22 @@ timestamp: 2026-07-17T00:00:00Z
 
 This file maintains a chronological record of all experiments conducted using Solar Open2.
 
-## 2026-07-20 (월) 03:51 — 첫 Git checkpoint 성공 경로 검증
+## 2026-07-20 (월) 03:52 — Git checkpoint blocker 7건 수정 완료 및 정적·함수 검증 종료
 
-- **Status**: 실행 전 기능 검증 진행 중. 유효한 3시간 본 실행은 아직 시작하지 않음.
-- **Fixes**: preflight 종료 코드 포착, run-state 경로 containment, null sentinel 복원, commit-gate 옵션 가드와 `approved_paths` argv 전달, zsh `read -rA` 호환성을 수정함.
-- **Static validation**: `zsh -n`과 `git diff --check` 통과. malformed JSON, 누락 schema, 절대·대시 시작·디렉터리·저장소 밖 run-state 경로가 예상한 non-zero 코드로 거부됨.
-- **Functional validation**: 격리된 임시 Git 저장소에서 first-checkpoint preflight Gate 1~4와 commit gate Gate 0~8 통과. 승인 파일 `deliverable.txt`만 로컬 commit `d0b0e84`에 포함되고 성공 JSON의 `approved_paths`가 `['deliverable.txt']`로 보존됨.
-- **Remaining**: subsequent checkpoint, 공백·유니코드 경로, 실패 cleanup, unapproved path 거부와 runtime soak/rehearsal.
+- **Status**: 실행 전 blocker 검증 완료. 7개 blocker 수정 후 정적·함수 검증 모두 통과. 유효한 3시간 본 실행은 아직 시작하지 않음.
+- **Blockers fixed (7건)**:
+  1. `preflight.sh`: command substitution 내 `set -e`로 인해 Python 종료 코드가 소멸되던 문제. `if python3 ...; then RS_EXIT=0 else RS_EXIT=$?; fi` 분기로 종료코드 포착, `mktemp` + `trap`으로 임시 파일을 통해 stdout과 종료코드 분리.
+  2. `preflight.sh`: `--run-state`에 절대 경로·디렉터리·저장소 밖 경로·symlink component를 허용하는 계약 불일치. 경로 containment 게이트(절대 경로·대시 시작·symlink·realpath containment·정규 파일) 신설, `exit 1`/`exit 2` 거부. Python에는 canonical realpath(`$RS_REAL`) 전달.
+  3. `preflight.sh`: 첫 checkpoint `last_checkpoint_commit: null`의 `__NULL__` sentinel이 복원되지 않아 subsequent checkpoint로 오인되던 문제. `[[ "$LAST_CHECKPOINT_COMMIT_FROM_STATE" == "__NULL__" ]] → ""` 변환 추가.
+  4. `commit-gate.sh`: `--run-state`·`--summary` 옵션 처리 시 `$2` 읽기 전 `$#` 검사 누락. `if [[ $# -lt 2 ]]` 가드 추가, stderr 오류·`exit 2` 처리.
+  5. `commit-gate.sh`: 성공 JSON의 `approved_paths`를 heredoc stdin(`sys.stdin`)으로 읽어 빈 배열이 되던 문제. `sys.argv[6:]` argv slice로 변경.
+  6. `commit-gate.sh`: Bash 전용 `read -ra`가 zsh 실행 시 `bad option: -a`로 실패. `read -rA`로 수정(2개 위치: line 94 COMPONENTS, line 137 COMPONENT_ARRAY).
+  7. `commit-gate.sh`: `--run-state`에 절대 경로·디렉터리 허용. Gate 4에서 `check_common_rejections` + symlink walk + realpath containment + 정규 파일 검사 일관 적용.
+- **Static validation**: `zsh -n`·`git diff --check` 통과. malformed JSON, 누락 schema, 절대·대시 시작·디렉터리·저장소 밖 run-state 경로가 예상한 non-zero 코드로 거부됨. `__NULL__` sentinel 복원 전후 첫 checkpoint 판별 정상 동작 확인. ShellCheck는 설치되어 있지 않아 실행하지 않음.
+- **Functional validation**: `/tmp` 격리 임시 Git 저장소와 로컬 bare upstream에서 first-checkpoint preflight Gate 1~4와 commit gate Gate 0~8 전체 통과. `P0-1`의 승인 파일 `deliverable.txt`만 로컬 commit에 포함되고 성공 JSON의 `approved_paths`가 `['deliverable.txt']`로 정확히 보존됨. 외부 remote 작업 없음.
+- **Remaining**: subsequent checkpoint, 공백·유니코드 경로, 실패 후 index cleanup, 승인되지 않은 경로 거부, runtime recorder·monitor·watchdog 연결, 10분 soak 및 30분 rehearsal.
 - **Scope**: 외부 remote 작업 없음. 테스트용 로컬 bare repository만 사용.
+- **Commit**: 이 검증 결과는 `5b68b93`에 포함됨. `README.md`, `docs/log.md`, `docs/experiments/experiment-log.md`를 03:52 기준 최신 상태로 동기화함. 검증 도중 생성된 `data/results/ralpthon/solar/.../run-state.json`(불완전한 `manual-test`)은 `.gitignore`로 추적 제외하며 커밋에서 제외.
 
 ## 2026-07-20 (월) 02:46 — Ralph Loop 스킬 9개 항목 일관성 보정 및 Git 히스토리 정리 (완료)
 

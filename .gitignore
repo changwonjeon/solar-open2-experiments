@@ -33,6 +33,7 @@ Thumbs.db
 # Data (대용량 데이터는 별도 관리 권장)
 data/raw/
 data/temp/
+data/results/
 
 # 테스트/임시 파일
 *.tmp
