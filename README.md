@@ -122,7 +122,7 @@ _upstage/
   | `SKILL.md` | 2개 | Resume 섹션의 "it may modify" 모순 문장 제거; 비수정 계약("never modifies worktree files or Git history - on success or on failure. No staging, committing, resetting, or file modification occurs as part of resume, regardless of outcome.") 명확화; "twice before" → "once already" 통일 |
   | `state-contract.md` | 1개 | `P0 Item Schema`의 `status` 필드에 `needs-operator` 추가; Resume Consistency Contract (4개 독립 비교) 문서화; Status Transitions 표에 `tests_passed`, `checkpoint_failed`, `needs-operator` 포함; State Write Distinctions(원자적 교체 vs 추가 전용) 정리 |
 
-- **Git 히스토리 정리 (2026.07.20)**: `git rebase -i --root`를 통해 과거 7개 커밋에 포함된 `Co-Authored-By: Claude...` 트레일러를 제거했습니다. 이전 기록에 언급된 `.gitmessage`와 `clean-coauthor.sh`는 현재 Git 이력에 존재하지 않아 후속 확인 대상으로 남겼습니다.
+- **Git 히스토리 정리 (2026.07.20)**: `git rebase -i --root`를 통해 과거 7개 커밋에 포함된 Co-Authored-By 트레일러를 제거했습니다. 이전 기록에 언급된 `.gitmessage`와 `clean-coauthor.sh`는 현재 Git 이력에 존재하지 않아 후속 확인 대상으로 남겼습니다.
 ---
 
 ## 🚀 실행 가이드
