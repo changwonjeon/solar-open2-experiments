@@ -8,7 +8,7 @@ status: completed
 researcher: "Solar Open 2 (Claude Code CLI)"
 model_version: "Solar Open 2 250B"
 input_sources:
-  - "projects/meeting-minutes/source/original/(5) 조코딩 - Solar Open 2 공개 행사 안내.md"
+  - "../../source/original/(5) 조코딩 - Solar Open 2 공개 행사 안내.md"
 experiment_id: mm-20260722-002
 related_document: "20260722-solar-open-weight-day.md"
 ---

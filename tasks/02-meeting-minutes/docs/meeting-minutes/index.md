@@ -27,5 +27,5 @@ Solar Open2가 Claude Code CLI로서 회의록 작성에 얼마나 뛰어난지 
 
 ## 관련 문서
 
-- [실험 일지](../experiment-log.md)
-- [루트 로그](../../log.md)
+- [실험 일지](../../../docs/experiment-log.md)
+- [루트 로그](../../../docs/log.md)

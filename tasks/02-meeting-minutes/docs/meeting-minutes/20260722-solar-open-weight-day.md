@@ -8,15 +8,15 @@ status: completed
 researcher: "Solar Open 2 (Claude Code CLI)"
 model_version: "Solar Open 2 250B"
 input_sources:
-  - "projects/meeting-minutes/source/original/20260722_행사개요_Solar Open Weight Day.txt"
-  - "projects/meeting-minutes/source/original/(1) Sung Kim(김성훈, Upstage CEO) - Solar Open Weight Day.md"
-  - "projects/meeting-minutes/source/original/(2) 이활석(Upstage CTO) - Solar Open 2 개발 및 학습 전략.md"
-  - "projects/meeting-minutes/source/original/(3) 김태호(노타 CTO) - Solar Open 2 최적화 및 경량화 발표.md"
-  - "projects/meeting-minutes/source/original/(4-1) 이태호(Upstage) - Solar Open 2 활용 사례 발표 및 시연.md"
-  - "projects/meeting-minutes/source/original/(4-2) Ria(Upstage) - Solar Open 2 오피스 활용 시연.md"
-  - "projects/meeting-minutes/source/original/(4-3) 이상후(AI팀장) - 슈퍼로이어 서비스 시연 및 소개.md"
-  - "projects/meeting-minutes/source/original/(4-4) 김진중(Playmore CTO) - Open 2 온프레미스 발표 및 루미 에이전트 소개.md"
-  - "projects/meeting-minutes/source/original/(5) 조코딩 - Solar Open 2 공개 행사 안내.md"
+  - "../../source/original/20260722_행사개요_Solar Open Weight Day.txt"
+  - "../../source/original/(1) Sung Kim(김성훈, Upstage CEO) - Solar Open Weight Day.md"
+  - "../../source/original/(2) 이활석(Upstage CTO) - Solar Open 2 개발 및 학습 전략.md"
+  - "../../source/original/(3) 김태호(노타 CTO) - Solar Open 2 최적화 및 경량화 발표.md"
+  - "../../source/original/(4-1) 이태호(Upstage) - Solar Open 2 활용 사례 발표 및 시연.md"
+  - "../../source/original/(4-2) Ria(Upstage) - Solar Open 2 오피스 활용 시연.md"
+  - "../../source/original/(4-3) 이상후(AI팀장) - 슈퍼로이어 서비스 시연 및 소개.md"
+  - "../../source/original/(4-4) 김진중(Playmore CTO) - Open 2 온프레미스 발표 및 루미 에이전트 소개.md"
+  - "../../source/original/(5) 조코딩 - Solar Open 2 공개 행사 안내.md"
 experiment_id: mm-20260722-001
 ---
 

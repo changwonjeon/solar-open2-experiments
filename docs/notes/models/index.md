@@ -1,3 +1,10 @@
+---
+type: Reference
+title: Models Directory
+description: Information about AI models, architectures, and techniques
+tags: [models, reference, architectures, ai]
+---
+
 # Models Directory
 
 Information about AI models, architectures, and techniques.

@@ -1,3 +1,10 @@
+---
+type: Reference
+title: People Directory
+description: Profiles of researchers, engineers, and contributors in the AI space
+tags: [people, reference, profiles, ai]
+---
+
 # People Directory
 
 Profiles and information about researchers, engineers, and contributors in the AI space.
