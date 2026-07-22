@@ -363,13 +363,13 @@ python3 src/scripts/ralpthon/compare.py
 
 ### C. 관련 문서
 
-- [RALPH_GOAL.md](../experiments/ralphthon/RALPH_GOAL.md)
-- [랄프톤 비교 실험 위키](../notes/notes/ralphthon-solar-comparison.md)
-- [Phase 2: 실행 스크립트](../src/scripts/ralpthon/run-ralph-solar.sh)
-- [Phase 2: 시작 스크립트](../src/scripts/ralpthon/start-ralph-solar.sh)
-- [Phase 3: 세션 로깅](../src/scripts/ralpthon/record-session.sh)
-- [Phase 3: 체크포인트 캡처](../src/scripts/ralpthon/capture-checkpoints.sh)
-- [Phase 3: 비교 분석기](../src/scripts/ralpthon/compare.py)
+- [RALPH_GOAL.md](./RALPH_GOAL.md)
+- [랄프톤 비교 실험 위키](./solar-vs-codex-comparison.md)
+- [Phase 2: 실행 스크립트](../../../../src/scripts/ralpthon/run-ralph-solar.sh)
+- [Phase 2: 시작 스크립트](../../../../src/scripts/ralpthon/start-ralph-solar.sh)
+- [Phase 3: 세션 로깅](../../../../src/scripts/ralpthon/record-session.sh)
+- [Phase 3: 체크포인트 캡처](../../../../src/scripts/ralpthon/capture-checkpoints.sh)
+- [Phase 3: 비교 분석기](../../../../src/scripts/ralpthon/compare.py)
 
 ---
 
