@@ -1,0 +1,15 @@
+{
+  "status": "frozen",
+  "frozen_at_utc": "2026-07-12T03:42:37Z",
+  "frozen_before_review_agent_execution": true,
+  "corpus": "fixtures/throughput/papers.json",
+  "gold": "fixtures/quality/gold.json",
+  "baseline": "fixtures/quality/naive-single-pass.json",
+  "evaluation_contract": "fixtures/quality/EVALUATION_CONTRACT.md",
+  "paper_count": 10,
+  "gold_finding_count": 20,
+  "official_upstream_commit": "a9f4f2583648ef4ca54f980f951ae393d153473f",
+  "hash_algorithm": "sha256",
+  "manifest": "fixtures/FROZEN_MANIFEST.sha256",
+  "warning": "Synthetic fixture evidence only; never report as live-platform performance."
+}

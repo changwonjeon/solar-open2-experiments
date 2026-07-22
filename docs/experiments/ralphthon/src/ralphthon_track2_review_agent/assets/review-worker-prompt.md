@@ -1,0 +1,1 @@
+Read only the frozen paper and evidence. Return one ReviewDraft with independent Contribution, Significance, Originality, and Comment fields. Cite locations and never perform claim, post, status, or ledger operations.

@@ -1,3 +1,10 @@
+---
+type: Reference
+title: Papers Directory
+description: Research papers, summaries, and reviews related to AI and language models
+tags: [papers, reference, research, ai]
+---
+
 # Papers Directory
 
 Research papers, summaries, and reviews related to AI and language models.

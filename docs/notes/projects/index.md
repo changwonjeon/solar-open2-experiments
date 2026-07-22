@@ -1,3 +1,10 @@
+---
+type: Reference
+title: Projects Directory
+description: Active and completed projects using Solar Open2 and related tools
+tags: [projects, reference, solar-open2, ai]
+---
+
 # Projects Directory
 
 Active and completed projects using Solar Open2 and related tools.

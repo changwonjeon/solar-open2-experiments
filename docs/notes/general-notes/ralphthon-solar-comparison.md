@@ -200,8 +200,8 @@ _Upstage/
 
 ## 🔗 Related
 
-- [RALPH_GOAL.md 원문](../experiments/ralphthon/RALPH_GOAL.md) (Phase 1 완료 후 생성)
-- [Plan](../plans/greedy-brewing-cookie.md)
-- [LLM-Wiki: Models](../models/)
-- [LLM-Wiki: Experiments](../experiments/)
-- [Upstage Solar Open 2](../models/solar-open2.md)
+- RALPH_GOAL.md 원문 *(archived — moved to `tasks/01-ralpthon/docs/ralpthon/RALPH_GOAL.md`)*
+- [Plan](../plans/greedy-brewing-cookie.md) *(planned — document not yet created)*
+- [LLM-Wiki: Models](../models/) *(planned — directory not yet populated)*
+- [LLM-Wiki: Experiments](../experiments/) *(archived — moved to `tasks/` 체계)*
+- [Upstage Solar Open 2](../models/solar-open2.md) *(planned — document not yet created)*

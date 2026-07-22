@@ -1,0 +1,16 @@
+{
+  "fixture_kind": "synthetic_existing_evidence",
+  "warning": "These records are test fixtures, not real experiments.",
+  "records": {
+    "paper-001": {"accuracy": {"baseline": 0.812, "proposed": 0.814, "seeds": 5}, "calibration_error": {"baseline": 0.118, "proposed": 0.061, "uncertainty_reported": false}},
+    "paper-002": {"median_latency_ms": {"baseline": 84, "proposed": 39}, "recall_at_10": {"baseline": 0.734, "proposed": 0.731}, "tail_latency_reported": false},
+    "paper-003": {"models_flagged": 18, "models_total": 40, "flagged_audited": 4, "unflagged_audited": 0},
+    "paper-004": {"token_accuracy": {"baseline": 78.4, "proposed": 80.1, "seeds": 1}, "latency_ms": {"baseline": 6.2, "proposed": 6.2}},
+    "paper-005": {"injected_errors": 100, "inspection_budget": 200, "errors_found": {"proposed": 72, "random": 21}},
+    "paper-006": {"mae_four_missing": {"baseline": 0.67, "proposed": 0.42}, "mae_none_missing": {"baseline": 0.29, "proposed": 0.31}, "confidence_intervals_reported": true},
+    "paper-007": {"median_absolute_error": {"epsilon_0_1": 9.8, "epsilon_2_0": 0.6}, "composition_analysis": false},
+    "paper-008": {"families": 3, "absolute_bias_improved_on": 3, "heavy_tail_variance_increase_percent": 35, "selection_used_test_performance": true},
+    "paper-009": {"average_exact_match": {"uncompressed": 63.2, "proposed": 62.8, "random": 58.1}, "lowest_resource_drop": 5.4},
+    "paper-010": {"tasks": 10, "exact_recovery": {"trace": 8, "notes": 3}, "participants": 3, "blinded": false}
+  }
+}

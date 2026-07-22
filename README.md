@@ -17,47 +17,49 @@ _upstage/
 │   ├── credentials/               # API 키, 토큰
 │   ├── secrets/                   # 비밀 키, 인증서
 │   └── notes/                     # 개인 메모
-├── docs/                          # 📚 OKF 포맷 지식 번들
-│   ├── guide/                     # 사용법 가이드
-│   │   ├── getting-started.md     # 시작 가이드
-│   │   ├── claude-code-open2.md   # Claude Code 연동
-│   │   ├── hermes-agent.md        # Hermes Agent 연동
-│   │   ├── okf-authoring.md       # OKF 문서 작성법
-│   │   └── troubleshooting.md     # 문제 해결
-│   ├── reference/                 # 기술 참조 문서
-│   │   ├── solar-open2.md         # Solar Open 2 상세 스펙
-│   │   └── index.md
-│   ├── experiments/               # 실험 기록
-│   │   ├── experiment-log.md      # 실험 일지
-│   │   └── index.md
-│   ├── notes/                     # LLM-Wiki 스타일 위키
-│   │   ├── people/                # 연구자 프로필
-│   │   ├── models/                # 모델 문서
-│   │   ├── papers/                 # 논문 요약
-│   │   ├── projects/              # 프로젝트 기록
-│   │   ├── notes/                 # 아이디어/로그
-│   │   └── writing/               # 에세이/블로그
-│   ├── templates/                 # 문서 템플릿
-│   │   ├── template-model.md
-│   │   ├── template-paper.md
-│   │   ├── template-experiment.md
-│   │   ├── template-person.md
-│   │   └── template-project.md
+├── tasks/                         # 📦 실험 태스크 (Source + Wiki 분리)
+│   ├── 01-ralpthon/               # 랄프톤 실험 (Ralph Loop 재현)
+│   │   ├── source/                # Source 계층 — Codex 원본 및 Solar 적응 코드
+│   │   │   ├── codex-original/    # Codex 원본 (77개 파일, 읽기 전용)
+│   │   │   └── solar-adaptation/  # Solar 적응 코드 (선택)
+│   │   ├── docs/ralpthon/         # Wiki 계층 — 실험 결과, 분석, 가이드
+│   │   ├── output/                # 생성 산출물
+│   │   ├── data/                  # 실험 데이터
+│   │   ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
+│   │   ├── CLAUDE.md              # 태스크 로컬 지시 (Schema)
+│   │   └── README.md              # 태스크 설명
+│   └── 02-meeting-minutes/        # 회의록 작성 실험
+│       ├── source/                # Source 계층 — 회의록 원문
+│       │   └── original/          # 9개 원문 (읽기 전용)
+│       ├── docs/meeting-minutes/  # Wiki 계층 — 회의록, 실험 결과
+│       ├── output/                # 생성 산출물 (LinkedIn 포스트 포함)
+│       ├── data/                  # 실험 데이터
+│       ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
+│       ├── CLAUDE.md              # 태스크 로컬 지시 (Schema)
+│       └── README.md              # 태스크 설명
+├── docs/                          # 📚 프로젝트 공통 OKF Wiki 번들
+│   ├── guide/                     # 사용법 가이드 (선택)
+│   ├── reference/                 # 기술 참조 문서 (선택)
+│   ├── notes/                     # LLM-Wiki 스타일 위키 (선택)
+│   ├── templates/                 # 문서 템플릿 (선택)
+│   ├── experiment-log.md          # 실험 일지
+│   ├── log.md                     # 변경 이력
 │   ├── index.md                   # 루트 인덱스
-│   └── log.md                     # 변경 이력
+│   └── AGENTS.md                  # 위키 전용 로컬 규칙 (Schema)
 ├── src/                           # 💻 코드 및 스크립트
-│   ├── scripts/                   # 유틸리티 스크립트
-│   └── examples/                  # 예제 코드
-├── data/                          # 📊 데이터
-│   ├── datasets/                  # 데이터셋
-│   ├── results/                   # 실험 결과
-│   └── benchmarks/                # 벤치마크 결과
+│   └── scripts/
+│       └── ralphthon/             # 랄프톤 실행 스크립트
+│           ├── original/          # Codex 원본 스크립트 (참조용)
+│           └── (Solar 적응 스크립트들)
 ├── assets/                        # 🖼️ 정적 자산 (이미지 등)
-├── .gitignore                     # Git 제외 설정
+├── _inbox/                        # 📥 전달용 폴더
+├── AGENTS.md                      # 루트 에이전트 규칙 (Schema)
+├── CLAUDE.md                      # 루트 Claude 지시 (Schema, @AGENTS.md 참조)
 ├── README.md                      # 이 파일
-└── CLAUDE.md                      # Claude Code 운영 지침
+└── pyproject.toml
 ```
 
+> **참고**: 과거 구조(`projects/ralph-loop/`, `docs/experiments/ralphthon/`, `docs/experiments/meeting-minutes/`, 전역 `tests/`, `data/fixtures/`)는 2026-07-23 구조 개편 커밋(`7024b1b`)에서 `tasks/` 체계로 재편되었습니다. 과거 경로의 문서는 현재 `tasks/01-ralpthon/docs/ralpthon/` 및 `tasks/02-meeting-minutes/docs/meeting-minutes/`에 있습니다.
 
 ## 📊 Solar Open 2 모델 정보
 
@@ -93,7 +95,7 @@ _upstage/
 - **프롬프트**: `$ralph\n\n<RALPH_GOAL.md>` (랄프톤의 Goal 파일 전체)
 - **비교 방식**: 정성(이해도/수행력) + 과정(로그/체크포인트) + 정량(P0 완료율/schema 준수율/시간)
 
-**실험 자료:** [`docs/notes/general-notes/ralphthon-solar-comparison.md`](docs/notes/general-notes/ralphthon-solar-comparison.md)
+**실험 자료:** `tasks/01-ralpthon/docs/ralpthon/`
 
 **진행 상태 (2026-07-22 23:31 KST):** 🟢 Git checkpoint 7개 blocker 수정 완료. 임시 Git 저장소에서 첫 checkpoint 성공 경로(full end-to-end) 검증했습니다. 2차 실험(회의록 작성) 1차 결과 생성 완료.
 
@@ -101,8 +103,8 @@ _upstage/
 
 회의록 작성 실험(2차 실험)은 행사 개요 문서 1건과 Tiro 노트테이킹 앱의 세션별 정리 문서 8건을 입력으로 받아, Solar Open 2(Claude Code CLI)가 이를 종합·구조화·요약하여 OKF 포맷의 회의록으로 변환하는 능력을 검증했습니다.
 
-- **입력**: `_inbox/` 9개 파일 — 행사개요 txt 1건 + 세션별 정리 md 8건 (Sung Kim CEO, 이활석 CTO, 김태호 NotaAI CTO, 이태호 Upstage, Ria Upstage, 이상후 로엔컴퍼니, 김진중 Playmore, 조코딩 Q&A)
-- **출력**: `docs/experiments/meeting-minutes/20260722-solar-open-weight-day.md` — 총 8개 세션의 내용을 누락 없이 추출, 계층적으로 구조화한 OKF 포맷 회의록 (행사 개요, 진행 일정, 8개 세션별 상세 요약, 결정사항/액션아이템 10건, 종합 인사이트 3대 경쟁력 + 생태계 확장 전략 포함)
+- **입력**: `tasks/02-meeting-minutes/source/original/` 9개 파일 — 행사개요 txt 1건 + 세션별 정리 md 8건 (Sung Kim CEO, 이활석 CTO, 김태호 NotaAI CTO, 이태호 Upstage, Ria Upstage, 이상후 로엔컴퍼니, 김진중 Playmore, 조코딩 Q&A)
+- **출력**: `tasks/02-meeting-minutes/docs/meeting-minutes/20260722-solar-open-weight-day.md` — 총 8개 세션의 내용을 누락 없이 추출, 계층적으로 구조화한 OKF 포맷 회의록 (행사 개요, 진행 일정, 8개 세션별 상세 요약, 결정사항/액션아이템 10건, 종합 인사이트 3대 경쟁력 + 생태계 확장 전략 포함)
 - **수행 결과**: 정보 추출·구조화·정확성·OKF 준수 4가지 차원에서 모두 양호 판정을 받았습니다. 상세 품질 평가는 `docs/log.md`의 2026-07-22 항목을 참고하세요.
 
 - **스크립트 안정화 히스토리 (2026.07.17~07.20)**:
@@ -142,6 +144,7 @@ _upstage/
   | `state-contract.md` | 1개 | `P0 Item Schema`의 `status` 필드에 `needs-operator` 추가; Resume Consistency Contract (4개 독립 비교) 문서화; Status Transitions 표에 `tests_passed`, `checkpoint_failed`, `needs-operator` 포함; State Write Distinctions(원자적 교체 vs 추가 전용) 정리 |
 
 - **Git 히스토리 정리 (2026.07.20)**: `git rebase -i --root`를 통해 과거 7개 커밋에 포함된 Co-Authored-By 트레일러를 제거했습니다. 이전 기록에 언급된 `.gitmessage`와 `clean-coauthor.sh`는 현재 Git 이력에 존재하지 않아 후속 확인 대상으로 남겼습니다.
+
 ---
 
 ## 🚀 실행 가이드

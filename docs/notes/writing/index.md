@@ -1,3 +1,10 @@
+---
+type: Reference
+title: Writing Directory
+description: Essays, blog posts, articles, and other written content
+tags: [writing, reference, essays, blog]
+---
+
 # Writing Directory
 
 Essays, blog posts, articles, and other written content.
