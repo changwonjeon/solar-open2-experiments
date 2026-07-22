@@ -64,10 +64,21 @@ _upstage/
 | 항목 | 내용 |
 |------|------|
 | **개발사** | Upstage (한국 스타트업) |
-| **모델명** | Solar Open 2 |
-| **파라미터** | ~10.7B |
-| **컨텍스트** | 32K 토큰 |
-| **아키텍처** | Decoder-only Transformer |
+| **모델명** | Solar Open2 250B |
+| **전체 파라미터** | 250B (Mixture-of-Experts) |
+| **활성 파라미터** | 15B (per token, top-8 + 1 shared) |
+| **컨텍스트** | 1M 토큰 |
+| **아키텍처** | Hybrid-Attention Mixture-of-Experts (MoE) |
+| **전문가 수** | 321 (320 routed + 1 shared) |
+| **레이어** | 48 |
+| **히든 사이즈** | 4096 |
+| **어휘 크기** | 196,608 |
+| **사전학습 토큰** | ~12조 |
+| **포지션 인코딩** | NoPE |
+| **지원 언어** | 한국어, 영어, 일본어 |
+| **라이선스** | upstage-solar-license |
+| **훈련 하드웨어** | NVIDIA B200 GPU (2M GPU Hours) |
+| **HuggingFace 모델** | https://huggingface.co/upstage/Solar-Open2-250B |
 | **API 엔드포인트** | https://api.upstage.ai/v1 |
 | **문서** | https://docs.upstage.ai/ |
 
