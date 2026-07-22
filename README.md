@@ -84,7 +84,7 @@ _upstage/
 
 ## 🧪 Solar Open 2 비교 실험 프로젝트
 
-### 랄프톤(Ralphthon) 재현 실험
+### 랄프톤(Ralphthon) 재현 실험 (1차 실험)
 
 랄프톤 해커톤(ICML 2026)에서 Codex CLI가 자율적으로 수행한 **랄프루프(Ralph Loop)**를 Solar Open 2 + Claude Code로 재현하여 두 모델의 자율 실행 능력을 비교 분석합니다.
 
@@ -95,7 +95,15 @@ _upstage/
 
 **실험 자료:** [`docs/notes/general-notes/ralphthon-solar-comparison.md`](docs/notes/general-notes/ralphthon-solar-comparison.md)
 
-**진행 상태 (2026-07-20 03:52 KST):** 🟢 Git checkpoint 7개 blocker 수정 완료. 임시 Git 저장소에서 첫 checkpoint 성공 경로(full end-to-end) 검증했습니다. 후속 checkpoint·재시도·failure cleanup·runtime 연결은 다음 작업으로 남았습니다.
+**진행 상태 (2026-07-22 23:31 KST):** 🟢 Git checkpoint 7개 blocker 수정 완료. 임시 Git 저장소에서 첫 checkpoint 성공 경로(full end-to-end) 검증했습니다. 2차 실험(회의록 작성) 1차 결과 생성 완료.
+
+### 회의록 작성 실험 (2차 실험)
+
+회의록 작성 실험(2차 실험)은 행사 개요 문서 1건과 Tiro 노트테이킹 앱의 세션별 정리 문서 8건을 입력으로 받아, Solar Open 2(Claude Code CLI)가 이를 종합·구조화·요약하여 OKF 포맷의 회의록으로 변환하는 능력을 검증했습니다.
+
+- **입력**: `_inbox/` 9개 파일 — 행사개요 txt 1건 + 세션별 정리 md 8건 (Sung Kim CEO, 이활석 CTO, 김태호 NotaAI CTO, 이태호 Upstage, Ria Upstage, 이상후 로엔컴퍼니, 김진중 Playmore, 조코딩 Q&A)
+- **출력**: `docs/experiments/meeting-minutes/20260722-solar-open-weight-day.md` — 총 8개 세션의 내용을 누락 없이 추출, 계층적으로 구조화한 OKF 포맷 회의록 (행사 개요, 진행 일정, 8개 세션별 상세 요약, 결정사항/액션아이템 10건, 종합 인사이트 3대 경쟁력 + 생태계 확장 전략 포함)
+- **수행 결과**: 정보 추출·구조화·정확성·OKF 준수 4가지 차원에서 모두 양호 판정을 받았습니다. 상세 품질 평가는 `docs/log.md`의 2026-07-22 항목을 참고하세요.
 
 - **스크립트 안정화 히스토리 (2026.07.17~07.20)**:
 

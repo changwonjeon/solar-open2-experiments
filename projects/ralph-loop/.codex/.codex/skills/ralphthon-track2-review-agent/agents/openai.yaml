@@ -1,4 +1,0 @@
-interface:
-  display_name: "Ralphthon Track 2 Reviewer"
-  short_description: "Run evidence-bound Track 2 review batches"
-  default_prompt: "Use $ralphthon-track2-review-agent to build or dry-run an evidence-bound Track 2 review batch."
