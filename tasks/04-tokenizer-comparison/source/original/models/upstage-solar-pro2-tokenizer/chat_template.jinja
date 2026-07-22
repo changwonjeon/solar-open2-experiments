@@ -1,0 +1,95 @@
+{{- bos_token -}}
+
+{%- set sys = namespace(text='') %}
+
+{%- for _m in messages %}
+
+    {%- if _m.role == 'system' %}
+
+        {%- set sys.text = sys.text + "\n\n" + _m.content %}
+
+    {%- endif %}
+
+{%- endfor %}
+
+{%- set sys.text = sys.text.strip('\n') %}
+
+{%- if response_format is defined and response_format.type == 'json_schema' %}
+
+    {{- "<|im_start|>system" }}
+
+    {%- if sys.text %}
+
+        {{- '\n' + sys.text + '\n' }}
+
+    {%- endif %}
+
+    {{- "\nYour responses should follow the schema: \n[Start of schema]\n" }}
+
+    {{- response_format }}
+
+    {{- "\n[End of schema]\nPlease ensure your answers adhere to this format and do not contain any unnecessary text." }}
+
+{%- elif sys.text %}
+
+    {{- "<|im_start|>system\n" }}
+
+    {{- sys.text }}
+
+{%- endif %}
+
+    {{- "<|im_end|>\n" }}
+
+{%- for m in messages %}
+
+    {%- if m.role == 'user' %}
+
+        {%- set clean = m.content|replace('/no_think','')|replace('/think','')|trim %}
+
+        {{- "<|im_start|>user\n" }}
+
+        {{- clean }}
+
+        {{- "<|im_end|>\n" }}
+
+    {%- elif m.role == 'assistant' %}
+
+        {%- if m.get('content') and m.get('content').strip() %}
+
+            {%- set full_content = m.content %}
+
+            {# think 태그 제거 처리 #}
+
+            {%- if '<think>' in full_content and '</think>' in full_content %}
+
+                {# <think>부터 </think>\n\n까지 제거 #}
+
+                {%- set think_start = full_content.find('<think>') %}
+
+                {%- set think_end = full_content.find('</think>') + 8 %}
+
+                {# </think> 뒤에 \n\n이 있으면 그것까지 포함해서 제거 #}
+
+                {%- if full_content[think_end:think_end+2] == '\n\n' %}
+
+                    {%- set think_end = think_end + 2 %}
+
+                {%- endif %}
+
+                {%- set full_content = full_content[:think_start] + full_content[think_end:] %}
+
+            {%- endif %}
+
+            {{- "<|im_start|>assistant\n" + full_content + "<|im_end|>\n" }}
+
+        {%- endif %}
+
+    {%- endif %}
+
+{%- endfor %}
+
+{%- if add_generation_prompt %}
+
+    {{- "<|im_start|>assistant\n" }}
+
+{%- endif %}
