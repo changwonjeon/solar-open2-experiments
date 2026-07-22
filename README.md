@@ -82,7 +82,7 @@ _upstage/
 - **프롬프트**: `$ralph\n\n<RALPH_GOAL.md>` (랄프톤의 Goal 파일 전체)
 - **비교 방식**: 정성(이해도/수행력) + 과정(로그/체크포인트) + 정량(P0 완료율/schema 준수율/시간)
 
-**실험 자료:** [`docs/notes/notes/ralphthon-solar-comparison.md`](docs/notes/notes/ralphthon-solar-comparison.md)
+**실험 자료:** [`docs/notes/general-notes/ralphthon-solar-comparison.md`](docs/notes/general-notes/ralphthon-solar-comparison.md)
 
 **진행 상태 (2026-07-20 03:52 KST):** 🟢 Git checkpoint 7개 blocker 수정 완료. 임시 Git 저장소에서 첫 checkpoint 성공 경로(full end-to-end) 검증했습니다. 후속 checkpoint·재시도·failure cleanup·runtime 연결은 다음 작업으로 남았습니다.
 
