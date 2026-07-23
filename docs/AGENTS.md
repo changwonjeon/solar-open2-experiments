@@ -11,18 +11,20 @@
 
 ## 위키 하위 디렉토리 규칙
 
+> 참고: 2026-07-23 구조 개편(`7024b1b`) 이전에는 `experiments/ralph-loop/`와 `experiments/meeting-minutes/`에 실험 문서가 위치했으나, 현재는 `tasks/` 체계로 통합되었습니다.
+
 | 디렉토리 | 용도 | index.md 필수 | log.md |
 |----------|------|---------------|--------|
 | `guide/` | 사용법 가이드 | ✅ | ❌ |
 | `reference/` | 기술 참조 문서 | ✅ | ❌ |
-| `experiments/ralph-loop/` | 랄프루프 실험 결과 | ✅ | ❌ (루트 log.md 참조) |
-| `experiments/meeting-minutes/` | 회의록 작성 실험 결과 | ✅ | ❌ (루트 log.md 참조) |
 | `notes/people/` | 인물 프로필 | ✅ | ❌ |
 | `notes/models/` | 모델 문서 | ✅ | ❌ |
 | `notes/papers/` | 논문 요약 | ✅ | ❌ |
 | `notes/projects/` | 프로젝트 기록 | ✅ | ❌ |
 | `notes/writing/` | 에세이/블로그 | ✅ | ❌ |
 | `notes/general-notes/` | 아이디어/로그/컨텍스트 | ✅ | ❌ |
+| `../tasks/01-ralphthon/docs/ralphthon/` | 랄프루프 실험 결과 (Task 01 Wiki) | ✅ | ❌ (루트 log.md 참조) |
+| `../tasks/02-meeting-minutes/docs/meeting-minutes/` | 회의록 작성 실험 결과 (Task 02 Wiki) | ✅ | ❌ (루트 log.md 참조) |
 
 ## 문서 생성 절차
 

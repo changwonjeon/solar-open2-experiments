@@ -1,3 +1,9 @@
+---
+type: Reference
+title: General Notes Directory
+description: Index of ideas, log entries, and general notes
+---
+
 # Notes Directory
 
 Ideas, thoughts, log entries, and general notes.
@@ -8,6 +14,10 @@ Ideas, thoughts, log entries, and general notes.
 * Log - Chronological activity logs
 * Thoughts - Reflections and observations
 * Questions - Open questions and inquiries
+
+## Recorded Issues
+
+* [Ralphthon 표기 오류 정정 기록](ralphthon-spelling-correction.md) - Solar Open 2 작업에서 잘못된 철자가 경로 전반으로 확산된 사례와 정정 근거
 
 ## Log Format
 
@@ -28,5 +38,5 @@ Detailed content of the log entry or note.
 
 # Related
 
-* [Related Note](../related-nte.md)
+* [Related Note](../related-note.md)
 ```

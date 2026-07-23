@@ -25,7 +25,7 @@ This file maintains a chronological record of all experiments conducted using So
 - **Functional validation**: `/tmp` 격리 임시 Git 저장소와 로컬 bare upstream에서 first-checkpoint preflight Gate 1~4와 commit gate Gate 0~8 전체 통과. `P0-1`의 승인 파일 `deliverable.txt`만 로컬 commit에 포함되고 성공 JSON의 `approved_paths`가 `['deliverable.txt']`로 정확히 보존됨. 외부 remote 작업 없음.
 - **Remaining**: subsequent checkpoint, 공백·유니코드 경로, 실패 후 index cleanup, 승인되지 않은 경로 거부, runtime recorder·monitor·watchdog 연결, 10분 soak 및 30분 rehearsal.
 - **Scope**: 외부 remote 작업 없음. 테스트용 로컬 bare repository만 사용.
-- **Commit**: 이 검증 결과는 `5b68b93`에 포함됨. `README.md`, `docs/log.md`, `docs/experiments/experiment-log.md`를 03:52 기준 최신 상태로 동기화함. 검증 도중 생성된 `data/results/ralpthon/solar/.../run-state.json`(불완전한 `manual-test`)은 `.gitignore`로 추적 제외하며 커밋에서 제외.
+- **Commit**: 이 검증 결과는 `5b68b93`에 포함됨. `README.md`, `docs/log.md`, `docs/experiments/experiment-log.md`를 03:52 기준 최신 상태로 동기화함. 검증 도중 생성된 `data/results/ralphthon/solar/.../run-state.json`(불완전한 `manual-test`)은 `.gitignore`로 추적 제외하며 커밋에서 제외.
 
 ## 2026-07-20 (월) 02:46 — Ralph Loop 스킬 9개 항목 일관성 보정 및 Git 히스토리 정리 (완료)
 

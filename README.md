@@ -18,11 +18,11 @@ _upstage/
 │   ├── secrets/                   # 비밀 키, 인증서
 │   └── notes/                     # 개인 메모
 ├── tasks/                         # 📦 실험 태스크 (Source + Wiki 분리)
-│   ├── 01-ralpthon/               # 랄프톤 실험 (Ralph Loop 재현)
+│   ├── 01-ralphthon/               # 랄프톤 실험 (Ralph Loop 재현)
 │   │   ├── source/                # Source 계층 — Codex 원본 및 Solar 적응 코드
 │   │   │   ├── codex-original/    # Codex 원본 (77개 파일, 읽기 전용)
 │   │   │   └── solar-adaptation/  # Solar 적응 코드 (선택)
-│   │   ├── docs/ralpthon/         # Wiki 계층 — 실험 결과, 분석, 가이드
+│   │   ├── docs/ralphthon/         # Wiki 계층 — 실험 결과, 분석, 가이드
 │   │   ├── output/                # 생성 산출물
 │   │   ├── data/                  # 실험 데이터
 │   │   ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
@@ -66,7 +66,7 @@ _upstage/
 └── pyproject.toml
 ```
 
-> **참고**: 과거 구조(`projects/ralph-loop/`, `docs/experiments/ralphthon/`, `docs/experiments/meeting-minutes/`, 전역 `tests/`, `data/fixtures/`)는 2026-07-23 구조 개편 커밋(`7024b1b`)에서 `tasks/` 체계로 재편되었습니다. 과거 경로의 문서는 현재 `tasks/01-ralpthon/docs/ralpthon/` 및 `tasks/02-meeting-minutes/docs/meeting-minutes/`에 있습니다.
+> **참고**: 과거 구조(`projects/ralph-loop/`, `docs/experiments/ralphthon/`, `docs/experiments/meeting-minutes/`, 전역 `tests/`, `data/fixtures/`)는 2026-07-23 구조 개편 커밋(`7024b1b`)에서 `tasks/` 체계로 재편되었습니다. 과거 경로의 문서는 현재 `tasks/01-ralphthon/docs/ralphthon/` 및 `tasks/02-meeting-minutes/docs/meeting-minutes/`에 있습니다.
 
 ## 📊 Solar Open 2 모델 정보
 
@@ -86,7 +86,7 @@ _upstage/
 
 ### 🔹 Task 01: 랄프톤(Ralphthon) 재현 실험
 
-**폴더**: `tasks/01-ralpthon/` | **상태**: 🟡 진행 중 (Checkpoint 검증 완료, 3시간 본 실행 대기)
+**폴더**: `tasks/01-ralphthon/` | **상태**: 🟡 진행 중 (Checkpoint 검증 완료, 3시간 본 실행 대기)
 **실험 유형**: Codex CLI의 랄프루프(Ralph Loop)를 Solar Open 2 + Claude Code로 재현하여 자율 실행 능력 비교
 
 랄프톤 해커톤(ICML 2026)에서 Codex CLI가 3시간 동안 자율적으로 수행한 **랄프루프(Ralph Loop)**를 Solar Open 2(Claude Code CLI)로 재현하여 두 모델의 자율 실행 능력을 정량·정성 비교합니다.
@@ -116,9 +116,9 @@ _upstage/
 
 #### 📁 주요 산출물
 
-- [`tasks/01-ralpthon/docs/ralpthon/solar-vs-codex-comparison.md`](tasks/01-ralpthon/docs/ralpthon/solar-vs-codex-comparison.md) — 정성·정량 비교 분석 리포트 (템플릿, 본 실행 후 채움)
-- [`tasks/01-ralpthon/docs/ralpthon/RALPH_GOAL.md`](tasks/01-ralpthon/docs/ralpthon/RALPH_GOAL.md) — 랄프루프 Goal 명세 (14개 P0 항목)
-- [`tasks/01-ralpthon/docs/ralpthon/context-notes.md`](tasks/01-ralpthon/docs/ralpthon/context-notes.md) — Track 2 준비 과정의 결정과 근거
+- [`tasks/01-ralphthon/docs/ralphthon/solar-vs-codex-comparison.md`](tasks/01-ralphthon/docs/ralphthon/solar-vs-codex-comparison.md) — 정성·정량 비교 분석 리포트 (템플릿, 본 실행 후 채움)
+- [`tasks/01-ralphthon/docs/ralphthon/RALPH_GOAL.md`](tasks/01-ralphthon/docs/ralphthon/RALPH_GOAL.md) — 랄프루프 Goal 명세 (14개 P0 항목)
+- [`tasks/01-ralphthon/docs/ralphthon/context-notes.md`](tasks/01-ralphthon/docs/ralphthon/context-notes.md) — Track 2 준비 과정의 결정과 근거
 
 #### 🚧 다음 단계
 
@@ -206,6 +206,71 @@ _upstage/
 
 ---
 
+### 🔹 Task 03: Wiki 구조 재편 및 Canonical 경로 정립
+
+**폴더**: `tasks/03-wiki-restructure/` | **상태**: 🟢 완료
+**실험 유형**: 저장소 내 실험 결과물을 task 단위로 분리하고, Source/Wiki/Output/Schema 계층을 명확히 구분하여 OKF 포맷 정합성과 canonical 경로 정합성을 확보
+
+`7024b1b` 커밋에서 문서 구조가 실험적으로 재편되면서 발생한 Source 원본 누락, docs 내 스크립트 혼입, 중복 nesting, OKF 포맷 위반, 보호 대상 손상 위험 등의 문제를 5단계에 걸쳐 해결했습니다.
+
+#### 📌 작업 개요
+
+| 항목 | 내용 |
+|------|------|
+| **작업명** | Wiki 구조 재편 및 Canonical 경로 정립 |
+| **시작일** | 2026-07-23 |
+| **HEAD** | 6e8c5d1 |
+| **기준 커밋** | 7024b1b^ (구조 변경 전) |
+
+#### 📌 진행 단계 (총 5단계)
+
+| 단계 | 이름 | 상태 |
+|------|------|------|
+| Step 1 | 감사 및 복구 매핑 작성 | ✅ 완료 |
+| Step 2 | Ralphthon 원본 복구 | ✅ 완료 (100개 파일 복구, `git hash-object`로 blob ID 일치 확인) |
+| Step 3 | 구조 정규화 | ✅ 완료 (.codex/.codex 중첩 0, .omx/.omx 중첩 0, docs/ 내 스크립트 0) |
+| Step 4 | 문서·링크 정합 | ✅ 완료 (OKF frontmatter 3개 추가, broken link 6개 수정, planned 마커 제거) |
+| Step 5 | 최종 검증 및 선택적 커밋 준비 | ✅ 완료 (모든 gate PASS) |
+
+#### 📌 계층 원칙
+
+| 계층 | 경로 | 역할 |
+|------|------|------|
+| **Source** | `tasks/01-ralphthon/source/codex-original/` | 불변 원본 자료 (읽기 전용) |
+| **Wiki** | `docs/` | OKF 포맷 지식 문서 (에이전트 유지관리) |
+| **Output** | `tasks/03-wiki-restructure/` | 생성 산출물 |
+| **Schema** | `AGENTS.md`, `CLAUDE.md` | 위키 구조/워크플로우 규칙 |
+
+#### 🚧 보호 범위
+
+- `tasks/02-meeting-minutes/` — 원본 9개 파일, 회의록, LinkedIn 산출물
+- `_private/` — 개인정보, 자격증명
+- `_inbox/` — 전달용 폴더
+- `src/data/results/` — 결과 데이터
+- `.gitignore` 처리된 모든 파일
+
+---
+
+### 🔹 Task 04: Tokenizer Comparison
+
+**폴더**: `tasks/04-tokenizer-comparison/` | **상태**: ⏳ 준비 중
+**실험 유형**: 여러 오픈웨이트 모델의 토크나이저 결과를 비교하여 토큰화 패턴·효율성·호환성을 분석
+
+다양한 오픈웨이트 모델의 토크나이저를 동일한 입력 텍스트에 적용하여, 토큰 수·토큰 분포·특수 토큰 처리·모델 간 호환성 등을 비교 분석합니다.
+
+#### 📌 구조
+
+| 항목 | 내용 |
+|------|------|
+| `source/original/` | 원본 애플리케이션, 검증 스크립트, 토크나이저 자산 (읽기 전용) |
+| `docs/tokenizer-comparison/` | OKF Wiki 문서 |
+| `output/` | 생성 산출물 |
+| `AGENTS.md`, `CLAUDE.md` | 태스크 로컬 규칙 |
+
+> **참고**: `source/original/` 내용은 읽기 전용으로 유지합니다.
+
+---
+
 ## 🚀 실행 가이드
 
 랄프톤 실험을 바로 실행하려면:
@@ -226,3 +291,11 @@ _upstage/
 - [Solar Open 2 API 문서](https://console.upstage.ai/api/chat)
 - [OKF 포맷 스펙](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf)
 - [LLM-Wiki (Karpathy)](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f)
+
+---
+
+## ⚠️ 특이사항: Ralphthon 표기 정정
+
+공식 영문 표기는 **Ralphthon**이며 경로에는 `ralphthon`을 사용합니다. Solar Open 2 작업 과정에서 잘못된 `ralpthon` 표기가 task·Wiki·실행 스크립트·Skill·결과 폴더로 반복 확산돼, 2026-07-23 Codex가 사용자 지시에 따라 현재 경로와 참조를 전수 정정했습니다.
+
+이 사례는 초기 고유명사 오류가 대규모 파일 작업에서 일관되게 복제될 수 있음을 보여줍니다. 향후 migration에서는 canonical 명칭 사전과 금지 문자열 전수 검색을 완료 gate로 사용합니다. Git 이력과 전체 정정 범위는 [`Ralphthon 표기 오류 정정 기록`](docs/notes/general-notes/ralphthon-spelling-correction.md)에 보존합니다.

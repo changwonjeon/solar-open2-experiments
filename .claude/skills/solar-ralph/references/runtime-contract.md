@@ -4,7 +4,7 @@
 
 ## tmux Session Lifecycle
 
-The Ralph Loop run is hosted inside two `tmux` sessions created by the launcher (`src/scripts/ralpthon/start-ralph-solar.sh`):
+The Ralph Loop run is hosted inside two `tmux` sessions created by the launcher (`src/scripts/ralphthon/start-ralph-solar.sh`):
 
 | Session | Purpose | Command |
 |---------|---------|---------|
@@ -40,7 +40,7 @@ The Ralph Loop run is hosted inside two `tmux` sessions created by the launcher 
 
 ## Launcher Interface
 
-The launcher (`src/scripts/ralpthon/start-ralph-solar.sh`) performs the following in order:
+The launcher (`src/scripts/ralphthon/start-ralph-solar.sh`) performs the following in order:
 
 1. Verifies the confirmation token (`START-RALPH`) is provided.
 2. Checks that `RALPH_GOAL.md` (or the specified task spec) exists.
@@ -67,11 +67,11 @@ The launcher does **not** start the recorder (`record-session.sh`) or the checkp
 
 - `record-session.sh` captures tmux pane output to log files using `tmux pipe-pane`. It is **not** started by the launcher. If used, it must be started manually before the run begins.
 - `capture-checkpoints.sh` polls `session.log` for size changes and attempts to detect P0 completion via keyword heuristics. It is **not** started by the launcher. If used, it must be started manually.
-- The current implementation of `capture-checkpoints.sh` uses `ROOT="${SCRIPT_DIR:h}"`, which resolves to `src/scripts/` rather than the repository root. This is a known limitation. The `/solar-ralph` skill and its state files use the correct repository root as determined by the launcher. Checkpoint artifacts should be written relative to `data/results/ralpthon/solar/<run-id>/` as determined by the launcher's ROOT calculation.
+- The current implementation of `capture-checkpoints.sh` uses `ROOT="${SCRIPT_DIR:h}"`, which resolves to `src/scripts/` rather than the repository root. This is a known limitation. The `/solar-ralph` skill and its state files use the correct repository root as determined by the launcher. Checkpoint artifacts should be written relative to `data/results/ralphthon/solar/<run-id>/` as determined by the launcher's ROOT calculation.
 
 ## Process Isolation
 
-- Each run uses a unique `run-id` (`solar-ralph-<YYYYMMDD-HHMMSS>`). All state files, logs, and artifacts are namespaced under `data/results/ralpthon/solar/<run-id>/`.
+- Each run uses a unique `run-id` (`solar-ralph-<YYYYMMDD-HHMMSS>`). All state files, logs, and artifacts are namespaced under `data/results/ralphthon/solar/<run-id>/`.
 - tmux session names (`ralphthon-loop`, `ralphthon-deadline`) are reused across runs. The launcher kills existing sessions before creating new ones.
 - The watchdog and the main loop session are independent processes. Killing one does not automatically kill the other, though the launcher's termination sequence attempts to kill both.
 - Broad process kill commands (e.g., `pkill -9 -f claude-upstage`) are **forbidden**. Only the tmux session names and the specific launchers they spawned should be terminated.
@@ -88,4 +88,4 @@ The launcher does **not** start the recorder (`record-session.sh`) or the checkp
 
 - The watchdog is the primary heartbeat monitor. It does not participate in the `/solar-ralph` state machine.
 - `/solar-ralph` maintains its own state in `run-state.json` and `events.jsonl`. These are updated by the skill itself, not by the watchdog or launcher.
-- If the watchdog terminates the session before `/solar-ralph finalize` is invoked, the state files written up to that point are preserved in `data/results/ralpthon/solar/<run-id>/`. The handoff is incomplete but the partial state is recoverable.
+- If the watchdog terminates the session before `/solar-ralph finalize` is invoked, the state files written up to that point are preserved in `data/results/ralphthon/solar/<run-id>/`. The handoff is incomplete but the partial state is recoverable.

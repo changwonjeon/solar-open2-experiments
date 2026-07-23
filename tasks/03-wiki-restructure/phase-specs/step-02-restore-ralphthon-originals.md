@@ -2,13 +2,13 @@
 
 ## 목적
 
-7024b1b^ 커밋에서 `docs/experiments/ralphthon/`에 존재했던 원본 파일(fixtures, src, tests, .codex, .omx) 중 HEAD에 존재하지 않는 파일들을 `tasks/01-ralpthon/source/codex-original/`에 복원합니다.
+7024b1b^ 커밋에서 `docs/experiments/ralphthon/`에 존재했던 원본 파일(fixtures, src, tests, .codex, .omx) 중 HEAD에 존재하지 않는 파일들을 `tasks/01-ralphthon/source/codex-original/`에 복원합니다.
 
 ## 보호 대상
 
 - `tasks/02-meeting-minutes/` — 절대 수정하지 않음
 - `_private/`, `_inbox/`, `src/data/results/`, ignored 파일 — 수정 금지
-- `tasks/01-ralpthon/source/codex-original/` 내 기존 파일은 git hash-object로 보존 확인 후 이동
+- `tasks/01-ralphthon/source/codex-original/` 내 기존 파일은 git hash-object로 보존 확인 후 이동
 
 ## 실행 절차
 
@@ -45,23 +45,23 @@ git show 7024b1b^:<filepath> > <target-path>
 ### 3. 복구 실행
 
 ```bash
-# tasks/01-ralpthon/source/ 디렉토리 생성
-mkdir -p tasks/01-ralpthon/source/codex-original/
+# tasks/01-ralphthon/source/ 디렉토리 생성
+mkdir -p tasks/01-ralphthon/source/codex-original/
 
 # fixtures 복구
-git show 7024b1b^:docs/experiments/ralphthon/fixtures/*.json > tasks/01-ralpthon/source/codex-original/fixtures/ 2>/dev/null || true
+git show 7024b1b^:docs/experiments/ralphthon/fixtures/*.json > tasks/01-ralphthon/source/codex-original/fixtures/ 2>/dev/null || true
 
 # src 복구
-git show 7024b1b^:docs/experiments/ralphthon/src/** > tasks/01-ralpthon/source/codex-original/src/ 2>/dev/null || true
+git show 7024b1b^:docs/experiments/ralphthon/src/** > tasks/01-ralphthon/source/codex-original/src/ 2>/dev/null || true
 
 # tests 복구
-git show 7024b1b^:docs/experiments/ralphthon/tests/** > tasks/01-ralpthon/source/codex-original/tests/ 2>/dev/null || true
+git show 7024b1b^:docs/experiments/ralphthon/tests/** > tasks/01-ralphthon/source/codex-original/tests/ 2>/dev/null || true
 
 # .codex 복구
-git show 7024b1b^:docs/experiments/ralphthon/.codex/** > tasks/01-ralpthon/source/codex-original/.codex/ 2>/dev/null || true
+git show 7024b1b^:docs/experiments/ralphthon/.codex/** > tasks/01-ralphthon/source/codex-original/.codex/ 2>/dev/null || true
 
 # .omx 복구
-git show 7024b1b^:docs/experiments/ralphthon/.omx/** > tasks/01-ralpthon/source/codex-original/.omx/ 2>/dev/null || true
+git show 7024b1b^:docs/experiments/ralphthon/.omx/** > tasks/01-ralphthon/source/codex-original/.omx/ 2>/dev/null || true
 ```
 
 ### 4. 중복 nesting 파일 처리
@@ -74,7 +74,7 @@ git show 7024b1b^:docs/experiments/ralphthon/.omx/** > tasks/01-ralpthon/source/
 
 ```bash
 # 원본 blob 보존 검증
-find tasks/01-ralpthon/source/codex-original/ -type f | while read f; do
+find tasks/01-ralphthon/source/codex-original/ -type f | while read f; do
   blob_id=$(git hash-object "$f")
   echo "$blob_id  $f"
 done > /tmp/step2-recovery-blobs.txt
@@ -91,6 +91,6 @@ done > /tmp/step2-recovery-blobs.txt
 
 ## 산출물
 
-- `tasks/01-ralpthon/source/codex-original/` — 복원된 원본 파일들
+- `tasks/01-ralphthon/source/codex-original/` — 복원된 원본 파일들
 - `/tmp/step2-recovery-blobs.txt` — 복구된 blob ID 목록
 - `tasks/03-wiki-restructure/work-log.md` — 복구 결과 기록

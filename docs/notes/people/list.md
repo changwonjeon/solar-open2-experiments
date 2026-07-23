@@ -17,7 +17,7 @@ This index lists all researcher and contributor profiles in this knowledge base.
 ## How to Add a Person
 
 1. Create a new file in this directory: `docs/notes/people/<name>.md`
-2. Use the [Person Template](../templates/template-person.md)
+2. Use the [Person Template](../../templates/template-person.md)
 3. Add an entry to this index
 4. Update the parent index: `docs/notes/people/index.md`
 

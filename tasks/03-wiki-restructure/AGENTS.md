@@ -5,7 +5,7 @@
 ## 계층별 원칙
 
 ### Source 계층
-- **경로**: `tasks/01-ralpthon/source/codex-original/`
+- **경로**: `tasks/01-ralphthon/source/codex-original/`
 - **원칙**: **읽기 전용 — 내용 수정 금지**
 - 원본 복구 시 반드시 `git hash-object`로 blob ID 일치 확인
 

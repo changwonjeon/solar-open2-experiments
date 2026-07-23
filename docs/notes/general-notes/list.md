@@ -23,7 +23,7 @@ This index lists all log entries, ideas, and general notes in this knowledge bas
 
 ## Adding a Note
 
-1. Create a new file: `docs/notes/notes/<note-slug>.md`
+1. Create a new file: `docs/notes/general-notes/<note-slug>.md`
 2. Use appropriate frontmatter:
    ```yaml
    ---
@@ -35,7 +35,7 @@ This index lists all log entries, ideas, and general notes in this knowledge bas
    ---
    ```
 3. Add an entry to this index
-4. Update the parent index: `docs/notes/notes/index.md`
+4. Update the parent index: `docs/notes/general-notes/index.md`
 
 ## Ideas to Document
 

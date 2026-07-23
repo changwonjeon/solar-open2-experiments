@@ -264,7 +264,7 @@ status: template
 - 실행 시각: `____`
 - 실행 환경: `claude-upstage --allow-dangerously-skip-permissions`
 - tmux 세션: `ralphthon-loop`, `ralphthon-deadline`
-- 로그 파일: `data/results/ralpthon/solar/session.log`
+- 로그 파일: `data/results/ralphthon/solar/session.log`
 
 **체크포인트 상태**:
 
@@ -333,43 +333,43 @@ status: template
 
 ```bash
 # Solar Open2 랄프루프 시작
-./src/scripts/ralpthon/start-ralph-solar.sh START-RALPH
+./src/scripts/ralphthon/start-ralph-solar.sh START-RALPH
 
 # tmux 세션 모니터링 (읽기 전용)
 tmux attach -t ralphthon-loop
 tmux attach -t ralphthon-deadline
 
 # 세션 로그 확인
-./src/scripts/ralpthon/record-session.sh dump
+./src/scripts/ralphthon/record-session.sh dump
 
 # 체크포인트 상태 확인
-./src/scripts/ralpthon/capture-checkpoints.sh status
+./src/scripts/ralphthon/capture-checkpoints.sh status
 
 # 정량 비교 분석
-python3 src/scripts/ralpthon/compare.py
+python3 src/scripts/ralphthon/compare.py
 ```
 
 ### B. 데이터 파일 위치
 
 | 데이터 유형 | 경로 |
 |-------------|------|
-| 세션 로그 | `data/results/ralpthon/solar/session.log` |
-| 체크포인트 | `data/results/ralpthon/solar/checkpoints/checkpoint-{N}.json` |
-| Git 로그 | `data/results/ralpthon/solar/gitlog/` |
-| 실패 원장 | `data/results/ralpthon/solar/failure-ledger.md` |
-| 시간 지표 | `data/results/ralpthon/solar/timing.json` |
-| 파일 목록 | `data/results/ralpthon/solar/files.json` |
-| 비교 결과 | `data/results/ralpthon/solar/comparison-summary.json` |
+| 세션 로그 | `data/results/ralphthon/solar/session.log` |
+| 체크포인트 | `data/results/ralphthon/solar/checkpoints/checkpoint-{N}.json` |
+| Git 로그 | `data/results/ralphthon/solar/gitlog/` |
+| 실패 원장 | `data/results/ralphthon/solar/failure-ledger.md` |
+| 시간 지표 | `data/results/ralphthon/solar/timing.json` |
+| 파일 목록 | `data/results/ralphthon/solar/files.json` |
+| 비교 결과 | `data/results/ralphthon/solar/comparison-summary.json` |
 
 ### C. 관련 문서
 
 - [RALPH_GOAL.md](./RALPH_GOAL.md)
 - [랄프톤 비교 실험 위키](./solar-vs-codex-comparison.md)
-- [Phase 2: 실행 스크립트](../../../../src/scripts/ralpthon/run-ralph-solar.sh)
-- [Phase 2: 시작 스크립트](../../../../src/scripts/ralpthon/start-ralph-solar.sh)
-- [Phase 3: 세션 로깅](../../../../src/scripts/ralpthon/record-session.sh)
-- [Phase 3: 체크포인트 캡처](../../../../src/scripts/ralpthon/capture-checkpoints.sh)
-- [Phase 3: 비교 분석기](../../../../src/scripts/ralpthon/compare.py)
+- [Phase 2: 실행 스크립트](../../../../src/scripts/ralphthon/run-ralph-solar.sh)
+- [Phase 2: 시작 스크립트](../../../../src/scripts/ralphthon/start-ralph-solar.sh)
+- [Phase 3: 세션 로깅](../../../../src/scripts/ralphthon/record-session.sh)
+- [Phase 3: 체크포인트 캡처](../../../../src/scripts/ralphthon/capture-checkpoints.sh)
+- [Phase 3: 비교 분석기](../../../../src/scripts/ralphthon/compare.py)
 
 ---
 

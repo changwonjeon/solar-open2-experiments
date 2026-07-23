@@ -38,6 +38,6 @@ This index lists all documented projects and experiments in this knowledge base.
 ## Adding a Project
 
 1. Create a new file: `docs/notes/projects/<project-slug>.md`
-2. Use the [Project Template](../templates/template-project.md)
+2. Use the [Project Template](../../templates/template-project.md)
 3. Add an entry to this index
 4. Update the parent index: `docs/notes/projects/index.md`

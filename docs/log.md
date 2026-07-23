@@ -8,28 +8,35 @@ description: Migration and restructuring log for _Upstage
 
 Chronological history of changes to this knowledge bundle.
 
+## 2026-07-23 (목) — Ralphthon canonical 표기 정정
+
+- 공식 영문 표기를 `Ralphthon`, 경로 표기를 `ralphthon`으로 확정했다.
+- Solar Open 2 작업에서 잘못된 철자가 task·Wiki·실행 스크립트·Skill·결과 폴더로 반복 확산된 사실을 확인했다.
+- Codex가 사용자 지시에 따라 현재 작업 트리의 폴더명과 참조를 전수 정정했다. 과거 Git 커밋은 근거 보존을 위해 재작성하지 않았다.
+- 상세 근거: [`Ralphthon 표기 오류 정정 기록`](notes/general-notes/ralphthon-spelling-correction.md)
+
 ## 2026-07-23 (목) — 구조 개편: `tasks/` 체계 도입 및 Source/Wiki 분리
 
 - **Commit**: `7024b1b` — "docs: restructure workspace for LLM-Wiki/OKF conformance and Solar Open2 agent experimentation"
 - **Restructuring**: 프로젝트 뿌리 수준의 분산된 Source/Wiki 자료를 `tasks/` 체계로 재편
-  - 과거 `projects/ralph-loop/` → 현재 `tasks/01-ralpthon/source/codex-original/` (77개 blob 복구, `git hash-object`로 ID 일치 확인)
-  - 과거 `docs/experiments/ralphthon/` → 현재 `tasks/01-ralpthon/docs/ralpthon/` (4개 Wiki 문서 보존)
+  - 과거 `projects/ralph-loop/` → 현재 `tasks/01-ralphthon/source/codex-original/` (77개 blob 복구, `git hash-object`로 ID 일치 확인)
+  - 과거 `docs/experiments/ralphthon/` → 현재 `tasks/01-ralphthon/docs/ralphthon/` (4개 Wiki 문서 보존)
   - 과거 `docs/experiments/meeting-minutes/` → 현재 `tasks/02-meeting-minutes/docs/meeting-minutes/` (3개 Wiki 문서 보존)
   - 과거 전역 `tests/`, `data/fixtures/` → 현재 task-local `source/codex-original/tests/`, `source/codex-original/fixtures/` (Source 계층 유지)
 - **Source 누락 발견 및 복구**:
-  - 1차 구조 점검 시 `tasks/01-ralpthon/source/`에 `codex-original/` 디렉토리가 누락되어 있었음
-  - `git hash-object`로 77개 고유 blob ID 확인 후 `tasks/01-ralpthon/source/codex-original/`에 복구
+  - 1차 구조 점검 시 `tasks/01-ralphthon/source/`에 `codex-original/` 디렉토리가 누락되어 있었음
+  - `git hash-object`로 77개 고유 blob ID 확인 후 `tasks/01-ralphthon/source/codex-original/`에 복구
   - 복구된 blob 수: **77개** (Codex 원본 스크립트, 테스트, 픽스처, 설정 파일 포함)
 - **Canonical 경로 확정**:
-  - 랄프톤 Source: `tasks/01-ralpthon/source/codex-original/`
-  - 랄프톤 Wiki: `tasks/01-ralpthon/docs/ralpthon/`
+  - 랄프톤 Source: `tasks/01-ralphthon/source/codex-original/`
+  - 랄프톤 Wiki: `tasks/01-ralphthon/docs/ralphthon/`
   - 회의록 Source: `tasks/02-meeting-minutes/source/original/`
   - 회의록 Wiki: `tasks/02-meeting-minutes/docs/meeting-minutes/`
 - **중복 제거**:
   - 과거 `docs/experiments/`와 현재 `tasks/*/docs/`에 중복 존재하던 Wiki 문서를 통합
   - 07/19 항목 중복(`## 2026-07-19` + `### 2026-07-19`)을 내용 손실 없이 하나로 통합
 - **현재 task 구조**:
-  - `tasks/01-ralpthon/`: Source(`source/codex-original/`), Wiki(`docs/ralpthon/`), 산출물(`output/`), 데이터(`data/`)
+  - `tasks/01-ralphthon/`: Source(`source/codex-original/`), Wiki(`docs/ralphthon/`), 산출물(`output/`), 데이터(`data/`)
   - `tasks/02-meeting-minutes/`: Source(`source/original/`), Wiki(`docs/meeting-minutes/`), 산출물(`output/`), 데이터(`data/`)
 - **검증 결과**: `git status` clean, 모든 Wiki 문서 OKF frontmatter 유효성 확인, broken link 없음
 - **Next**: 실험 개요 문서 작성, 품질 평가 지표 도입, `guide/`·`reference/`·`notes/` 디렉토리 본격 구축
@@ -56,7 +63,7 @@ Chronological history of changes to this knowledge bundle.
 * **Verify**: 전체 대상 script의 `zsh -n`, `git diff --check` 통과. malformed JSON·누락 schema·절대·대시 시작·디렉터리·저장소 밖 run-state 경로가 예상한 non-zero 코드로 거부됨 확인. `--run-state`에 `__NULL__` sentinel 복원 전후 첫/checkpoint 판별 정상 동작 확인. ShellCheck는 설치되어 있지 않아 실행하지 않았습니다.
 * **Functional test**: `/tmp`의 격리 Git 저장소와 로컬 bare upstream에서 첫 checkpoint preflight Gate 1~4 및 commit gate Gate 0~8 전체를 통과했습니다. `P0-1`의 승인 경로 `deliverable.txt`만 commit에 포함됐고 성공 JSON의 `approved_paths`가 정확한 배열로 보존됐습니다. 외부 remote 동작은 없었습니다.
 * **Next**: 후속 checkpoint, 재시도·failure cleanup, 승인되지 않은 경로 거부, runtime recorder·monitor·watchdog 연결, 10분 soak 및 30분 rehearsal을 검증합니다.
-* **Workspace note**: 검증 도중 생성된 `data/results/ralpthon/solar/fix-solar-ralph-skill-consistency-20260720-033655/run-state.json`은 불완전한 `manual-test` 임시 산출물이므로 이번 commit에서 제외하고 로컬에 보존했습니다. 이 파일은 `.gitignore`의 `data/results/ralpthon/solar/` 패터닝으로 추적 제외됩니다.
+* **Workspace note**: 검증 도중 생성된 `data/results/ralphthon/solar/fix-solar-ralph-skill-consistency-20260720-033655/run-state.json`은 불완전한 `manual-test` 임시 산출물이므로 이번 commit에서 제외하고 로컬에 보존했습니다. 이 파일은 `.gitignore`의 `data/results/ralphthon/solar/` 패터닝으로 추적 제외됩니다.
 
 ## 2026-07-20 (월) — Ralph Loop 스킬 9개 항목 일관성 보정 및 Git 히스토리 정리
 
@@ -69,7 +76,7 @@ Chronological history of changes to this knowledge bundle.
   - **state-contract.md (1 item)**: Added `needs-operator` to P0 Item Schema status field; added Resume Consistency Contract documenting 4 independent comparisons; added `tests_passed`, `checkpoint_failed`, `needs-operator` to Status Transitions table; added State Write Distinctions section (atomic replace vs append-only).
 * **Cleanup**: Rewrote full Git history using `git rebase -i --root` to remove `Co-Authored-By: Claude...` trailers from 7 commits, ensuring clean commit history.
 * **Added**: Created `.gitmessage` template to prevent future co-authored-by insertions, and `clean-coauthor.sh` utility script for history cleanup.
-* **Documentation**: Updated `README.md` with detailed 07/19~07/20 progress log including full script stabilization timeline table; updated `tasks/01-ralpthon/docs/ralpthon/experiment-log.md` with comprehensive 07/20 entry.
+* **Documentation**: Updated `README.md` with detailed 07/19~07/20 progress log including full script stabilization timeline table; updated `tasks/01-ralphthon/docs/ralphthon/experiment-log.md` with comprehensive 07/20 entry.
 * **Status**: All 9 items verified and committed. Working tree clean.
 
 ### 2026-07-17 ~ 07-20 — Ralph Loop 스크립트 안정화 전체 히스토리

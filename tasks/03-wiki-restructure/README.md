@@ -31,16 +31,16 @@
 | 단계 | 이름 | 상태 |
 |------|------|------|
 | Step 1 | 감사 및 복구 매핑 작성 | ✅ 완료 |
-| Step 2 | Ralphthon 원본 복구 | 🔄 진행 중 |
-| Step 3 | 구조 정규화 | 미실행 |
-| Step 4 | 문서·링크 정합 | 미실행 |
-| Step 5 | 최종 검증 및 선택적 커밋 준비 | 미실행 |
+| Step 2 | Ralphthon 원본 복구 | ✅ 완료 (100개 파일 복구, `git hash-object`로 blob ID 일치 확인) |
+| Step 3 | 구조 정규화 | ✅ 완료 (.codex/.codex 중첩 0, .omx/.omx 중첩 0, docs/ 내 스크립트 0) |
+| Step 4 | 문서·링크 정합 | ✅ 완료 (OKF frontmatter 3개 추가, broken link 6개 수정, planned 마커 제거) |
+| Step 5 | 최종 검증 및 선택적 커밋 준비 | ✅ 완료 (모든 gate PASS) |
 
 ## 계층 원칙
 
 | 계층 | 경로 | 역할 |
 |------|------|------|
-| **Source** | `tasks/01-ralpthon/source/codex-original/` | 불변 원본 자료 (읽기 전용) |
+| **Source** | `tasks/01-ralphthon/source/codex-original/` | 불변 원본 자료 (읽기 전용) |
 | **Wiki** | `docs/` | OKF 포맷 지식 문서 (에이전트 유지관리) |
 | **Output** | `tasks/03-wiki-restructure/` | 생성 산출물 |
 | **Schema** | `AGENTS.md`, `CLAUDE.md` | 위키 구조/워크플로우 규칙 |
@@ -57,7 +57,7 @@
 
 ## 관련 작업
 
-- `tasks/01-ralpthon/` — Ralphth폰 실험 원본 소스 복원 및 구조화 (완료)
+- `tasks/01-ralphthon/` — Ralphth폰 실험 원본 소스 복원 및 구조화 (완료)
 - `tasks/02-meeting-minutes/` — 회의록 작성 실험 (완료)
 
 ## 생성 확인

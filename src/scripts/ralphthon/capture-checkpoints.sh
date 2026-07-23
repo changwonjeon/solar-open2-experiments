@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="${0:A:h}"
 ROOT="${SCRIPT_DIR:h}"
-DATA_DIR="$ROOT/data/results/ralpthon/solar"
+DATA_DIR="$ROOT/data/results/ralphthon/solar"
 CHECKPOINT_DIR="$DATA_DIR/checkpoints"
 SESSION_LOG="$DATA_DIR/session.log"
 
@@ -25,7 +25,7 @@ Commands:
 Options:
   --poll-interval SEC  Set polling interval in seconds (default: 30)
   --max-checkpoints N  Set max number of checkpoints (default: 14)
-  --output DIR         Set output directory (default: data/results/ralpthon/solar/checkpoints/)
+  --output DIR         Set output directory (default: data/results/ralphthon/solar/checkpoints/)
 
 Environment:
   POLL_INTERVAL        Polling interval in seconds (default: 30)
