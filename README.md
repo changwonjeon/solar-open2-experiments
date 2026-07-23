@@ -137,8 +137,9 @@ _upstage/
 
 ### 🔹 Task 01: 랄프톤(Ralphthon) 재현 실험
 
-**폴더**: `tasks/01-ralphthon/` | **상태**: 🟡 진행 중 (Checkpoint 검증 완료, 3시간 본 실행 대기)
-**실험 유형**: Codex CLI의 랄프루프(Ralph Loop)를 Solar Open 2 + Claude Code로 재현하여 자율 실행 능력 비교
+- **폴더**: `tasks/01-ralphthon/`
+- **상태**: 🟡 진행 중 (Checkpoint 검증 완료, 3시간 본 실행 대기)
+- **실험 유형**: Codex CLI의 랄프루프(Ralph Loop)를 Solar Open 2 + Claude Code로 재현하여 자율 실행 능력 비교
 
 랄프톤 해커톤(ICML 2026)에서 Codex CLI가 3시간 동안 자율적으로 수행한 **랄프루프(Ralph Loop)**를 Solar Open 2(Claude Code CLI)로 재현하여 두 모델의 자율 실행 능력을 정량·정성 비교합니다.
 
@@ -184,8 +185,9 @@ _upstage/
 
 ### 🔹 Task 02: 회의록 작성 실험
 
-**폴더**: `tasks/02-meeting-minutes/` | **상태**: 🟢 완료
-**실험 유형**: Solar Open 2의 자연어 이해·정보 추출·구조화 작성 능력을 회의록 작성 태스크로 검증
+- **폴더**: `tasks/02-meeting-minutes/`
+- **상태**: 🟢 완료
+- **실험 유형**: Solar Open 2의 자연어 이해·정보 추출·구조화 작성 능력을 회의록 작성 태스크로 검증
 
 행사 개요 문서 1건과 Tiro 노트테이킹 앱의 세션별 정리 문서 8건을 입력으로 받아, Solar Open 2(Claude Code CLI)가 이를 종합·구조화·요약하여 OKF 포맷의 회의록으로 변환합니다.
 
@@ -259,8 +261,9 @@ _upstage/
 
 ### 🔹 Task 03: Wiki 구조 재편 및 Canonical 경로 정립
 
-**폴더**: `tasks/03-wiki-restructure/` | **상태**: 🟢 완료
-**실험 유형**: 저장소 내 실험 결과물을 task 단위로 분리하고, Source/Wiki/Output/Schema 계층을 명확히 구분하여 OKF 포맷 정합성과 canonical 경로 정합성을 확보
+- **폴더**: `tasks/03-wiki-restructure/`
+- **상태**: 🟢 완료
+- **실험 유형**: 저장소 내 실험 결과물을 task 단위로 분리하고, Source/Wiki/Output/Schema 계층을 명확히 구분하여 OKF 포맷 정합성과 canonical 경로 정합성을 확보
 
 `7024b1b` 커밋에서 문서 구조가 실험적으로 재편되면서 발생한 Source 원본 누락, docs 내 스크립트 혼입, 중복 nesting, OKF 포맷 위반, 보호 대상 손상 위험 등의 문제를 5단계에 걸쳐 해결했습니다.
 
@@ -304,8 +307,9 @@ _upstage/
 
 ### 🔹 Task 04: Tokenizer Comparison
 
-**폴더**: `tasks/04-tokenizer-comparison/` | **상태**: ⏳ 준비 중
-**실험 유형**: 여러 오픈웨이트 모델의 토크나이저 결과를 비교하여 토큰화 패턴·효율성·호환성을 분석
+- **폴더**: `tasks/04-tokenizer-comparison/`
+- **상태**: ⏳ 준비 중
+- **실험 유형**: 여러 오픈웨이트 모델의 토크나이저 결과를 비교하여 토큰화 패턴·효율성·호환성을 분석
 
 다양한 오픈웨이트 모델의 토크나이저를 동일한 입력 텍스트에 적용하여, 토큰 수·토큰 분포·특수 토큰 처리·모델 간 호환성 등을 비교 분석합니다.
 
