@@ -28,14 +28,21 @@ _upstage/
 │   │   ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
 │   │   ├── CLAUDE.md              # 태스크 로컬 지시 (Schema)
 │   │   └── README.md              # 태스크 설명
-│   └── 02-meeting-minutes/        # 회의록 작성 실험
-│       ├── source/                # Source 계층 — 회의록 원문
-│       │   └── original/          # 9개 원문 (읽기 전용)
-│       ├── docs/meeting-minutes/  # Wiki 계층 — 회의록, 실험 결과
-│       ├── output/                # 생성 산출물 (LinkedIn 포스트 포함)
-│       ├── data/                  # 실험 데이터
-│       ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
-│       ├── CLAUDE.md              # 태스크 로컬 지시 (Schema)
+│   ├── 02-meeting-minutes/        # 회의록 작성 실험
+│   │   ├── source/                # Source 계층 — 회의록 원문
+│   │   │   └── original/          # 9개 원문 (읽기 전용)
+│   │   ├── docs/meeting-minutes/  # Wiki 계층 — 회의록, 실험 결과
+│   │   ├── output/                # 생성 산출물 (LinkedIn 포스트 포함)
+│   │   ├── data/                  # 실험 데이터
+│   │   ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
+│   │   ├── CLAUDE.md              # 태스크 로컬 지시 (Schema)
+│   │   └── README.md              # 태스크 설명
+│   ├── 03-wiki-restructure/       # 위키 구조 개편 태스크
+│   │   └── README.md              # 태스크 설명
+│   └── 04-tokenizer-comparison/   # 토크나이저 비교 태스크
+│       ├── source/                # Source 계층
+│       ├── docs/                  # Wiki 계층
+│       ├── output/                # 생성 산출물
 │       └── README.md              # 태스크 설명
 ├── docs/                          # 📚 프로젝트 공통 OKF Wiki 번들
 │   ├── guide/                     # 사용법 가이드 (선택)
@@ -65,47 +72,99 @@ _upstage/
 
 | 항목 | 내용 |
 |------|------|
-| **개발사** | Upstage (한국 스타트업) |
-| **모델명** | Solar Open2 250B |
-| **전체 파라미터** | 250B (Mixture-of-Experts) |
-| **활성 파라미터** | 15B (per token, top-8 + 1 shared) |
+| **모델명** | Solar Open2 250B (MoE, 15B active) |
 | **컨텍스트** | 1M 토큰 |
-| **아키텍처** | Hybrid-Attention Mixture-of-Experts (MoE) |
-| **전문가 수** | 321 (320 routed + 1 shared) |
-| **레이어** | 48 |
-| **히든 사이즈** | 4096 |
-| **어휘 크기** | 196,608 |
-| **사전학습 토큰** | ~12조 |
-| **포지션 인코딩** | NoPE |
 | **지원 언어** | 한국어, 영어, 일본어 |
 | **라이선스** | upstage-solar-license |
-| **훈련 하드웨어** | NVIDIA B200 GPU (2M GPU Hours) |
-| **HuggingFace 모델** | https://huggingface.co/upstage/Solar-Open2-250B |
+| **HuggingFace** | https://huggingface.co/upstage/Solar-Open2-250B |
 | **API 엔드포인트** | https://api.upstage.ai/v1 |
 | **문서** | https://docs.upstage.ai/ |
 
+> **참고**: MoE(321개 전문가) 구조로 토큰당 15B 활성 파라미터만 사용하여, 250B 전체 모델 대비 훨씬 적은 VRAM으로 대규모 추론이 가능합니다. 상세 사양은 [HuggingFace 모델 카드](https://huggingface.co/upstage/Solar-Open2-250B)를 참고하세요.
+
 ## 🧪 Solar Open 2 비교 실험 프로젝트
 
-### 랄프톤(Ralphthon) 재현 실험 (1차 실험)
+### 🔹 Task 01: 랄프톤(Ralphthon) 재현 실험
 
-랄프톤 해커톤(ICML 2026)에서 Codex CLI가 자율적으로 수행한 **랄프루프(Ralph Loop)**를 Solar Open 2 + Claude Code로 재현하여 두 모델의 자율 실행 능력을 비교 분석합니다.
+**폴더**: `tasks/01-ralpthon/` | **상태**: 🟡 진행 중 (Checkpoint 검증 완료, 3시간 본 실행 대기)
+**실험 유형**: Codex CLI의 랄프루프(Ralph Loop)를 Solar Open 2 + Claude Code로 재현하여 자율 실행 능력 비교
 
-**실험 개요:**
-- **목표**: 랄프톤에서 Codex가 3시간 동안 autonomously 수행한 P0 deliverables를 Solar Open 2로 재현
-- **프롬프트**: `$ralph\n\n<RALPH_GOAL.md>` (랄프톤의 Goal 파일 전체)
-- **비교 방식**: 정성(이해도/수행력) + 과정(로그/체크포인트) + 정량(P0 완료율/schema 준수율/시간)
+랄프톤 해커톤(ICML 2026)에서 Codex CLI가 3시간 동안 자율적으로 수행한 **랄프루프(Ralph Loop)**를 Solar Open 2(Claude Code CLI)로 재현하여 두 모델의 자율 실행 능력을 정량·정성 비교합니다.
 
-**실험 자료:** `tasks/01-ralpthon/docs/ralpthon/`
+#### 📌 실험 설계
 
-**진행 상태 (2026-07-22 23:31 KST):** 🟢 Git checkpoint 7개 blocker 수정 완료. 임시 Git 저장소에서 첫 checkpoint 성공 경로(full end-to-end) 검증했습니다. 2차 실험(회의록 작성) 1차 결과 생성 완료.
+| 항목 | Codex (원본) | Solar Open2 (재현) |
+|------|-------------|-------------------|
+| 백엔드 모델 | Codex CLI | Solar Open2 (Claude Code) |
+| 실행 명령 | `codex -a never -s workspace-write -C $ROOT "$task_text"` | `claude-upstage --allow-dangerously-skip-permissions -p "$task_text"` |
+| 프롬프트 | `$ralph\n\n<RALPH_GOAL.md>` | `$ralph\n\n<RALPH_GOAL.md>` |
+| 실행 시간 | ~3시간 | Phase 4에서 측정 예정 |
+| P0 항목 수 | 14개 | 14개 |
+| Mock 논문 수 | 10편 (3회 반복) | 10편 (3회 반복) |
+| 비교 일자 | 2026-07-12 | 2026-07-17 (Phase 4 실행일) |
 
-### 회의록 작성 실험 (2차 실험)
+#### 📊 진행 상황 (2026-07-23 기준)
 
-회의록 작성 실험(2차 실험)은 행사 개요 문서 1건과 Tiro 노트테이킹 앱의 세션별 정리 문서 8건을 입력으로 받아, Solar Open 2(Claude Code CLI)가 이를 종합·구조화·요약하여 OKF 포맷의 회의록으로 변환하는 능력을 검증했습니다.
+| 항목 | 상태 | 비고 |
+|------|------|------|
+| **스크립트 안정화** | ✅ 완료 | `preflight.sh`·`commit-gate.sh` 9개 항목 일관성 보정 + Git 히스토리 정리 |
+| **Blocker 7건 수정** | ✅ 완료 | 종료코드 소멸, 경로 containment 게이트, null sentinel 복원, argv 전달, zsh 호환 등 |
+| **정적 검증** | ✅ 완료 | `zsh -n`·`git diff --check` 통과 |
+| **함수 검증 (First Checkpoint)** | ✅ 완료 | `/tmp` 격리 Git 저장소 + 로컬 bare upstream에서 Gate 0~8 전체 통과 |
+| **3시간 본 실행** | ⏳ 대기 중 | 후속 checkpoint·재시도·10분 soak·30분 rehearsal 후 실행 예정 |
+| **P0 완료율** | ⏳ 미측정 | Codex 14/14(100%) vs Solar Open2 — 본 실행 결과에 따라 측정 |
 
-- **입력**: `tasks/02-meeting-minutes/source/original/` 9개 파일 — 행사개요 txt 1건 + 세션별 정리 md 8건 (Sung Kim CEO, 이활석 CTO, 김태호 NotaAI CTO, 이태호 Upstage, Ria Upstage, 이상후 로엔컴퍼니, 김진중 Playmore, 조코딩 Q&A)
-- **출력**: `tasks/02-meeting-minutes/docs/meeting-minutes/20260722-solar-open-weight-day.md` — 총 8개 세션의 내용을 누락 없이 추출, 계층적으로 구조화한 OKF 포맷 회의록 (행사 개요, 진행 일정, 8개 세션별 상세 요약, 결정사항/액션아이템 10건, 종합 인사이트 3대 경쟁력 + 생태계 확장 전략 포함)
-- **수행 결과**: 정보 추출·구조화·정확성·OKF 준수 4가지 차원에서 모두 양호 판정을 받았습니다. 상세 품질 평가는 `docs/log.md`의 2026-07-22 항목을 참고하세요.
+#### 📁 주요 산출물
+
+- [`tasks/01-ralpthon/docs/ralpthon/solar-vs-codex-comparison.md`](tasks/01-ralpthon/docs/ralpthon/solar-vs-codex-comparison.md) — 정성·정량 비교 분석 리포트 (템플릿, 본 실행 후 채움)
+- [`tasks/01-ralpthon/docs/ralpthon/RALPH_GOAL.md`](tasks/01-ralpthon/docs/ralpthon/RALPH_GOAL.md) — 랄프루프 Goal 명세 (14개 P0 항목)
+- [`tasks/01-ralpthon/docs/ralpthon/context-notes.md`](tasks/01-ralpthon/docs/ralpthon/context-notes.md) — Track 2 준비 과정의 결정과 근거
+
+#### 🚧 다음 단계
+
+1. 후속 checkpoint 검증 (whitespace·Unicode 경로, 실패 후 index cleanup)
+2. 승인되지 않은 경로 거부 검증
+3. Runtime recorder·monitor·watchdog 연결
+4. 10분 soak 테스트 + 30분 rehearsal
+5. **3시간 본 실행** (Ralph Loop)
+6. P0 완료율/schema 준수율/시간 지표 채우기
+
+---
+
+### 🔹 Task 02: 회의록 작성 실험
+
+**폴더**: `tasks/02-meeting-minutes/` | **상태**: 🟢 완료
+**실험 유형**: Solar Open 2의 자연어 이해·정보 추출·구조화 작성 능력을 회의록 작성 태스크로 검증
+
+행사 개요 문서 1건과 Tiro 노트테이킹 앱의 세션별 정리 문서 8건을 입력으로 받아, Solar Open 2(Claude Code CLI)가 이를 종합·구조화·요약하여 OKF 포맷의 회의록으로 변환합니다.
+
+#### 📌 실험 결과
+
+- **입력**: `source/original/` 9개 파일 — 행사개요 txt 1건 + 세션별 정리 md 8건
+  - 발표자: Sung Kim CEO, 이활석 CTO, 김태호 NotaAI CTO, 이태호 Upstage, Ria Upstage, 이상후 로엔컴퍼니, 김진중 Playmore, 조코딩 Q&A
+- **출력**:
+  - [`20260722-solar-open-weight-day.md`](tasks/02-meeting-minutes/docs/meeting-minutes/20260722-solar-open-weight-day.md) — 8개 세션 종합 회의록 (행사 개요, 진행 일정, 세션별 상세 요약, 결정사항/액션아이템 10건, 종합 인사이트 포함)
+  - [`20260722-qa-session.md`](tasks/02-meeting-minutes/docs/meeting-minutes/20260722-qa-session.md) — 조코딩 Q&A 세션 심층 회의록 (패널 토론 집중 기록)
+
+#### 📊 품질 평가 (4차원)
+
+| 차원 | 평가 | 세부 내용 |
+|------|------|----------|
+| **정보 추출** | ✅ 양호 | 9개 파일 전체 핵심 내용 누락 없이 포착 (모델 아키텍처 4요소, NotaAI 3기술, 활용사례 4건, Q&A 11개 주제) |
+| **구조화** | ✅ 양호 | 시간순 세션 → 주제별 분류 → 행동항목 테이블 → 인사이트 종합의 다층적 계층 구조 |
+| **정확성** | ✅ 양호 | 수치(250B, 1M, GPU 2장, 35,000명, 80% 성능저하 등) 원문 유지. 발표자명·직함 정확도 확인 |
+| **OKF 준수** | ✅ 양호 | `type: Experiment`, `tags`, `timestamp`, `input_sources` frontmatter 완전 준수 |
+
+#### 📁 주요 산출물
+
+- [`tasks/02-meeting-minutes/docs/meeting-minutes/20260722-solar-open-weight-day.md`](tasks/02-meeting-minutes/docs/meeting-minutes/20260722-solar-open-weight-day.md) — 종합 회의록
+- [`tasks/02-meeting-minutes/docs/meeting-minutes/20260722-qa-session.md`](tasks/02-meeting-minutes/docs/meeting-minutes/20260722-qa-session.md) — Q&A 세션 회의록
+- [`tasks/02-meeting-minutes/output/`](tasks/02-meeting-minutes/output/) — LinkedIn 포스트 등 추가 산출물
+
+#### 🚧 다음 단계
+
+- 실험 개요 문서 작성 (`experiment-overview.md`)
+- 품질 평가 지표 체계화
 
 - **스크립트 안정화 히스토리 (2026.07.17~07.20)**:
 
@@ -154,7 +213,6 @@ _upstage/
 
 또는  스킬을 사용하여 에이전트가 자동으로 실행할 수 있습니다.
 ---
-
 ## 🗓️ Stage 1 일정
 
 | 기간 | 내용 |
