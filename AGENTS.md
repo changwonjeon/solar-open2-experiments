@@ -11,11 +11,11 @@ _upstage/
 │   ├── secrets/
 │   └── notes/                     # 개인 메모 (gitignore 됨)
 ├── tasks/                         # 📦 실험 태스크 (Source + Wiki 분리)
-│   ├── 01-ralpthon/               # 랄프톤 실험 (Ralph Loop 재현)
+│   ├── 01-ralphthon/               # 랄프톤 실험 (Ralph Loop 재현)
 │   │   ├── source/                # Source 계층 — Codex 원본 및 Solar 적응 코드
 │   │   │   ├── codex-original/    # Codex 원본 (77개 파일, 읽기 전용)
 │   │   │   └── solar-adaptation/  # Solar 적응 코드 (선택)
-│   │   ├── docs/ralpthon/         # Wiki 계층 — 실험 결과, 분석, 가이드
+│   │   ├── docs/ralphthon/         # Wiki 계층 — 실험 결과, 분석, 가이드
 │   │   ├── output/                # 생성 산출물
 │   │   ├── data/                  # 실험 데이터
 │   │   ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
@@ -55,14 +55,14 @@ _upstage/
 ## 계층 원칙 (현재 구조)
 
 1. **Source 계층**
-   - `tasks/01-ralpthon/source/codex-original/` — Codex 원본 스크립트·테스트·픽스처 (77개 파일, 읽기 전용, 불변성 보장)
-   - `tasks/01-ralpthon/source/solar-adaptation/` — Solar 적응 코드 (개발 중, 수정 가능)
+   - `tasks/01-ralphthon/source/codex-original/` — Codex 원본 스크립트·테스트·픽스처 (77개 파일, 읽기 전용, 불변성 보장)
+   - `tasks/01-ralphthon/source/solar-adaptation/` — Solar 적응 코드 (개발 중, 수정 가능)
    - `tasks/02-meeting-minutes/source/original/` — 회의록 원문 9개 (읽기 전용, 불변성 보장)
-   - `src/scripts/ralpthon/original/` — Codex 원본 스크립트 (참조용)
+   - `src/scripts/ralphthon/original/` — Codex 원본 스크립트 (참조용)
    - Source 파일은 내용을 수정하지 않고 참고만 한다.
 
 2. **Wiki 계층**
-   - `tasks/01-ralpthon/docs/ralpthon/` — 랄프톤 실험 Wiki (OKF 포맷)
+   - `tasks/01-ralphthon/docs/ralphthon/` — 랄프톤 실험 Wiki (OKF 포맷)
    - `tasks/02-meeting-minutes/docs/meeting-minutes/` — 회의록 실험 Wiki (OKF 포맷)
    - `docs/` — 프로젝트 공통 Wiki (OKF 포맷)
    - Wiki 문서는 마크다운 + OKF frontmatter로 작성한다.
@@ -70,15 +70,15 @@ _upstage/
 3. **Schema 계층**
    - 루트 `AGENTS.md` — 전체 저장소 에이전트 규칙
    - 루트 `CLAUDE.md` — 루트 Claude 지시 (`@AGENTS.md` 참조)
-   - `tasks/01-ralpthon/AGENTS.md` — 랄프톤 태스크 로컬 규칙
-   - `tasks/01-ralpthon/CLAUDE.md` — 랄프톤 태스크 로컬 지시
+   - `tasks/01-ralphthon/AGENTS.md` — 랄프톤 태스크 로컬 규칙
+   - `tasks/01-ralphthon/CLAUDE.md` — 랄프톤 태스크 로컬 지시
    - `tasks/02-meeting-minutes/AGENTS.md` — 회의록 태스크 로컬 규칙
    - `tasks/02-meeting-minutes/CLAUDE.md` — 회의록 태스크 로컬 지시
    - `docs/AGENTS.md` — 위키 전용 로컬 규칙
    - Schema 파일(`AGENTS.md`, `CLAUDE.md`)은 OKF 콘텐츠 검사에서 제외한다.
 
 4. **Output 계층**
-   - `tasks/01-ralpthon/output/` — 랄프톤 생성 산출물
+   - `tasks/01-ralphthon/output/` — 랄프톤 생성 산출물
    - `tasks/02-meeting-minutes/output/` — 회의록 생성 산출물 (LinkedIn 포스트 포함)
    - Output은 Source를 수정하거나 Output으로 덮어쓰지 않는다.
 
@@ -88,7 +88,7 @@ _upstage/
 - **원본 복구**: 반드시 `git hash-object`로 blob ID 일치를 확인한다.
 - **migration 중 이동**: 구조 개편 커밋(`7024b1b`, `7024b1b`) 중 Source→Source, Wiki→Wiki 이동은 허용된다.
 - **평상시 Source 불변성**: migration 완료 후 Source 파일은 읽기 전용으로 유지한다.
-- **평상시 이동 제한**: `tasks/01-ralpthon/source/codex-original/`와 `tasks/02-meeting-minutes/source/original/`의 파일은 평상시 이동·수정·삭제하지 않는다.
+- **평상시 이동 제한**: `tasks/01-ralphthon/source/codex-original/`와 `tasks/02-meeting-minutes/source/original/`의 파일은 평상시 이동·수정·삭제하지 않는다.
 
 ## 문서 포맷 (OKF)
 
@@ -149,7 +149,7 @@ timestamp: <ISO 8601 datetime> # Optional
 
 ## 실험 구분
 
-- **랄프루프 실험 (Ralph Loop)** — 1차 실험. Codex CLI의 랄프루프를 Solar Open 2 + Claude Code로 재현. 관련 자료는 `tasks/01-ralpthon/source/`, `tasks/01-ralpthon/docs/ralpthon/`, `src/scripts/ralpthon/original/`에 분리 보관.
+- **랄프루프 실험 (Ralph Loop)** — 1차 실험. Codex CLI의 랄프루프를 Solar Open 2 + Claude Code로 재현. 관련 자료는 `tasks/01-ralphthon/source/`, `tasks/01-ralphthon/docs/ralphthon/`, `src/scripts/ralphthon/original/`에 분리 보관.
 - **회의록 작성 실험 (Meeting Minutes)** — 2차 실험. 회의록 자동 작성 및 품질 평가. 관련 문서는 `tasks/02-meeting-minutes/source/original/`, `tasks/02-meeting-minutes/docs/meeting-minutes/`에 보관.
 
 ## 보호 범위

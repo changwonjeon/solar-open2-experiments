@@ -8,7 +8,7 @@ Source/Wiki/Output/Schema 계층을 명확히 분리하고, 중복 nesting(.code
 
 | 계층 | 경로 | 역할 | 보호 수준 |
 |------|------|------|-----------|
-| **Source** | `tasks/01-ralpthon/source/codex-original/` | 불변 원본 자료 | 읽기 전용, 수정 금지 |
+| **Source** | `tasks/01-ralphthon/source/codex-original/` | 불변 원본 자료 | 읽기 전용, 수정 금지 |
 | **Wiki** | `docs/` | OKF 포맷 지식 문서 | 에이전트 유지관리 |
 | **Output** | `tasks/03-wiki-restructure/` | 생성 산출물 | 결과물 기록 |
 | **Schema** | `AGENTS.md`, `CLAUDE.md` | 위키 구조/워크플로우 규칙 | @AGENTS.md 참조 |
@@ -27,7 +27,7 @@ find docs/experiments/ralphthon/ -path "*/.codex/.codex/*" -type f | while read 
 done
 
 # .omx/.omx 중첩 제거
-find docs/experiments/ralpthon/ -path "*/.omx/.omx/*" -type f | while read f; do
+find docs/experiments/ralphthon/ -path "*/.omx/.omx/*" -type f | while read f; do
   target=$(echo "$f" | sed 's|/.omx/.omx/|/.omx/|')
   mkdir -p "$(dirname "$target")"
   cp "$f" "$target"
@@ -35,10 +35,10 @@ find docs/experiments/ralpthon/ -path "*/.omx/.omx/*" -type f | while read f; do
 done
 ```
 
-### 2. src/scripts/ralpthon/original/ → Source 계층 이동
+### 2. src/scripts/ralphthon/original/ → Source 계층 이동
 
-- `src/scripts/ralpthon/original/`의 Codex 원본 스크립트는 `tasks/01-ralpthon/source/codex-original/src/`로 이동
-- `src/scripts/ralpthon/`에는 Solar 적응 스크립트만 유지
+- `src/scripts/ralphthon/original/`의 Codex 원본 스크립트는 `tasks/01-ralphthon/source/codex-original/src/`로 이동
+- `src/scripts/ralphthon/`에는 Solar 적응 스크립트만 유지
 
 ### 3. docs/ 내 스크립트 분리
 
@@ -51,8 +51,8 @@ done
 
 | 리소스 | Canonical 경로 | 비고 |
 |--------|---------------|------|
-| Ralphthon 실험 원본 | `tasks/01-ralpthon/source/codex-original/` | 읽기 전용 |
-| Ralphthon 실험 위키 | `docs/experiments/ralpthon/` | OKF 포맷 |
+| Ralphthon 실험 원본 | `tasks/01-ralphthon/source/codex-original/` | 읽기 전용 |
+| Ralphthon 실험 위키 | `docs/experiments/ralphthon/` | OKF 포맷 |
 | Meeting Minutes 실험 | `tasks/02-meeting-minutes/` | 보호 대상 |
 | Meeting Minutes 위키 | `docs/experiments/meeting-minutes/` | OKF 포맷 |
 | Wiki 재구성 산출물 | `tasks/03-wiki-restructure/` | 산출물 |

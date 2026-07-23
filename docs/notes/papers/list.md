@@ -48,6 +48,6 @@ This index lists all paper summaries and reviews in this knowledge base.
 ## Adding a Paper
 
 1. Create a new file: `docs/notes/papers/<paper-slug>.md`
-2. Use the [Paper Template](../templates/template-paper.md)
+2. Use the [Paper Template](../../templates/template-paper.md)
 3. Add an entry to this index
 4. Update the parent index: `docs/notes/papers/index.md`

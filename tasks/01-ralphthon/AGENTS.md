@@ -2,10 +2,10 @@
 
 ## Source 계층
 - `source/codex-original/`은 읽기 전용입니다. 내용을 수정하거나 덮어쓰지 마십시오.
-- 새 source ingest 시 `docs/ralpthon/index.md`와 `docs/ralpthon/log.md`를 갱신하십시오.
+- 새 source ingest 시 `docs/ralphthon/index.md`와 `docs/ralphthon/log.md`를 갱신하십시오.
 
 ## Wiki 계층
-- `docs/ralpthon/`는 OKF Wiki입니다. 모든 문서에 `type` frontmatter를 포함하십시오.
+- `docs/ralphthon/`는 OKF Wiki입니다. 모든 문서에 `type` frontmatter를 포함하십시오.
 
 ## Output 계층
 - `output/`은 생성 산출물입니다. source를 수정하거나 output으로 덮어쓰지 마십시오.

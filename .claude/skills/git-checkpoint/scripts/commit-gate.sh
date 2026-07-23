@@ -203,11 +203,11 @@ check_symlink_components() {
 is_raw_transcript_path() {
   local raw_path="$1"
   # Raw transcript paths include session logs under the run directory.
-  # Match paths like: data/results/ralpthon/solar/<run-id>/<session>.log
-  if [[ "$raw_path" == data/results/ralpthon/solar/*/*.log ]]; then
+  # Match paths like: data/results/ralphthon/solar/<run-id>/<session>.log
+  if [[ "$raw_path" == data/results/ralphthon/solar/*/*.log ]]; then
     return 0  # is a raw transcript
   fi
-  if [[ "$raw_path" == data/results/ralpthon/solar/*/* ]]; then
+  if [[ "$raw_path" == data/results/ralphthon/solar/*/* ]]; then
     # Any file under the run directory that is not a known state file
     local bn
     bn="$(basename "$raw_path")"
@@ -751,9 +751,9 @@ if [[ "$RS_REAL" != "$REPO_ROOT" ]] && [[ "$RS_REAL" != "$REPO_ROOT/"* ]]; then
 fi
 
 # Must be under the expected run directory
-if [[ "$RS_REAL" != */data/results/ralpthon/solar/solar-ralph-*/run-state.json ]]; then
+if [[ "$RS_REAL" != */data/results/ralphthon/solar/solar-ralph-*/run-state.json ]]; then
   print -r -u2 "ERROR: GATE 4 FAILED -- run-state.json is not under the expected run directory pattern"
-  print -r -u2 "       Expected: data/results/ralpthon/solar/solar-ralph-<YYYYMMDD-HHMMSS>/run-state.json"
+  print -r -u2 "       Expected: data/results/ralphthon/solar/solar-ralph-<YYYYMMDD-HHMMSS>/run-state.json"
   cleanup_on_failure
   exit 1
 fi

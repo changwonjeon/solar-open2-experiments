@@ -16,4 +16,4 @@
 
 ## 참고
 
-이 디렉토리의 자료는 Codex CLI 기준으로 작성된 원본이며, Solar Open 2 + Claude Code 재현 실험에서의 분석·비교 자료는 `docs/experiments/ralpthon/`에 별도로 보관된다.
+이 디렉토리의 자료는 Codex CLI 기준으로 작성된 원본이며, Solar Open 2 + Claude Code 재현 실험에서의 분석·비교 자료는 `docs/experiments/ralphthon/`에 별도로 보관된다.

@@ -19,7 +19,7 @@ Claude Code invokes this skill with the arguments following the slash command:
 |----------|---------|----------|-------------|
 | 1 | `<p0-id>` | Yes | P0 identifier, e.g. `P0-3`. Must match the active P0 in `run-state.json`. Must conform to `P0-<number>` format. |
 | 2..n | `<approved-path>...` | Yes (at least one) | One or more repository-relative paths to stage. Each path is passed individually to `git add -- <path>`. No globs, no `git add .`. |
-| — | `--run-state <path>` | Yes | Path to `run-state.json` (e.g., `data/results/ralpthon/solar/solar-ralph-20260719-143022/run-state.json`). Required for Gate 5 validation. |
+| — | `--run-state <path>` | Yes | Path to `run-state.json` (e.g., `data/results/ralphthon/solar/solar-ralph-20260719-143022/run-state.json`). Required for Gate 5 validation. |
 | — | `--summary <text>` | No | Commit message summary. Defaults to `<p0-id> deliverable` if omitted. |
 
 **Argument handling:** `/git-checkpoint` parses `$ARGUMENTS` by first collecting all non-option arguments (positions 1 and 2..n) as `<p0-id>` and `<approved-path>...`, then processing `--run-state` and `--summary` options from the remaining tokens. If `<p0-id>` is missing, or fewer than one `<approved-path>` is provided, or `--run-state` is missing, the skill prints a usage error to stderr and exits with code 2.
@@ -27,7 +27,7 @@ Claude Code invokes this skill with the arguments following the slash command:
 **Example invocation from `/solar-ralph step`:**
 
 ```
-/git-checkpoint P0-3 src/lib/foo.py src/lib/bar.py --run-state data/results/ralpthon/solar/solar-ralph-20260719-143022/run-state.json --summary "implement null-input assertion"
+/git-checkpoint P0-3 src/lib/foo.py src/lib/bar.py --run-state data/results/ralphthon/solar/solar-ralph-20260719-143022/run-state.json --summary "implement null-input assertion"
 ```
 
 ## Interface
@@ -145,7 +145,7 @@ Note: `preflight.sh` uses `git diff --name-only <commit> HEAD` only as an **info
 
 The P0's test commands must have passed. This is verified by reading `run-state.json`:
 - `--run-state` is **required**. Auto-discovery of the latest run directory is not performed.
-- The run-state path is validated: it must exist, must not be a symlink, must be inside the repository, and must match the pattern `data/results/ralpthon/solar/solar-ralph-*/run-state.json`.
+- The run-state path is validated: it must exist, must not be a symlink, must be inside the repository, and must match the pattern `data/results/ralphthon/solar/solar-ralph-*/run-state.json`.
 - The P0 entry must exist and its `status` field must be `tests_passed` or `checkpoint_failed`.
   - `tests_passed`: tests passed, ready for checkpoint. Proceed.
   - `checkpoint_failed`: previous checkpoint was rejected. Allow retry.

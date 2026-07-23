@@ -56,7 +56,7 @@ Claude Code invokes this skill with the arguments following the slash command. T
 1. **Read references**: Load `references/runtime-contract.md`, `references/state-contract.md`, and `references/failure-and-handoff.md`. These define the runtime environment, state file schemas, failure normalization rules, and handoff format that govern the entire run. Keep them in context throughout the run.
 2. Read the task spec file at `<task-spec-path>`. **Do not modify it.**
 3. Parse P0 items from the spec. Each P0 gets a status: `pending | active | tests_passed | passed | failed | checkpoint_failed | deferred | needs-operator`. The distinction between `tests_passed` (tests passed, checkpoint not yet committed) and `passed` (tests passed AND checkpoint committed) is critical for `/git-checkpoint` gate validation. The `needs-operator` status indicates a condition that requires human intervention — no auto-retry is attempted.
-4. Initialize `run-state.json` in `data/results/ralpthon/solar/<run-id>/`:
+4. Initialize `run-state.json` in `data/results/ralphthon/solar/<run-id>/`:
    - `schema_version`, `run_id`, `model`, `harness`
    - `task_spec_path`, `task_spec_sha256`
    - `baseline_commit`, `branch`
@@ -252,7 +252,7 @@ active → deferred  (same failure repeated, reduction not viable)
 - Every entry in `events.jsonl` is appended as a single line (append-only). Do not read, modify, and rewrite the file.
 - `events.jsonl` receives one JSON object per significant event (P0 activated, test started, test passed, test failed, checkpoint committed, resume reconciled, finalize triggered).
 - **No secrets, prompt text, or personal identifiers are written to any state file.**
-- State files are located in `data/results/ralpthon/solar/<run-id>/`. The `<run-id>` is generated at `start` time as `solar-ralph-<YYYYMMDD-HHMMSS>`.
+- State files are located in `data/results/ralphthon/solar/<run-id>/`. The `<run-id>` is generated at `start` time as `solar-ralph-<YYYYMMDD-HHMMSS>`.
 
 ---
 

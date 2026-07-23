@@ -9,14 +9,14 @@
 **2. WSL2 환경 호환성 문제**
 - `/usr/bin/caffeinate` (macOS 전용) 제거
 - `$ROOT` 경로 계산 수정: `ROOT="${SCRIPT_DIR:h:h}"` → `ROOT="${SCRIPT_DIR:h:h:h}"` (WSL2 환경 및 프로젝트 루트에 맞게)
-- `tmux` 세션 이름은 기존 `ralphthon-loop`, `ralpthon-deadline` 유지
+- `tmux` 세션 이름은 기존 `ralphthon-loop`, `ralphthon-deadline` 유지
 
 **3. 시간 기준 문제**
 - 초기 Watchdog가 2026-07-12 절대 시간 기준이라 7/17 실행 시 `delta` 음수 → 즉시 종료
 - **해결**: `start_time=$(date +%s)`로 **스크립트 실행 순간의 상대 시간**을 기준으로 3시간 측정. 루프 진입 전 1회 캡처하여 고정.
 
 **4. Git Preflight 검사 실패**
-- `git status --porcelain`이 `docs/experiments/ralphthon/`, `src/scripts/ralpthon/`를 untracked 파일로 감지하여 `exit 4`
+- `git status --porcelain`이 `docs/experiments/ralphthon/`, `src/scripts/ralphthon/`를 untracked 파일로 감지하여 `exit 4`
 - **해결**: `git status --porcelain --untracked-files=no`로 수정하여 tracked 파일만 검사
 
 **5. 2026-07-17 16:47 KST 검증 결과**

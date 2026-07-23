@@ -1,3 +1,9 @@
+---
+type: Reference
+title: Guide Directory
+description: Index of usage guides and how-to documentation
+---
+
 # Guide Directory
 
 Practical guides for working with Solar Open2 and related tools.
@@ -11,4 +17,4 @@ Practical guides for working with Solar Open2 and related tools.
 
 ## Useful Scripts
 
-* [setup-environment.sh](../src/scripts/setup-environment.sh) - Automated environment setup
+* [setup-environment.sh](../../src/scripts/setup-environment.sh) - Automated environment setup

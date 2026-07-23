@@ -3,7 +3,7 @@ set -euo pipefail
 
 SCRIPT_DIR="${0:A:h}"
 ROOT="${SCRIPT_DIR:h}"
-SESSION_DIR="$ROOT/data/results/ralpthon/solar"
+SESSION_DIR="$ROOT/data/results/ralphthon/solar"
 
 # Default: 1 hour of logging
 LOG_DURATION="${LOG_DURATION:-3600}"
@@ -14,17 +14,17 @@ usage() {
 Usage: $(basename "$0") [COMMAND] [OPTIONS]
 
 Commands:
-  start               Start logging tmux sessions to data/results/ralpthon/solar/
+  start               Start logging tmux sessions to data/results/ralphthon/solar/
   stop                Stop logging and finalize logs
   status              Check if logging is active
   dump [SESSION]      Dump current log for a session (default: ralphthon-loop)
 
 Options:
   --duration SECONDS  Set logging duration (default: 3600)
-  --output DIR        Set output directory (default: data/results/ralpthon/solar/)
+  --output DIR        Set output directory (default: data/results/ralphthon/solar/)
 
 Environment:
-  SESSION_DIR         Output directory (default: \$ROOT/data/results/ralpthon/solar)
+  SESSION_DIR         Output directory (default: \$ROOT/data/results/ralphthon/solar)
   LOG_DURATION        Logging duration in seconds (default: 3600)
 
 Examples:

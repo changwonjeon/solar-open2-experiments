@@ -137,7 +137,7 @@ Solar Open2 can be configured as a custom model provider in Claude Code:
 2. Configure Claude Code settings to use Solar Open2 endpoint
 3. Test with a simple query
 
-See [Claude Code with Solar Open2](../guide/claude-code-open2.md) for detailed setup instructions.
+See [Claude Code with Solar Open2](../../guide/claude-code-open2.md) for detailed setup instructions.
 
 ### Hermes Agent
 
@@ -147,7 +147,7 @@ Solar Open2 works seamlessly with Hermes Agent:
 - Use natural language commands
 - Leverage agent capabilities for complex tasks
 
-See [Hermes Agent Guide](../guide/hermes-agent.md) for configuration details.
+See [Hermes Agent Guide](../../guide/hermes-agent.md) for configuration details.
 
 ## Performance Benchmarks
 
@@ -217,19 +217,19 @@ See [Hermes Agent Guide](../guide/hermes-agent.md) for configuration details.
 
 ## Related Documents
 
-- [Solar Open2 Reference](../reference/solar-open2.md) - Detailed specifications
-- [Getting Started Guide](../guide/getting-started.md) - Initial setup
-- [Claude Code Integration](../guide/claude-code-open2.md) - Using with Claude Code
-- [Hermes Agent Integration](../guide/hermes-agent.md) - Using with Hermes Agent
-- [OKF Document Authoring](../guide/okf-authoring.md) - Document formatting guide
+- [Solar Open2 Reference](../../reference/solar-open2.md) - Detailed specifications
+- [Getting Started Guide](../../guide/getting-started.md) - Initial setup
+- [Claude Code Integration](../../guide/claude-code-open2.md) - Using with Claude Code
+- [Hermes Agent Integration](../../guide/hermes-agent.md) - Using with Hermes Agent
+- [OKF Document Authoring](../../guide/okf-authoring.md) - Document formatting guide
 
 ## Research Connections
 
 Related papers and concepts to explore:
 
-- [Transformer Architecture](../notes/papers/transformer.md) - Foundational architecture
-- [Efficient LLMs](../notes/papers/efficient-llms.md) - Model optimization techniques
-- [Korean NLP](../notes/papers/korean-nlp.md) - Korean language processing
+- [Transformer Architecture](../../papers/transformer.md) - Foundational architecture
+- [Efficient LLMs](../../papers/efficient-llms.md) - Model optimization techniques
+- [Korean NLP](../../papers/korean-nlp.md) - Korean language processing
 
 ## Notes
 

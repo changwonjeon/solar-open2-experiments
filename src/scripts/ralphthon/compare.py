@@ -327,10 +327,10 @@ def main():
     import argparse
     
     parser = argparse.ArgumentParser(description="Ralphthon Solar vs Codex 정량 비교 지표 계산기")
-    parser.add_argument("--checkpoints", "-c", default="data/results/ralpthon/solar/checkpoints",
-                        help="체크포인트 디렉토리 경로 (기본값: data/results/ralpthon/solar/checkpoints)")
-    parser.add_argument("--output", "-o", default="data/results/ralpthon/solar",
-                        help="출력 디렉토리 경로 (기본값: data/results/ralpthon/solar)")
+    parser.add_argument("--checkpoints", "-c", default="data/results/ralphthon/solar/checkpoints",
+                        help="체크포인트 디렉토리 경로 (기본값: data/results/ralphthon/solar/checkpoints)")
+    parser.add_argument("--output", "-o", default="data/results/ralphthon/solar",
+                        help="출력 디렉토리 경로 (기본값: data/results/ralphthon/solar)")
     parser.add_argument("--reference", "-r", help="Codex 기준값 JSON 파일 경로 (선택사항)")
     parser.add_argument("--verbose", "-v", action="store_true", help="상세 출력")
     

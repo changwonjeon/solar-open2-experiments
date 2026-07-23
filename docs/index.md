@@ -16,13 +16,11 @@ Usage guides and getting-started documentation.
 
 | 문서 | 설명 |
 |------|------|
-| `guide/getting-started.md` | 시작 가이드 *(planned)* |
-| `guide/claude-code-open2.md` | Claude Code 연동 가이드 *(planned)* |
-| `guide/hermes-agent.md` | Hermes Agent 연동 가이드 *(planned)* |
-| `guide/okf-authoring.md` | OKF 문서 작성법 *(planned)* |
-| `guide/troubleshooting.md` | 문제 해결 가이드 *(planned)* |
-
-> **참고**: `guide/` 디렉토리와 하위 문서는 향후 생성 예정입니다. 현재는 placeholder로 표시됩니다.
+| `guide/getting-started.md` | 시작 가이드 |
+| `guide/claude-code-open2.md` | Claude Code 연동 가이드 |
+| `guide/hermes-agent.md` | Hermes Agent 연동 가이드 |
+| `guide/okf-authoring.md` | OKF 문서 작성법 |
+| `guide/troubleshooting.md` | 문제 해결 가이드 |
 
 ### Reference
 
@@ -30,10 +28,8 @@ Technical reference documents.
 
 | 문서 | 설명 |
 |------|------|
-| `reference/solar-open2.md` | Solar Open 2 상세 스펙 *(planned)* |
-| `reference/index.md` | 레퍼런스 인덱스 *(planned)* |
-
-> **참고**: `reference/` 디렉토리와 하위 문서는 향후 생성 예정입니다. 현재는 placeholder로 표시됩니다.
+| `reference/solar-open2.md` | Solar Open 2 상세 스펙 |
+| `reference/index.md` | 레퍼런스 인덱스 |
 
 ### Notes
 
@@ -41,14 +37,16 @@ LLM-Wiki style wiki notes.
 
 | 카테고리 | 설명 |
 |----------|------|
-| `notes/people/` | 인물 프로필 *(planned)* |
-| `notes/models/` | 모델 문서 *(planned)* |
-| `notes/papers/` | 논문 요약 *(planned)* |
-| `notes/projects/` | 프로젝트 기록 *(planned)* |
-| `notes/writing/` | 에세이/블로그 *(planned)* |
-| `notes/general-notes/` | 아이디어/로그/컨텍스트 *(planned)* |
+| `notes/people/` | 인물 프로필 |
+| `notes/models/` | 모델 문서 |
+| `notes/papers/` | 논문 요약 |
+| `notes/projects/` | 프로젝트 기록 |
+| `notes/writing/` | 에세이/블로그 |
+| `notes/general-notes/` | 아이디어/로그/컨텍스트 |
 
-> **참고**: `notes/` 디렉토리와 하위 문서는 향후 생성 예정입니다. 현재는 placeholder로 표시됩니다.
+주요 특이사항:
+
+- [`notes/general-notes/ralphthon-spelling-correction.md`](notes/general-notes/ralphthon-spelling-correction.md) — Ralphthon 표기 오류의 확산 범위, Git 근거와 canonical 경로 정정 기록
 
 ### Templates
 
@@ -56,13 +54,11 @@ Document templates for OKF authoring.
 
 | 템플릿 | 설명 |
 |--------|------|
-| `templates/template-model.md` | Model 문서 템플릿 *(planned)* |
-| `templates/template-paper.md` | Paper 문서 템플릿 *(planned)* |
-| `templates/template-experiment.md` | Experiment 문서 템플릿 *(planned)* |
-| `templates/template-person.md` | Person 문서 템플릿 *(planned)* |
-| `templates/template-project.md` | Project 문서 템플릿 *(planned)* |
-
-> **참고**: `templates/` 디렉토리와 하위 문서는 향후 생성 예정입니다. 현재는 placeholder로 표시됩니다.
+| `templates/template-model.md` | Model 문서 템플릿 |
+| `templates/template-paper.md` | Paper 문서 템플릿 |
+| `templates/template-experiment.md` | Experiment 문서 템플릿 |
+| `templates/template-person.md` | Person 문서 템플릿 |
+| `templates/template-project.md` | Project 문서 템플릿 |
 
 ## Experiment Log
 
@@ -76,13 +72,13 @@ Document templates for OKF authoring.
 
 ### Ralph Loop Experiment (Task 01)
 
-- [`../tasks/01-ralpthon/`](../tasks/01-ralpthon/) — Ralph Loop 재현 실험
-  - Source: `../tasks/01-ralpthon/source/codex-original/` (77개 Codex 원본 파일)
-  - Wiki: [`../tasks/01-ralpthon/docs/ralpthon/`](../tasks/01-ralpthon/docs/ralpthon/)
-    - [`index.md`](../tasks/01-ralpthon/docs/ralpthon/index.md) — 랄프톤 실험 Wiki 인덱스
-    - [`context-notes.md`](../tasks/01-ralpthon/docs/ralpthon/context-notes.md) — 작업 컨텍스트 기록
-    - [`solar-vs-codex-comparison.md`](../tasks/01-ralpthon/docs/ralpthon/solar-vs-codex-comparison.md) — Solar vs Codex 비교 실험 리포트
-    - [`RALPH_GOAL.md`](../tasks/01-ralpthon/docs/ralpthon/RALPH_GOAL.md) — Ralph Loop 동결 목표
+- [`../tasks/01-ralphthon/`](../tasks/01-ralphthon/) — Ralph Loop 재현 실험
+  - Source: `../tasks/01-ralphthon/source/codex-original/` (77개 Codex 원본 파일)
+  - Wiki: [`../tasks/01-ralphthon/docs/ralphthon/`](../tasks/01-ralphthon/docs/ralphthon/)
+    - [`index.md`](../tasks/01-ralphthon/docs/ralphthon/index.md) — 랄프톤 실험 Wiki 인덱스
+    - [`context-notes.md`](../tasks/01-ralphthon/docs/ralphthon/context-notes.md) — 작업 컨텍스트 기록
+    - [`solar-vs-codex-comparison.md`](../tasks/01-ralphthon/docs/ralphthon/solar-vs-codex-comparison.md) — Solar vs Codex 비교 실험 리포트
+    - [`RALPH_GOAL.md`](../tasks/01-ralphthon/docs/ralphthon/RALPH_GOAL.md) — Ralph Loop 동결 목표
 
 ### Meeting Minutes Experiment (Task 02)
 

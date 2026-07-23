@@ -54,8 +54,8 @@ for session in ralphthon-loop ralphthon-deadline; do
 done
 
 # Launch Ralph Loop in tmux
-tmux new-session -d -s ralphthon-loop -c "$ROOT" "$ROOT/src/scripts/ralpthon/run-ralph-solar.sh"
-tmux new-session -d -s ralphthon-deadline "$ROOT/src/scripts/ralpthon/ralph-deadline-watchdog.sh"
+tmux new-session -d -s ralphthon-loop -c "$ROOT" "$ROOT/src/scripts/ralphthon/run-ralph-solar.sh"
+tmux new-session -d -s ralphthon-deadline "$ROOT/src/scripts/ralphthon/ralph-deadline-watchdog.sh"
 
 # Wait for claude-upstage to initialize
 sleep 10

@@ -9,7 +9,7 @@
 ### 1. 기준 커밋(7024b1b^) 상태 스냅샷 생성
 
 ```bash
-git ls-tree -r 7024b1b^ -- docs/experiments/ralphthon/ > /tmp/step1-ralpthon-tree.txt
+git ls-tree -r 7024b1b^ -- docs/experiments/ralphthon/ > /tmp/step1-ralphthon-tree.txt
 ```
 
 - 모든 blob ID, 파일 경로, 크기 목록 확보
@@ -19,7 +19,7 @@ git ls-tree -r 7024b1b^ -- docs/experiments/ralphthon/ > /tmp/step1-ralpthon-tre
 
 ```bash
 git ls-tree -r HEAD -- docs/experiments/ralphthon/ > /tmp/step1-head-tree.txt
-diff -u /tmp/step1-ralpthon-tree.txt /tmp/step1-head-tree.txt > /tmp/step1-diff.txt
+diff -u /tmp/step1-ralphthon-tree.txt /tmp/step1-head-tree.txt > /tmp/step1-diff.txt
 ```
 
 - 삭제된 파일, 추가된 파일, 변경된 파일 분류
@@ -31,7 +31,7 @@ diff -u /tmp/step1-ralpthon-tree.txt /tmp/step1-head-tree.txt > /tmp/step1-diff.
 
 | # | 기준 경로 (7024b1b^) | 현재 상태 | blob ID | 크기 | 복구 대상 위치 | 비고 |
 |---|---------------------|-----------|---------|------|----------------|------|
-| 1 | docs/experiments/ralphthon/fixtures/*.json | HEAD 미존재 | abc123... | 4,096 | tasks/01-ralpthon/source/codex-original/fixtures/ | 원본 |
+| 1 | docs/experiments/ralphthon/fixtures/*.json | HEAD 미존재 | abc123... | 4,096 | tasks/01-ralphthon/source/codex-original/fixtures/ | 원본 |
 | ... | ... | ... | ... | ... | ... | ... |
 
 ### 4. 보호 대상 검증
@@ -51,7 +51,7 @@ git ls-tree -r HEAD -- tasks/02-meeting-minutes/ > /tmp/step1-meeting-minutes.tx
 - 7024b1b^의 docs/experiments/ralphthon/에서 **N개 파일** 확인
 - 고유 blob **N개** 중 **N개**가 현재 작업트리에 존재하지 않음 (git 객체 DB에는 존재)
 - HEAD 대비 **N개 파일 삭제 예정**, 그중 **N개 중복 nesting(.codex/.codex, .omx/.omx)
-- **N개 파일**이 이미 tasks/01-ralpthon/docs/ralpthon/으로 이동 완료 (blob 보존됨)
+- **N개 파일**이 이미 tasks/01-ralphthon/docs/ralphthon/으로 이동 완료 (blob 보존됨)
 - 보호 대상 tasks/02-meeting-minutes/는 변경 없음 확인
 ```
 
@@ -64,7 +64,7 @@ git ls-tree -r HEAD -- tasks/02-meeting-minutes/ > /tmp/step1-meeting-minutes.tx
 
 ## 산출물
 
-- `/tmp/step1-ralpthon-tree.txt` — 기준 커밋 스냅샷
+- `/tmp/step1-ralphthon-tree.txt` — 기준 커밋 스냅샷
 - `/tmp/step1-head-tree.txt` — 현재 HEAD 스냅샷
 - `/tmp/step1-diff.txt` — 차이점 diff
 - `tasks/03-wiki-restructure/work-log.md` — 감사 결과 기록

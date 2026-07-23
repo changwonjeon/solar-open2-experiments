@@ -44,8 +44,8 @@ data/results/
 /.claude/*
 !/.claude/skills/
 /.claude/skills/*
-!/.claude/skills/solar-ralph/
-!/.claude/skills/solar-ralph/**
+!/.claude/skills/solar-ralphthon/
+!/.claude/skills/solar-ralphthon/**
 !/.claude/skills/git-checkpoint/
 !/.claude/skills/git-checkpoint/**
 

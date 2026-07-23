@@ -84,12 +84,12 @@ exec codex -a never -s workspace-write -C "$ROOT" "$task_text"
 
 | 기록 항목 | 수집 방법 | 출력 |
 |-----------|-----------|------|
-| 전체 세션 로그 | tmux pipe-pipe-pipe → 로그 파일 | `data/results/ralpthon/solar-session.log` |
-| P0 진행 체크포인트 | 각 P0 완료 시 자동 캡처 | `data/results/ralpthon/checkpoints/checkpoint-{N}.json` |
-| Git 변경 추적 | `git log --oneline --name-only` 주기 캡처 | `data/results/ralpthon/gitlog/` |
-| 에러/실패 원장 | FAILURE_LEDGER.md 형식 Solar 버전 | `data/results/ralpthon/failure-ledger.md` |
-| 실행 시간 측정 | 시작/종료 timestamp 기록 | `data/results/ralpthon/timing.json` |
-| 생성된 파일 목록 | `find` + 파일 트리 diff | `data/results/ralpthon/files.json` |
+| 전체 세션 로그 | tmux pipe-pipe-pipe → 로그 파일 | `data/results/ralphthon/solar-session.log` |
+| P0 진행 체크포인트 | 각 P0 완료 시 자동 캡처 | `data/results/ralphthon/checkpoints/checkpoint-{N}.json` |
+| Git 변경 추적 | `git log --oneline --name-only` 주기 캡처 | `data/results/ralphthon/gitlog/` |
+| 에러/실패 원장 | FAILURE_LEDGER.md 형식 Solar 버전 | `data/results/ralphthon/failure-ledger.md` |
+| 실행 시간 측정 | 시작/종료 timestamp 기록 | `data/results/ralphthon/timing.json` |
+| 생성된 파일 목록 | `find` + 파일 트리 diff | `data/results/ralphthon/files.json` |
 
 ### C안: 정량 비교 (Quantitative)
 
@@ -114,22 +114,22 @@ exec codex -a never -s workspace-write -C "$ROOT" "$task_text"
 - 제외: `.git/`, `_private/`, `tmp/`, 실행 결과물(`outbox/`, `manifests/`, `clipboard/`)
 
 ### Phase 2: 실행 스크립트 수정 (Adapt for Solar)
-- `work/run-ralph-direct.sh` → `src/scripts/ralpthon/run-ralph-solar.sh`
+- `work/run-ralph-direct.sh` → `src/scripts/ralphthon/run-ralph-solar.sh`
   - `codex` CLI → `claude` CLI (`--dangerously-skip-permissions`)
   - `task_text` 생성 로직은 유지
-- `work/start-ralph-loop.sh` → `src/scripts/ralpthon/start-ralph-solar.sh`
+- `work/start-ralph-loop.sh` → `src/scripts/ralphthon/start-ralph-solar.sh`
   - tmux 세션 관리 유지 (필요시 단순화)
   - watchdog 유지 또는 단순화
 
 ### Phase 3: 비교 기록 시스템 구축 (Comparison Framework)
 - 세션 로깅 스크립트: `tmux pipe-pipe-pipe` 설정 + 로그 수집
 - 체크포인트 자동 캡처: P0 완료 감지 시 `CHECKPOINT.json` 스냅샷
-- 정량 지표 계산기: `src/scripts/ralpthon/compare.py`
+- 정량 지표 계산기: `src/scripts/ralphthon/compare.py`
 - 비교 리포트 템플릿: `docs/experiments/ralphthon/solar-vs-codex-comparison.md`
 
 ### Phase 4: 랄프루프 실행 (Solar Execution)
 - 사용자가 `--dangerously-skip-permissions`로 Claude Code 재실행
-- 랄프루프 시작: `./src/scripts/ralpthon/start-ralph-solar.sh START-RALPH`
+- 랄프루프 시작: `./src/scripts/ralphthon/start-ralph-solar.sh START-RALPH`
 - 실행 중 모니터링: `tmux attach -t ralphthon-solar` (읽기 전용)
 - 실행 완료 후 산출물 수집
 
@@ -150,7 +150,7 @@ _Upstage/
 │   ├── context.md                 # 컨텍스트 스냅샷
 │   ├── solar-vs-codex-comparison.md  # 최종 비교 리포트
 │   └── handoff-template.md        # Handoff 템플릿
-├── src/scripts/ralpthon/
+├── src/scripts/ralphthon/
 │   ├── start-ralph-solar.sh       # 수정된 런처
 │   ├── run-ralph-solar.sh         # 수정된 실행 스크립트
 │   ├── compare.py                 # 비교 지표 계산 스크립트
@@ -159,14 +159,14 @@ _Upstage/
 │   └── agents/                    # TOML 에이전트 정의
 ├── docs/notes/skills/ralphthon/
 │   └── track2-review-agent/       # 스킬 정의
-├── data/results/ralpthon/solar/
+├── data/results/ralphthon/solar/
 │   ├── session.log                # 전체 세션 로그
 │   ├── checkpoints/               # P0별 체크포인트
 │   ├── gitlog/                    # Git 변경 로그
 │   ├── failure-ledger.md          # 실패 원장
 │   ├── timing.json                # 시간 지표
 │   └── files.json                 # 생성/수정 파일 목록
-├── data/results/ralpthon/codex/
+├── data/results/ralphthon/codex/
 │   └── (기존 랄프톤의 ledger.jsonl, CHECKPOINT.json 등 참조)
 └── data/datasets/ralphthon-mock/
     └── paper-00*.md              # Mock 논문 10편
@@ -200,7 +200,7 @@ _Upstage/
 
 ## 🔗 Related
 
-- RALPH_GOAL.md 원문 *(archived — moved to `tasks/01-ralpthon/docs/ralpthon/RALPH_GOAL.md`)*
+- RALPH_GOAL.md 원문 *(archived — moved to `tasks/01-ralphthon/docs/ralphthon/RALPH_GOAL.md`)*
 - [Plan](../plans/greedy-brewing-cookie.md) *(planned — document not yet created)*
 - [LLM-Wiki: Models](../models/) *(planned — directory not yet populated)*
 - [LLM-Wiki: Experiments](../experiments/) *(archived — moved to `tasks/` 체계)*

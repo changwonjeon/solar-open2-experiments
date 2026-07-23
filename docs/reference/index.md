@@ -1,3 +1,9 @@
+---
+type: Reference
+title: Reference Directory
+description: Index of technical reference documents for Solar Open2
+---
+
 # Reference Directory
 
 Technical references, specifications, and documentation for Solar Open2.

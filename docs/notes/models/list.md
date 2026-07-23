@@ -66,7 +66,7 @@ This index lists all documented model profiles in this knowledge base.
 ## Adding a Model
 
 1. Create a new file: `docs/notes/models/<model-slug>.md`
-2. Use the [Model Template](../templates/template-model.md)
+2. Use the [Model Template](../../templates/template-model.md)
 3. Add an entry to this index
 4. Update the parent index: `docs/notes/models/index.md`
 
