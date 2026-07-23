@@ -13,56 +13,107 @@
 
 ```
 _upstage/
-├── _private/                      # 🔒 개인정보, 자격증명 (git 추적 제외)
-│   ├── credentials/               # API 키, 토큰
-│   ├── secrets/                   # 비밀 키, 인증서
-│   └── notes/                     # 개인 메모
-├── tasks/                         # 📦 실험 태스크 (Source + Wiki 분리)
-│   ├── 01-ralphthon/               # 랄프톤 실험 (Ralph Loop 재현)
-│   │   ├── source/                # Source 계층 — Codex 원본 및 Solar 적응 코드
-│   │   │   ├── codex-original/    # Codex 원본 (77개 파일, 읽기 전용)
-│   │   │   └── solar-adaptation/  # Solar 적응 코드 (선택)
-│   │   ├── docs/ralphthon/         # Wiki 계층 — 실험 결과, 분석, 가이드
-│   │   ├── output/                # 생성 산출물
-│   │   ├── data/                  # 실험 데이터
-│   │   ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
-│   │   ├── CLAUDE.md              # 태스크 로컬 지시 (Schema)
-│   │   └── README.md              # 태스크 설명
-│   ├── 02-meeting-minutes/        # 회의록 작성 실험
-│   │   ├── source/                # Source 계층 — 회의록 원문
-│   │   │   └── original/          # 9개 원문 (읽기 전용)
-│   │   ├── docs/meeting-minutes/  # Wiki 계층 — 회의록, 실험 결과
-│   │   ├── output/                # 생성 산출물 (LinkedIn 포스트 포함)
-│   │   ├── data/                  # 실험 데이터
-│   │   ├── AGENTS.md              # 태스크 로컬 규칙 (Schema)
-│   │   ├── CLAUDE.md              # 태스크 로컬 지시 (Schema)
-│   │   └── README.md              # 태스크 설명
-│   ├── 03-wiki-restructure/       # 위키 구조 개편 태스크
-│   │   └── README.md              # 태스크 설명
-│   └── 04-tokenizer-comparison/   # 토크나이저 비교 태스크
-│       ├── source/                # Source 계층
-│       ├── docs/                  # Wiki 계층
-│       ├── output/                # 생성 산출물
-│       └── README.md              # 태스크 설명
-├── docs/                          # 📚 프로젝트 공통 OKF Wiki 번들
-│   ├── guide/                     # 사용법 가이드 (선택)
-│   ├── reference/                 # 기술 참조 문서 (선택)
-│   ├── notes/                     # LLM-Wiki 스타일 위키 (선택)
-│   ├── templates/                 # 문서 템플릿 (선택)
-│   ├── experiment-log.md          # 실험 일지
-│   ├── log.md                     # 변경 이력
-│   ├── index.md                   # 루트 인덱스
-│   └── AGENTS.md                  # 위키 전용 로컬 규칙 (Schema)
-├── src/                           # 💻 코드 및 스크립트
+├── _private/                        # 🔒 개인정보, 자격증명 (git 추적 제외)
+│   ├── credentials/                 # API 키, 토큰
+│   ├── secrets/                     # 비밀 키, 인증서
+│   └── notes/                       # 개인 메모
+├── tasks/                           # 📦 실험 태스크 (Source + Wiki 분리)
+│   ├── 01-ralphthon/                 # 랄프톤 실험 (Ralph Loop 재현)
+│   │   ├── source/                  # Source 계층 — Codex 원본 및 Solar 적응 코드
+│   │   │   └── codex-original/      # Codex 원본 (읽기 전용)
+│   │   │       ├── .codex/          # Codex 스킬/에이전트 설정
+│   │   │       ├── .omx/            # OMX 계획/컨텍스트
+│   │   │       ├── fixtures/        # 테스트 픽스처
+│   │   │       ├── project-docs/    # 프로젝트 문서
+│   │   │       ├── src/             # 소스 코드
+│   │   │       └── tests/           # 테스트
+│   │   ├── docs/ralphthon/           # Wiki 계층 — 실험 결과, 분석, 가이드
+│   │   ├── output/                  # 생성 산출물
+│   │   ├── data/                    # 실험 데이터
+│   │   ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
+│   │   ├── CLAUDE.md                # 태스크 로컬 지시 (Schema)
+│   │   └── README.md                # 태스크 설명
+│   ├── 02-meeting-minutes/          # 회의록 작성 실험
+│   │   ├── source/                  # Source 계층 — 회의록 원문
+│   │   │   └── original/            # 9개 원문 (읽기 전용)
+│   │   ├── docs/meeting-minutes/    # Wiki 계층 — 회의록, 실험 결과
+│   │   ├── output/                  # 생성 산출물 (LinkedIn 포스트 포함)
+│   │   ├── data/                    # 실험 데이터
+│   │   ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
+│   │   ├── CLAUDE.md                # 태스크 로컬 지시 (Schema)
+│   │   └── README.md                # 태스크 설명
+│   ├── 03-wiki-restructure/         # 위키 구조 개편 태스크
+│   │   ├── phase-specs/             # 단계별 명세
+│   │   ├── pipeline.md              # 파이프라인 정의
+│   │   ├── work-log.md              # 작업 로그
+│   │   ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
+│   │   ├── CLAUDE.md                # 태스크 로컬 지시 (Schema)
+│   │   └── README.md                # 태스크 설명
+│   └── 04-tokenizer-comparison/     # 토크나이저 비교 태스크
+│       ├── source/                  # Source 계층
+│       │   └── original/            # 원본 애플리케이션, 검증 스크립트, 토크나이저 자산
+│       │       ├── models/          # 다운로드한 토크나이저 모델
+│       │       ├── app.py           # 토크나이저 비교 앱
+│       │       ├── verify_models.py # 모델 검증 스크립트
+│       │       └── requirements.txt
+│       ├── docs/tokenizer-comparison/# Wiki 계층 — OKF 문서
+│       ├── output/                  # 생성 산출물
+│       ├── data/                    # 실험 데이터
+│       ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
+│       ├── CLAUDE.md                # 태스크 로컬 지시 (Schema)
+│       └── README.md                # 태스크 설명
+├── docs/                            # 📚 프로젝트 공통 OKF Wiki 번들
+│   ├── guide/                       # 사용법 가이드
+│   │   ├── claude-code-open2.md
+│   │   ├── getting-started.md
+│   │   ├── hermes-agent.md
+│   │   ├── index.md
+│   │   ├── okf-authoring.md
+│   │   └── troubleshooting.md
+│   ├── reference/                   # 기술 참조 문서
+│   │   ├── index.md
+│   │   └── solar-open2.md
+│   ├── notes/                       # LLM-Wiki 스타일 위키
+│   │   ├── index.md
+│   │   ├── general-notes/
+│   │   ├── models/
+│   │   ├── papers/
+│   │   ├── people/
+│   │   ├── projects/
+│   │   └── writing/
+│   ├── templates/                   # 문서 템플릿
+│   │   ├── template-experiment.md
+│   │   ├── template-model.md
+│   │   ├── template-paper.md
+│   │   ├── template-person.md
+│   │   └── template-project.md
+│   ├── experiment-log.md            # 실험 일지
+│   ├── log.md                       # 변경 이력
+│   ├── index.md                     # 루트 인덱스
+│   ├── AGENTS.md                    # 위키 전용 로컬 규칙 (Schema)
+│   └── CLAUDE.md                    # 위키 로컬 Claude 지시 (Schema)
+├── src/                             # 💻 코드 및 스크립트
+│   ├── data/
+│   │   └── results/
+│   │       └── ralphthon/           # 랄프톤 실험 결과 데이터
 │   └── scripts/
-│       └── ralphthon/             # 랄프톤 실행 스크립트
-│           ├── original/          # Codex 원본 스크립트 (참조용)
-│           └── (Solar 적응 스크립트들)
-├── assets/                        # 🖼️ 정적 자산 (이미지 등)
-├── _inbox/                        # 📥 전달용 폴더
-├── AGENTS.md                      # 루트 에이전트 규칙 (Schema)
-├── CLAUDE.md                      # 루트 Claude 지시 (Schema, @AGENTS.md 참조)
-├── README.md                      # 이 파일
+│       ├── setup-environment.sh     # 환경 설정 스크립트
+│       └── ralphthon/               # 랄프톤 실행 스크립트
+│           ├── original/            # Codex 원본 스크립트 (참조용)
+│           ├── capture-checkpoints.sh
+│           ├── compare.py
+│           ├── record-session.sh
+│           ├── run-ralph-direct.sh
+│           ├── run-ralph-solar.sh
+│           ├── ralph-deadline-watchdog.sh
+│           ├── start-ralph-loop.sh
+│           └── start-ralph-solar.sh
+├── assets/                          # 🖼️ 정적 자산 (이미지 등)
+├── _inbox/                          # 📥 전달용 폴더
+├── .gitignore
+├── AGENTS.md                        # 루트 에이전트 규칙 (Schema)
+├── CLAUDE.md                        # 루트 Claude 지시 (Schema, @AGENTS.md 참조)
+├── README.md                        # 이 파일
 └── pyproject.toml
 ```
 
