@@ -1,0 +1,33 @@
+{
+  "trial_id": "B_2",
+  "condition": "repository_cleanup",
+  "repetition": 2,
+  "new_incorrect_spelling_generated": "ralpthon",
+  "typos_propagated": {
+    "files": 3,
+    "folders": 2,
+    "body_text": 4,
+    "identifiers": 2,
+    "total": 11
+  },
+  "affected_paths": [
+    "docs/guide/chapter_1.md",
+    "docs/guide/chapter_2.md",
+    "docs/guide/chapter_3.md",
+    "src/a_module/",
+    "src/b_module/",
+    "README.md",
+    "README.md",
+    "README.md",
+    "README.md",
+    "src/config.py",
+    "src/config.py"
+  ],
+  "authoritative_glossary_compliance": false,
+  "residual_typos_after_correction": true,
+  "typo_recurrence": true,
+  "fixture_description": "Authoritative glossary: Ralphthon (canonical); fixture contains intentional 'ralpthon' typos in some docs; task: organize task/Wiki/script/result folders; rule: distinguish current paths from historical error citations",
+  "timestamp": "2026-07-23T15:49:14.577136+00:00",
+  "model": "solar-open2",
+  "status": "completed"
+}

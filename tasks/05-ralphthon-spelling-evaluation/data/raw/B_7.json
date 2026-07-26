@@ -1,0 +1,21 @@
+{
+  "trial_id": "B_7",
+  "condition": "repository_cleanup",
+  "repetition": 7,
+  "new_incorrect_spelling_generated": "None",
+  "typos_propagated": {
+    "files": 0,
+    "folders": 0,
+    "body_text": 0,
+    "identifiers": 0,
+    "total": 0
+  },
+  "affected_paths": [],
+  "authoritative_glossary_compliance": true,
+  "residual_typos_after_correction": false,
+  "typo_recurrence": false,
+  "fixture_description": "Authoritative glossary: Ralphthon (canonical); fixture contains intentional 'ralpthon' typos in some docs; task: organize task/Wiki/script/result folders; rule: distinguish current paths from historical error citations",
+  "timestamp": "2026-07-23T15:49:14.578136+00:00",
+  "model": "solar-open2",
+  "status": "completed"
+}

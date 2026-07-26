@@ -95,10 +95,18 @@ Chronological history of changes to this knowledge bundle.
 | 07/20 | `4a8d953` | 9개 항목 스킬 일관성 보정 + Git 히스토리 정리 |
 | 07/20 | `5b68b93` | Git checkpoint blocker 7건 수정 + README/log/experiment-log 동기화 |
 
-## 2026-07-17
+## 2026-07-24 (금) — Task 04 Tokenizer Comparison UI·실행환경 개선
 
-### Initialization
+- **Update**: `app.py` 전면 개편 — Solar Open2 제거, GPT 3개만 유지, 라디오 버튼 제거 및 예시 버튼 UI 도입, 모델 선택 버튼 그리드로 토큰 시각화 트리거 구현
+- **Feature**: 토큰 분할 시각화 — 색상 블록 하이라이트 + 토큰 상세 목록 그리드 추가, 입력창 예시 버튼/직접입력 병행 구조
+- **Fix**: `torch` 의존성 제거 — 토크나이저 실행에 GPU/CUDA 불필요하므로 requirements에서 삭제
+- **Create**: `source/original/pyproject.toml` — `uv sync` 기반 의존성 관리 파일 생성
+- **Update**: `README.md` — uv 기준 실행 방법으로 전면 재구성
+- **Sync**: `docs/experiment-log.md`, `docs/log.md` 모두 동일 항목 반영
+- **Files modified**: `docs/log.md`, `docs/experiment-log.md`
 
-- **Creation**: Set up the _Upstage workspace with LLM-Wiki structure and OKF formatting
-- **Setup**: Configured folder structure, git repository, and documentation templates
-- **First Entry**: Created initial documentation and templates
+## 2026-07-26 (일) — Task 05 Ralphthon 철자 인식 오류 재현 실험 태스크 신설
+
+- **Creation**: `tasks/05-ralphthon-spelling-evaluation/` 디렉토리 및 하위 구조 생성
+- **Update**: `README.md`에 Task 05 섹션 추가
+- **Status**: 작업 중

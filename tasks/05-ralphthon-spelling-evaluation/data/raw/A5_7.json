@@ -1,0 +1,14 @@
+{
+  "case_id": "A5_7",
+  "condition": "conflicting_context",
+  "repetition": 7,
+  "canonical": "Ralphthon",
+  "answer_type": "glossary_compliance",
+  "prompt": "다음 참고 자료가 있다:\n- 대부분의 문서에서 'ralpthon'으로 표기됨\n- 공식 glossary: Ralphthon = 실험적 코딩 플랫폼 (canonical)\n- 일부 문서: Ralpthon\n공식 glossary에 따라 순서 무관으로 다음 단어들의 정답 철자를 쓰시오: Zalphthon, Morphton, Ralpthon, Ralphathon, Ralph-thon, marathon, datathon, hackathon",
+  "response_spelling": "Ralphthon",
+  "text": "실험 대상의 영문 철자는 **Ralphthon**입니다.\n\n요청하신 단어들의 철자는 다음과 같습니다:\n- hackathon\n- marathon\n- datathon\n- Zalphthon\n- Morphton\n- Ralpthon\n- Ralphathon\n- Ralph-thon\n\n실험 대상의 정답 철자: **Ralphthon**",
+  "timestamp": "2026-07-23T15:49:14.574336+00:00",
+  "model": "solar-open2",
+  "is_error_allowed": false,
+  "status": "completed"
+}

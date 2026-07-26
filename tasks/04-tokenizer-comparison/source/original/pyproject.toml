@@ -1,0 +1,19 @@
+[project]
+name = "tokenizer-comparison"
+version = "1.0.0"
+description = "LLM 토크나이저 비교 데모 — HuggingFace + GPT 계열 토크나이저 비교"
+requires-python = ">=3.10"
+
+dependencies = [
+    "transformers>=4.48.0",
+    "streamlit>=1.37.0",
+    "tiktoken>=0.6.0",
+    "torch>=2.0.0 ; sys_platform != 'darwin' or sys_platform == 'darwin'",
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+
+[tool.uv.sources]
+torch = { index = "pytorch-cpu" }

@@ -1,0 +1,693 @@
+{
+  "scored_results": [
+    {
+      "case_id": "A1_1",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A1_2",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A1_3",
+      "condition": "explicit_copy",
+      "response_spelling": "ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 2,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A1_4",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A1_5",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A1_6",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A1_7",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A1_8",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A1_9",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A1_10",
+      "condition": "explicit_copy",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_1",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_2",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_3",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_4",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_5",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_6",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_7",
+      "condition": "transliteration_inference",
+      "response_spelling": "ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 2,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_8",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralphathon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_9",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralphathon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A2_10",
+      "condition": "transliteration_inference",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": true,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_1",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_2",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_3",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_4",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_5",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_6",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_7",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A3_8",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_9",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A3_10",
+      "condition": "morpheme_construction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_1",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_2",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_3",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_4",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_5",
+      "condition": "typo_correction",
+      "response_spelling": "ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 2,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A4_6",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_7",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_8",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_9",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A4_10",
+      "condition": "typo_correction",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_1",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_2",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_3",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_4",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_5",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_6",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_7",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_8",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_9",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A5_10",
+      "condition": "conflicting_context",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A6_1",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A6_2",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A6_3",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A6_4",
+      "condition": "delayed_retention",
+      "response_spelling": "ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 2,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A6_5",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A6_6",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A6_7",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A6_8",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    },
+    {
+      "case_id": "A6_9",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralphthon",
+      "exact_match": true,
+      "case_sensitive_match": true,
+      "levenshtein_distance": 0,
+      "is_error_allowed": false,
+      "error_type": ""
+    },
+    {
+      "case_id": "A6_10",
+      "condition": "delayed_retention",
+      "response_spelling": "Ralpthon",
+      "exact_match": false,
+      "case_sensitive_match": false,
+      "levenshtein_distance": 1,
+      "is_error_allowed": false,
+      "error_type": "deletion_error"
+    }
+  ],
+  "summary": {
+    "total_scored": 60,
+    "exact_matches": 44,
+    "case_sensitive_matches": 44,
+    "by_condition": {
+      "explicit_copy": {
+        "condition": "explicit_copy",
+        "total": 10,
+        "exact_matches": 5,
+        "avg_levenshtein": 0.6,
+        "error_count": 5,
+        "wilson_95_ci": [
+          0.2366,
+          0.7634
+        ]
+      },
+      "transliteration_inference": {
+        "condition": "transliteration_inference",
+        "total": 10,
+        "exact_matches": 5,
+        "avg_levenshtein": 0.6,
+        "error_count": 0,
+        "wilson_95_ci": [
+          0.2366,
+          0.7634
+        ]
+      },
+      "morpheme_construction": {
+        "condition": "morpheme_construction",
+        "total": 10,
+        "exact_matches": 9,
+        "avg_levenshtein": 0.1,
+        "error_count": 1,
+        "wilson_95_ci": [
+          0.5958,
+          0.9821
+        ]
+      },
+      "typo_correction": {
+        "condition": "typo_correction",
+        "total": 10,
+        "exact_matches": 9,
+        "avg_levenshtein": 0.2,
+        "error_count": 1,
+        "wilson_95_ci": [
+          0.5958,
+          0.9821
+        ]
+      },
+      "conflicting_context": {
+        "condition": "conflicting_context",
+        "total": 10,
+        "exact_matches": 10,
+        "avg_levenshtein": 0.0,
+        "error_count": 0,
+        "wilson_95_ci": [
+          0.7225,
+          1.0
+        ]
+      },
+      "delayed_retention": {
+        "condition": "delayed_retention",
+        "total": 10,
+        "exact_matches": 6,
+        "avg_levenshtein": 0.5,
+        "error_count": 4,
+        "wilson_95_ci": [
+          0.3127,
+          0.8318
+        ]
+      }
+    },
+    "spelling_distribution": {
+      "Ralphthon": 44,
+      "Ralpthon": 10,
+      "ralpthon": 4,
+      "Ralphathon": 2
+    },
+    "error_type_distribution": {
+      "deletion_error": 11
+    }
+  },
+  "provenance": {
+    "scorer_version": "1.0.0",
+    "canonical_spelling": "Ralphthon",
+    "canonical_slug": "ralphthon",
+    "num_cases": 60,
+    "num_scored": 60
+  }
+}

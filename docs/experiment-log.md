@@ -65,6 +65,27 @@ This file maintains a chronological record of all experiments conducted using So
 - **Setup**: Configured folder structure, git repository, and documentation templates
 - **First Entry**: Created initial documentation and templates
 
+## 2026-07-26 (일) — Task 05 Ralphthon 철자 인식 오류 재현 실험 태스크 신설
+
+- **Task**: `tasks/05-ralphthon-spelling-evaluation/`
+- **Type**: Creation
+- **Details**: Solar Open 2 모델에서 `Ralphthon` 철자 보존·추론·교정 및 저장소 확산 현상 재현을 위한 태스크 신설. 실험 A와 B로 구성.
+- **Status**: 🟡 작업 중
+
+## 2026-07-24 (금) — Task 04 Tokenizer Comparison UI·실행환경 개선
+
+- **Task**: `tasks/04-tokenizer-comparison/source/original/app.py`
+- **Type**: Update
+- **Details**:
+  - Solar Open2 토크나이저 제거 (로컬 호환성 문제)
+  - GPT 모델 축소: gpt-4o, gpt-4, gpt-3.5-turbo 3개만 유지
+  - 예시 텍스트 UI: 라디오 버튼 → 클릭 가능 버튼 4개 (텍스트창에 채우기 방식)
+  - 토큰 시각화: 모델 선택 버튼 → 색상 블록 하이라이트 + 토큰 상세 목록 표시
+  - `torch` 의존성 제거 (CPU-only 토크나이저)
+  - `pyproject.toml` 생성 → `uv sync` 기반 실행 환경 구성
+  - `README.md` uv 기준 실행 안내로 전면 수정
+- **Reference**: `tasks/04-tokenizer-comparison/README.md`, `tasks/04-tokenizer-comparison/source/original/app.py`
+
 ## How to Add Entries
 
 When adding new experiment entries:

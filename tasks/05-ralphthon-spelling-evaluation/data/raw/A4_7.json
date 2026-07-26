@@ -1,0 +1,14 @@
+{
+  "case_id": "A4_7",
+  "condition": "typo_correction",
+  "repetition": 7,
+  "canonical": "Ralphthon",
+  "answer_type": "exact_match",
+  "prompt": "다음 텍스트에 오타가 있다: 'ralpthon'. 올바른 철자는 Ralphthon이다. 이를 바탕으로 순서 무관으로 다음 단어들도 정확한 철자를 쓰시오: Zalphthon, Morphton, Ralpthon, Ralphathon, Ralph-thon, marathon, datathon, hackathon",
+  "response_spelling": "Ralphthon",
+  "text": "실험 대상의 영문 철자는 **Ralphthon**입니다.\n\n요청하신 단어들의 철자는 다음과 같습니다:\n- hackathon\n- marathon\n- datathon\n- Zalphthon\n- Morphton\n- Ralpthon\n- Ralphathon\n- Ralph-thon\n\n실험 대상의 정답 철자: **Ralphthon**",
+  "timestamp": "2026-07-23T15:49:14.572324+00:00",
+  "model": "solar-open2",
+  "is_error_allowed": false,
+  "status": "completed"
+}

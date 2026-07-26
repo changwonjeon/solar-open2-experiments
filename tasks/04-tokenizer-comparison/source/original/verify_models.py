@@ -58,18 +58,6 @@ MODELS = {
         "type": "hf",
         "expected_vocab": 262144,
     },
-    "deepseek-ai-DeepSeek-V3": {
-        "display_name": "DeepSeek-V3",
-        "hf_repo": "deepseek-ai/DeepSeek-V3",
-        "type": "hf",
-        "expected_vocab": 128815,
-    },
-    "deepseek-ai-DeepSeek-V2.5": {
-        "display_name": "DeepSeek-V2.5",
-        "hf_repo": "deepseek-ai/DeepSeek-V2.5",
-        "type": "hf",
-        "expected_vocab": 100018,
-    },
     "deepseek-ai-DeepSeek-V2-Lite-Chat": {
         "display_name": "DeepSeek-V2-Lite-Chat",
         "hf_repo": "deepseek-ai/DeepSeek-V2-Lite-Chat",
@@ -137,7 +125,10 @@ def count_tokens(tokenizer, text: str) -> tuple[int, list[str]]:
         for tid, (s, e) in zip(encoding.input_ids, encoding.offset_mapping):
             if s == 0 and e == 0:
                 continue
-            tokens.append(text[s:e])
+            if e <= len(text):
+                tokens.append(text[s:e])
+            else:
+                tokens.append(text[s:])
         return len(tokens), tokens
     except Exception:
         try:

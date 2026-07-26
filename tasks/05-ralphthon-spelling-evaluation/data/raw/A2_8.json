@@ -1,0 +1,14 @@
+{
+  "case_id": "A2_8",
+  "condition": "transliteration_inference",
+  "repetition": 8,
+  "canonical": "Ralphthon",
+  "answer_type": "generation_distribution",
+  "prompt": "한글 '랄프톤'의 영문 철자를 쓰시오. 순서 무관으로 다음 단어들도 함께 작성: Ralph-thon, hackathon, marathon, datathon, Zalphthon, Morphton, Ralpthon, Ralphathon",
+  "response_spelling": "Ralphathon",
+  "text": "실험 대상의 영문 철자는 **Ralphathon**입니다.\n\n요청하신 단어들의 철자는 다음과 같습니다:\n- hackathon\n- marathon\n- datathon\n- Zalphthon\n- Morphton\n- Ralpthon\n- Ralphathon\n- Ralph-thon\n\n실험 대상의 정답 철자: **Ralphathon**",
+  "timestamp": "2026-07-23T15:49:14.569182+00:00",
+  "model": "solar-open2",
+  "is_error_allowed": true,
+  "status": "completed"
+}

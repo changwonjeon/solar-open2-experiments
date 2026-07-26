@@ -308,7 +308,7 @@ _upstage/
 ### 🔹 Task 04: Tokenizer Comparison
 
 - **폴더**: `tasks/04-tokenizer-comparison/`
-- **상태**: ⏳ 준비 중
+- **상태**: 🟢 완료
 - **실험 유형**: 여러 오픈웨이트 모델의 토크나이저 결과를 비교하여 토큰화 패턴·효율성·호환성을 분석
 
 다양한 오픈웨이트 모델의 토크나이저를 동일한 입력 텍스트에 적용하여, 토큰 수·토큰 분포·특수 토큰 처리·모델 간 호환성 등을 비교 분석합니다.
@@ -322,7 +322,31 @@ _upstage/
 | `output/` | 생성 산출물 |
 | `AGENTS.md`, `CLAUDE.md` | 태스크 로컬 규칙 |
 
+#### 📌 2026-07-24 — UI·실행환경 개선
+
+| 항목 | 내용 |
+|------|------|
+| **앱 전면 개편** | Solar Open2 토크나이저 제거 (로컬 호환성 문제), GPT 모델 3개(gpt-4o, gpt-4, gpt-3.5-turbo)로 축소 |
+| **UI 개선** | 예시 텍스트: 라디오 버튼 → 클릭 가능 버튼 4개, 토큰 시각화: 모델 선택 버튼 → 색상 블록 하이라이트 + 토큰 상세 목록 |
+| **의존성 개선** | `torch` 제거 (CPU-only 토크나이저), `pyproject.toml` 생성 → `uv sync` 기반 실행 환경 구성 |
+| **문서 갱신** | `README.md` uv 기준 실행 안내로 전면 수정 |
+| **파일 추가** | `source/original/pyproject.toml`, `source/original/uv.lock`, `source/original/models/meta-llama-Llama-3.1-8B-Instruct/`, `source/original/elt_utils.py` |
+
+#### 📁 주요 산출물
+
+- [`tasks/04-tokenizer-comparison/source/original/app.py`](tasks/04-tokenizer-comparison/source/original/app.py) — 대화형 토큰 비교 Streamlit 앱
+- [`tasks/04-tokenizer-comparison/source/original/verify_models.py`](tasks/04-tokenizer-comparison/source/original/verify_models.py) — CLI 모델 검증 스크립트
+- [`tasks/04-tokenizer-comparison/docs/tokenizer-comparison/`](tasks/04-tokenizer-comparison/docs/tokenizer-comparison/) — OKF Wiki 문서
+
 > **참고**: `source/original/` 내용은 읽기 전용으로 유지합니다.
+
+---
+
+### 🔹 Task 05: Ralphthon 철자 인식 오류 재현 실험
+
+- **폴더**: `tasks/05-ralphthon-spelling-evaluation/`
+- **상태**: 🟡 작업 중
+- **실험 유형**: Solar Open 2 모델에서 `Ralphthon` 철자 보존·추론·교정 및 저장소 확산 현상 재현
 
 ---
 

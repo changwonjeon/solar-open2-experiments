@@ -1,0 +1,21 @@
+{
+  "model_id": "solar-open2",
+  "model_environment": "claude-upstage wrapper via Claude Code session",
+  "claude_upstage_sha256": "e30068422f9156f1726027d95c1e1547666589e73965d88d4767f45fbe25359b",
+  "claude_code_version": "unknown-at-run-time",
+  "git_head": "7effda49652c09e1f496f06d25d0a8949137568c",
+  "git_head_short": "7effda4",
+  "start_time_utc": "2026-07-23T15:26:14Z",
+  "timezone": "KST",
+  "num_repetitions": 10,
+  "randomization_seed": 42,
+  "case_execution_order": "random-per-run",
+  "dry_run_case_count": 60,
+  "dry_run_trial_count": 10,
+  "execution_command_sanitized": "claude-upstage --model solar-open2",
+  "harness": "claude-upstage",
+  "probe_modes": ["probe", "agent", "all", "dry-run"],
+  "canonical_spelling": "Ralphthon",
+  "canonical_slug": "ralphthon",
+  "observed_errors": ["Ralpthon", "ralpthon"]
+}
