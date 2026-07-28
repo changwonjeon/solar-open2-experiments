@@ -1,0 +1,4 @@
+# AAWS submodule directory - gitignored at root level
+# The aaws/ folder is a git submodule and its contents are managed separately
+# Only output/ is tracked when using solar-open2
+aaws/

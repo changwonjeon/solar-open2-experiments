@@ -62,6 +62,30 @@ _upstage/
 │       ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
 │       ├── CLAUDE.md                # 태스크 로컬 지시 (Schema)
 │       └── README.md                # 태스크 설명
+│   ├── 05-ralphthon-spelling-evaluation/ # 랄프톤 철자 오류 재현 실험
+│       ├── source/                  # Source 계층
+│       ├── docs/                    # Wiki 계층 — OKF 문서
+│       ├── output/                  # 생성 산출물
+│       ├── data/                    # 실험 데이터
+│       ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
+│       ├── CLAUDE.md                # 태스크 로컬 지시 (Schema)
+│       └── README.md                # 태스크 설명
+│   └── 06-practice-aaws/            # Solar Open 2 API 에이전트 평가 실습
+│       ├── aaws/                    # AAWS 원본 (git submodule, 실습 중 수정 허용)
+│       │   ├── app/                 # 에이전트 시스템 (Navigator/Coder/Supervisor/Analyst)
+│       │   ├── notebooks/           # 1~5일차 Jupyter 노트북 (참조용)
+│       │   ├── artifacts/           # 시나리오 명세 및 수집 결과
+│       │   ├── tests/               # 평가 러너
+│       │   ├── install/             # 설치 스크립트
+│       │   ├── Mission_upstage.md   # 실제 실행 미션
+│       │   ├── test_upstage.py      # Solar Open 2 API 연결 검증
+│       │   └── .env                 # API 키 (gitignore 필수)
+│       ├── docs/                    # Wiki 계층 — OKF 문서 (experiment-log, 분석 리포트)
+│       ├── data/                    # 실험 데이터 (fixture, gold dataset)
+│       ├── output/                  # 생성 산출물 (평가 리포트, 차트, 보고서)
+│       ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
+│       ├── CLAUDE.md                # 태스크 로컬 지시 (Schema)
+│       └── README.md                # 태스크 설명
 ├── docs/                            # 📚 프로젝트 공통 OKF Wiki 번들
 │   ├── guide/                       # 사용법 가이드
 │   │   ├── claude-code-open2.md
@@ -347,6 +371,118 @@ _upstage/
 - **폴더**: `tasks/05-ralphthon-spelling-evaluation/`
 - **상태**: 🟡 작업 중
 - **실험 유형**: Solar Open 2 모델에서 `Ralphthon` 철자 보존·추론·교정 및 저장소 확산 현상 재현
+
+---
+
+### 🔹 Task 06: Solar Open 2 API 에이전트 평가 실습
+
+- **폴더**: `tasks/06-practice-aaws/`
+- **상태**: 🟡 실습 진행 중 (사전 준비 완료, Mission 1 실행 중)
+- **실행 미션**: [`aaws/Mission_upstage.md`](tasks/06-practice-aaws/aaws/Mission_upstage.md)
+- **실험 유형**: LangGraph/LangChain 기반 AAWS에서 Solar Open 2(`solar-open2`)를 모델의 두뇌로 연결했을 때, Supervisor·Navigator·Coder·Analyst 역할별 수행 능력을 공정하고 반복 가능하게 평가
+
+2026년 7월 28일 LGCNS 사내교육 Day 2 미션으로, 기존 Gemini 기반 AAWS 에이전트 팀에 Solar Open 2를 대체 투입하여 역할별 성공률·정확성·비용·지연·복구력을 측정합니다.
+
+#### 📌 실험 설계
+
+| 항목 | 내용 |
+|------|------|
+| **평가 대상** | Solar Open 2 모델의 역할별 수행 능력 (Claude Code 사용 능력 아님) |
+| **비교 기준** | Gemini 전체 팀(`GGG`)을 기준선으로, Solar 전체 팀(`SSS`) 및 역할별 교차 조건(`SGG`, `GSG`, `GGS`) 비교 |
+| **실행 환경** | `uv` 기반, LangSmith trace 연동 |
+| **평가 시나리오** | Level 1 (`quotes_01_pagination`, `quotes_02_tag_filter`), Level 2 (`ajax_01_playwright_wait`, `ajax_02_api_reverse_engineering`) |
+| **미션 구성** | Mission 1(역할별 평가) → Mission 2(Analyst 구축) → Mission 3(고도화: Memory/Fallback/Skills) |
+
+#### 📌 미션 구조 (Mission_upstage.md 기준)
+
+| 미션 | 주제 | 핵심 내용 |
+|------|------|-----------|
+| **Mission 1** | 역할별 웹 수집 에이전트 평가 | Supervisor/Navigator/Coder 역할별 Solar 적합도 분석. `GGG`/`SSS`/`SGG`/`GSG`/`GGS` 5가지 조건 비교 |
+| **Mission 2** | Solar Analyst 에이전트 구축·평가 | 수집 결과 JSON을 분석·시각화하는 Analyst 에이전트 추가. Solar의 데이터 해석 능력 별도 평가 |
+| **Mission 3** | Solar 에이전트 고도화 (선택) | Track A: Pattern Memory, Track B: Model Fallback, Track C: Skill System, Track D: 사용자 정의 시나리오 |
+
+#### 📌 평가 지표
+
+| 지표 | 의미 |
+|------|------|
+| Schema pass | JSON 구조와 타입 준수 |
+| Task completion | 요구한 결과 파일 생성과 정상 종료 |
+| Record completeness | 필수 레코드 수 대비 수집률 |
+| Value accuracy | gold 값과 정확히 일치한 필드 비율 |
+| Missing rate | 필수 필드 누락률 |
+| Duplicate rate | 중복 레코드 비율 |
+| Filter compliance | 요청 조건을 만족한 레코드 비율 |
+| Page coverage | 요구 페이지 또는 상세 URL 방문 비율 |
+
+**권장 종합 가중치**: 내용 정확성·완전성 40% / 작업 완료 20% / 형식 정확성 20% / 전략 효율 10% / 비용·지연·재시도 10%
+
+#### 📌 진행 상황 (2026-07-28 기준)
+
+| 항목 | 상태 | 비고 |
+|------|------|------|
+| AAWS 클론 및 환경 구성 | ✅ 완료 | `tasks/06-practice-aaws/aaws/`에 git submodule로 추가 |
+| `.env` 파일 세팅 (`UPSTAGE_API_KEY` 등) | ✅ 완료 | `aaws/.env`로 복사 완료 |
+| `docs/` / `data/` / `output/` 디렉토리 구성 | ✅ 완료 | OKF 계층 구조 준비 완료 |
+| Step 0-2. 단독 API 호출 확인 (`test_upstage.py`) | ⏳ 진행 중 | `uv run python test_upstage.py` 실행 및 검증 |
+| Mission 1. 역할별 웹 수집 에이전트 평가 | ⏳ 진행 중 | `test_config.yaml` 시나리오 활성화 후 파일럿 실행 |
+| Mission 2. Solar Analyst 에이전트 구축·평가 | ⏳ 대기 중 | Mission 1 완료 후 진행 |
+| Mission 3. Solar 에이전트 고도화 | ⏳ 대기 중 | Mission 1·2 baseline 동결 후 진행 |
+
+#### 🚧 다음 단계
+
+1. `test_upstage.py` 실행으로 Solar Open 2 API 연결 검증
+2. `tests/test_config.yaml`에서 Level 1 시나리오 활성화
+3. `uv run python -m tests.run_supervisor_scenarios --model-mode both`로 `GGG`/`SSS` 파일럿 실행
+4. 역할별 교차 비교(`SGG`, `GSG`, `GGS`) 파일럿 실행
+5. 유효 조건별 5회 본 실험 + 결정론적 정확도 채점
+6. Mission 2 (Analyst 에이전트) 진행
+7. Mission 3 (고도화 트랙) 진행
+8. 역할별 결론, 실패 분석, 운영 판단 문서화
+
+#### 📁 주요 진입점
+
+| 목적 | 경로 |
+|------|------|
+| Solar API 연결 검증 | `tasks/06-practice-aaws/aaws/test_upstage.py` |
+| Supervisor 시나리오 실행 | `tasks/06-practice-aaws/aaws/tests/run_supervisor_scenarios.py` |
+| Sequential 시나리오 실행 | `tasks/06-practice-aaws/aaws/tests/run_sequential_scenarios.py` |
+| 시나리오 선택 | `tasks/06-practice-aaws/aaws/tests/test_config.yaml` |
+| 실습 미션 가이드 | `tasks/06-practice-aaws/aaws/Mission_upstage.md` |
+| OKF 위키 | `tasks/06-practice-aaws/docs/` |
+
+#### 📁 주요 산출물 (실습 진행에 따라 생성 예정)
+
+- [`tasks/06-practice-aaws/docs/experiment-log.md`](tasks/06-practice-aaws/docs/experiment-log.md) — 실습 진행 일지 (일일 기록)
+- [`tasks/06-practice-aaws/docs/analysis-report.md`](tasks/06-practice-aaws/docs/analysis-report.md) — 멀티에이전트 성능 분석 리포트
+- [`tasks/06-practice-aaws/docs/final-evaluation-report.md`](tasks/06-practice-aaws/docs/final-evaluation-report.md) — 최종 결과 보고서
+- `tasks/06-practice-aaws/output/scenario-sequential-results/` — Sequential 파이프라인 평가 결과
+- `tasks/06-practice-aaws/output/scenario-supervisor-results/` — Supervisor 파이프라인 평가 결과
+- `tasks/06-practice-aaws/data/fixtures/` — 고정 HTML/API fixture
+- `tasks/06-practice-aaws/data/gold/` — gold dataset
+
+#### 실전 명령어
+
+```bash
+cd tasks/06-practice-aaws/aaws
+
+# 1. Solar API 단독 연결 확인
+uv run python test_upstage.py
+
+# 2. 시나리오 선택 (tests/test_config.yaml 에서 주석 해제)
+vim tests/test_config.yaml
+
+# 3. Gemini 전체 팀
+uv run python -m tests.run_supervisor_scenarios --model-mode gemini
+
+# 4. Solar 전체 팀
+uv run python -m tests.run_supervisor_scenarios --model-mode upstage
+
+# 5. Gemini와 Solar 전체 팀 순차 실행
+uv run python -m tests.run_supervisor_scenarios --model-mode both
+
+# 6. Sequential 파이프라인
+uv run python -m tests.run_sequential_scenarios
+```
 
 ---
 
