@@ -14,7 +14,7 @@
 
 | 항목 | 상태 | 비고 |
 |------|------|------|
-| AAWS 클론 및 환경 구성 | ✅ 완료 | `tasks/06-practice-aaws/aaws/` 에 git submodule 로 추가 |
+| AAWS 클론 및 환경 구성 | ✅ 완료 | `tasks/06-practice-aaws/code/` 에 태양광 평가용 코드 보관 (aaws/ 는 외부 공개 금지) |
 | `.env` 파일 세팅 (`UPSTAGE_API_KEY` 등) | ✅ 완료 | `aaws/.env` 로 복사 완료 |
 | `docs/` / `data/` / `output/` 디렉토리 구성 | ✅ 완료 | OKF 계층 구조 준비 완료 |
 | Step 0-1. 환경 구성 | ✅ 완료 | `.env` 에 API 키 세팅 완료 |
@@ -27,25 +27,21 @@
 
 ```
 tasks/06-practice-aaws/
-├── aaws/                      # ← git submodule (AAWS 원본, 실습 중 수정 허용)
+├── aaws/                      # 🔒 LGCNS 사내 교육 자료 (gitignore 처리, 외부 공개 금지)
+├── code/                      # ☀️ Solar Open 2 평가용 코드 (공개 저장소 관리)
 │   ├── app/                   # 에이전트 시스템 (Navigator/Coder/Supervisor/Analyst)
 │   │   ├── agents/            # 에이전트 구현
 │   │   ├── tools/             # 에이전트 도구 모음
 │   │   ├── prompts/           # 시스템 프롬프트
 │   │   └── schemas.py         # Pydantic 스키마
-│   ├── notebooks/             # 1~5 일차 Jupyter 노트북 (참조용)
-│   ├── artifacts/             # 시나리오 명세 및 수집 결과
-│   │   ├── scenarios/         # 9 개 난이도별 시나리오 (.md)
-│   │   └── results/           # 평가 리포트 및 크롤링 결과 JSON
 │   ├── tests/                 # 평가 러너
 │   │   ├── run_sequential_scenarios.py
 │   │   ├── run_supervisor_scenarios.py
 │   │   └── test_config.yaml   # 시나리오 선택 config
-│   ├── install/               # 설치 스크립트
-│   ├── Mission.md             # 기존 Day 2 미션 (참조용)
 │   ├── Mission_upstage.md     # 실제 실행 미션 (Solar Open 2 API 평가)
 │   ├── test_upstage.py        # Solar Open 2 단독 API 연결 검증 스크립트
-│   └── .env                   # API 키 (gitignore 필수)
+│   ├── requirements.txt       # Python 의존성
+│   └── __init__.py
 ├── docs/                      # OKF Wiki 문서 (experiment-log, 분석 리포트)
 ├── data/                      # 실험 데이터 (시나리오 결과, 고정 fixture, gold dataset)
 ├── output/                    # 생성 산출물 (LLMs-as-a-Judge 평가 리포트, 차트, 보고서)
@@ -56,19 +52,19 @@ tasks/06-practice-aaws/
 
 ## Canonical Source
 
-- AAWS 원본: `aaws/` (git submodule)
-- 실제 실행 미션: `aaws/Mission_upstage.md`
-- 참고 미션: `aaws/Mission.md` (기존 Day 2 미션, 참조용)
+- Solar 평가 코드: `code/` (공개 저장소 관리)
+- 실제 실행 미션: `code/Mission_upstage.md`
+- 참고 미션: LGCNS 사내 교육 자료 (외부 접근 불가)
 
 ## 진입점
 
 | 목적 | 경로 |
 |------|------|
-| Solar API 연결 검증 | `aaws/test_upstage.py` |
-| Supervisor 시나리오 실행 | `aaws/tests/run_supervisor_scenarios.py` |
-| Sequential 시나리오 실행 | `aaws/tests/run_sequential_scenarios.py` |
-| 시나리오 선택 | `aaws/tests/test_config.yaml` |
-| 실습 미션 가이드 | `aaws/Mission_upstage.md` |
+| Solar API 연결 검증 | `code/test_upstage.py` |
+| Supervisor 시나리오 실행 | `code/tests/run_supervisor_scenarios.py` |
+| Sequential 시나리오 실행 | `code/tests/run_sequential_scenarios.py` |
+| 시나리오 선택 | `code/tests/test_config.yaml` |
+| 실습 미션 가이드 | `code/Mission_upstage.md` |
 | OKF 위키 | `docs/` |
 
 ## Mission 구조 (Mission_upstage.md 기준)
@@ -150,7 +146,7 @@ Mission 1 에서 수집한 JSON 을 분석·시각화하는 Analyst 에이전트
 ## 실전 명령어
 
 ```bash
-cd tasks/06-practice-aaws/aaws
+cd tasks/06-practice-aaws/code
 
 # 1. Solar API 단독 연결 확인
 uv run python test_upstage.py
@@ -173,7 +169,8 @@ uv run python -m tests.run_sequential_scenarios
 
 ## 실습 수정 가이드
 
-- `aaws/` 내 파일 수정 시: 실습 중 자유롭게 수정 가능 (Source 불변성 예외)
+- `aaws/` 내 파일 수정 시: LGCNS 사내 교육 자료로 외부 공개 금지 (개발/실습 환경에서만 접근 가능)
+- `code/` 내 파일 수정 시: Solar Open 2 평가 실험용 코드. 실습 중 자유롭게 수정 가능
 - `docs/` 내 문서 작성 시: OKF frontmatter(`type`, `timestamp`, `tags`) 준수
 - `output/` 내 산출물: solar-open2 실행 결과만 저장, 중간 작업 파일은 `data/` 에 보관
 - `git add`/`commit`/`push`: 사용자 승인 후에만 실행

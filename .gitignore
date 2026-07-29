@@ -52,3 +52,6 @@ data/results/
 # macOS
 .Spotlight-V100
 .Trashes
+
+# AAWS submodule directory (proprietary - not for public repo)
+/tasks/06-practice-aaws/aaws/

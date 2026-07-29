@@ -1,0 +1,20 @@
+# Application dependencies for Solar Open 2 agent evaluation
+# Generated for tasks/06-practice-aaws/code/ directory
+
+# HTTP client for agent communication
+requests>=2.31.0
+
+# Data validation and settings management
+pydantic>=2.0.0
+
+# LangChain core components
+langchain-core>=0.2.0
+
+# LangChain framework
+langchain>=0.1.0
+
+# LangSmith tracing and evaluation
+langsmith>=0.1.0
+
+# Environment variable management
+python-dotenv>=1.0.0
