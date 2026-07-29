@@ -15,7 +15,7 @@
 | 항목 | 상태 | 비고 |
 |------|------|------|
 | AAWS 클론 및 환경 구성 | ✅ 완료 | `tasks/06-practice-aaws/code/` 에 태양광 평가용 코드 보관 (aaws/ 는 외부 공개 금지) |
-| `.env` 파일 세팅 (`UPSTAGE_API_KEY` 등) | ✅ 완료 | `aaws/.env` 로 복사 완료 |
+| `.env` 파일 세팅 (`UPSTAGE_API_KEY` 등) | ✅ 완료 | `code/.env` 로 복사 완료 (aaws/ 내부 원본은 외부 공개 금지) |
 | `docs/` / `data/` / `output/` 디렉토리 구성 | ✅ 완료 | OKF 계층 구조 준비 완료 |
 | Step 0-1. 환경 구성 | ✅ 완료 | `.env` 에 API 키 세팅 완료 |
 | Step 0-2. 단독 API 호출 확인 (`test_upstage.py`) | ⏳ 진행 중 | `uv run python test_upstage.py` 실행 및 검증 |
@@ -169,11 +169,11 @@ uv run python -m tests.run_sequential_scenarios
 
 ## 실습 수정 가이드
 
-- `aaws/` 내 파일 수정 시: LGCNS 사내 교육 자료로 외부 공개 금지 (개발/실습 환경에서만 접근 가능)
-- `code/` 내 파일 수정 시: Solar Open 2 평가 실험용 코드. 실습 중 자유롭게 수정 가능
-- `docs/` 내 문서 작성 시: OKF frontmatter(`type`, `timestamp`, `tags`) 준수
-- `output/` 내 산출물: solar-open2 실행 결과만 저장, 중간 작업 파일은 `data/` 에 보관
-- `git add`/`commit`/`push`: 사용자 승인 후에만 실행
+- `aaws/`: LGCNS 사내 교육 자료로 외부 공개 금지. `aaws/` 내 파일은 로컬 개발/실습 환경에서만 접근 가능하며, 원격 저장소에는 저장하지 않습니다.
+- `code/`: Solar Open 2 평가 실험용 코드. `code/` 내 파일은 실습 중 자유롭게 수정 가능하며, solar-open2 실행 결과만 `output/`에 저장하고 중간 작업 파일은 `data/`에 보관합니다.
+- `docs/`: OKF frontmatter(`type`, `timestamp`, `tags`) 준수가 필수입니다.
+- `output/`: solar-open2 실행 결과만 저장하세요.
+- `git add`/`commit`/`push`: 사용자 승인 후에만 실행합니다. Co-Authored-By 트레일러는 커밋 메시지에 포함하지 않습니다.
 
 ---
 
