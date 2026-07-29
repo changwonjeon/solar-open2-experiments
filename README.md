@@ -18,7 +18,16 @@ _upstage/
 │   ├── secrets/                     # 비밀 키, 인증서
 │   └── notes/                       # 개인 메모
 ├── tasks/                           # 📦 실험 태스크 (Source + Wiki 분리)
-│   ├── 01-ralphthon/                 # 랄프톤 실험 (Ralph Loop 재현)
+│   ├── 00-hermes/                   # Hermes Agent 플랫폼 실험 (2026-07-29 신설)
+│   │   ├── index.md                 # 루트 인덱스 (OKF Reference)
+│   │   ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
+│   │   ├── log.md                   # 변경 이력 / 세션 로그 색인
+│   │   ├── sessions/                # 세션별 기록 (OKF Experiment/Project)
+│   │   ├── context-snapshots/       # 컨텍스트 동결 스냅샷 (OKF Ralph Context Snapshot)
+│   │   ├── playbooks/               # 실행 절차 (OKF Playbook)
+│   │   ├── models/                  # 모델/환경 정보 (OKF Model)
+│   │   └── references/              # 참고 자료 (OKF Reference)
+│   ├── 01-ralphthon/                # 랄프톤 실험 (Ralph Loop 재현)
 │   │   ├── source/                  # Source 계층 — Codex 원본 및 Solar 적응 코드
 │   │   │   └── codex-original/      # Codex 원본 (읽기 전용)
 │   │   │       ├── .codex/          # Codex 스킬/에이전트 설정
@@ -27,7 +36,7 @@ _upstage/
 │   │   │       ├── project-docs/    # 프로젝트 문서
 │   │   │       ├── src/             # 소스 코드
 │   │   │       └── tests/           # 테스트
-│   │   ├── docs/ralphthon/           # Wiki 계층 — 실험 결과, 분석, 가이드
+│   │   ├── docs/ralphthon/          # Wiki 계층 — 실험 결과, 분석, 가이드
 │   │   ├── output/                  # 생성 산출물
 │   │   ├── data/                    # 실험 데이터
 │   │   ├── AGENTS.md                # 태스크 로컬 규칙 (Schema)
@@ -158,6 +167,51 @@ _upstage/
 > **참고**: MoE(321개 전문가) 구조로 토큰당 15B 활성 파라미터만 사용하여, 250B 전체 모델 대비 훨씬 적은 VRAM으로 대규모 추론이 가능합니다. 상세 사양은 [HuggingFace 모델 카드](https://huggingface.co/upstage/Solar-Open2-250B)를 참고하세요.
 
 ## 🧪 Solar Open 2 비교 실험 프로젝트
+
+### 🔹 Task 00: Hermes Agent 플랫폼 실험
+
+- **폴더**: `tasks/00-hermes/`
+- **상태**: 🟢 완료 (기록 시스템 구축)
+- **실험 유형**: Claude Code CLI 외에 Hermes Agent 플랫폼을 추가로 연동하여, Solar Open 2를 백엔드로 한 다중 에이전트 플랫폼 실험 환경 구축
+
+Hermes Agent는 Solar Open 2를 백엔드로 사용하는 또 다른 에이전트 플랫폼으로, Claude Code CLI와 병행·비교 실험이 가능합니다. `tasks/00-hermes/`는 Hermes 세션의 작업 내역을 OKF frontmatter + LLM-Wiki 스타일로 체계적으로 기록하는 전용 공간입니다.
+
+#### 📌 구조
+
+| 항목 | 내용 |
+|------|------|
+| `sessions/` | 세션별 작업 기록 (OKF: `Experiment`/`Project`, LLM-Wiki: `Notes`/`Projects`) |
+| `context-snapshots/` | 컨텍스트 동결 스냅샷 (OKF: `Ralph Context Snapshot`) |
+| `playbooks/` | 반복 작업 실행 절차 (OKF: `Playbook`) |
+| `models/` | 모델/환경 정보 (OKF: `Model`, LLM-Wiki: `Models`) |
+| `references/` | 참고 자료 (OKF: `Reference`) |
+| `log.md` | 변경 이력 및 세션 로그 색인 |
+| `index.md` | 루트 인덱스 (OKF `Reference`) |
+| `AGENTS.md` | 태스크 로컬 규칙 (Schema) |
+
+#### 📌 기록 원칙
+
+1. **단일 소스 오브 트루스**: `tasks/00-hermes/`는 Hermes 세션 기록의 유일한 저장소이며, `docs/`에 중복 기록하지 않음
+2. **OKF frontmatter 필수**: 모든 `.md` 파일에 `type` 필드 포함 YAML frontmatter 작성
+3. **LLM-Wiki 카테고리 분류**: Notes, Projects, Models 등 카테고리로 문서 분류
+4. **세션 기반 기록**: 각 세션은 `sessions/YYYY-MM-DD-<slug>.md` 형식 독립 문서로 기록
+5. **보호 범위**: `sessions/` 기존 파일 내용 임의 수정 금지, 덮어쓰기 대신 후속 작업을 별도 문서로 추가
+
+#### 📁 주요 산출물
+
+- [`tasks/00-hermes/sessions/2026-07-29-first-hermes-session.md`](tasks/00-hermes/sessions/2026-07-29-first-hermes-session.md) — 첫 Hermes 세션 기록
+- [`tasks/00-hermes/context-snapshots/2026-07-29-initial-context.md`](tasks/00-hermes/context-snapshots/2026-07-29-initial-context.md) — 초기 컨텍스트 스냅샷
+- [`tasks/00-hermes/playbooks/okf-document-creation.md`](tasks/00-hermes/playbooks/okf-document-creation.md) — OKF 문서 작성 플레이북
+- [`tasks/00-hermes/references/okf-spec.md`](tasks/00-hermes/references/okf-spec.md) — OKF 스펙 참고 자료
+- [`tasks/00-hermes/references/llm-wiki-guide.md`](tasks/00-hermes/references/llm-wiki-guide.md) — LLM-Wiki 가이드
+
+#### 🚧 다음 단계
+
+- Hermes Agent 세션 실전 운영 및 세션 기록 지속 축적
+- Claude Code CLI vs Hermes Agent 비교 실험 설계
+- Solar Open 2 백엔드 성능 교차 검증
+
+---
 
 ### 🔹 Task 01: 랄프톤(Ralphthon) 재현 실험
 
