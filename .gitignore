@@ -56,3 +56,4 @@ data/results/
 # AAWS submodule directory (proprietary - not for public repo)
 /tasks/06-practice-aaws/aaws/
 /tasks/06-practice-aaws/aaws/.env
+/tasks/06-practice-aaws/code/.env
