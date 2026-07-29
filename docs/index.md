@@ -70,6 +70,15 @@ Document templates for OKF authoring.
 
 ## Task Wikis
 
+### Hermes Agent Platform Experiment (Task 00)
+
+- [`../tasks/00-hermes/`](../tasks/00-hermes/) — Hermes Agent 플랫폼 실험
+  - Wiki: [`../tasks/00-hermes/index.md`](../tasks/00-hermes/index.md) — Hermes 작업 내역 인덱스
+  - Sessions: [`../tasks/00-hermes/sessions/`](../tasks/00-hermes/sessions/) — 세션별 기록
+  - Context Snapshots: [`../tasks/00-hermes/context-snapshots/`](../tasks/00-hermes/context-snapshots/) — 컨텍스트 스냅샷
+  - Playbooks: [`../tasks/00-hermes/playbooks/`](../tasks/00-hermes/playbooks/) — 실행 절차
+  - References: [`../tasks/00-hermes/references/`](../tasks/00-hermes/references/) — 참고 자료
+
 ### Ralph Loop Experiment (Task 01)
 
 - [`../tasks/01-ralphthon/`](../tasks/01-ralphthon/) — Ralph Loop 재현 실험

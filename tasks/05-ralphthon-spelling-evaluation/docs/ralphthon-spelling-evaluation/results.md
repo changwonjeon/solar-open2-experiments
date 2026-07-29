@@ -276,10 +276,10 @@ execution_host: solar-open2-claude-code-session
 
 - [실험 인덱스](index.md) — Wiki 루트
 - [실행 명세](../../EXECUTION_PLAN.md) — 실험 명세
-- [상위 Task 01](../01-ralphthon/docs/ralphthon/) — 랄프루프 실험 결과
+- [상위 Task 01](../../../01-ralphthon/docs/ralphthon/) — 랄프루프 실험 결과
 - [상위 README](../../README.md) — 프로젝트 개요
-- [채점 결과](../output/summary.json) — 완전 채점 데이터
-- [채점 결과(CSV)](../output/summary.csv) — 조건별 채점 데이터
+- [채점 결과](../../output/summary.json) — 완전 채점 데이터
+- [채점 결과(CSV)](../../output/summary.csv) — 조건별 채점 데이터
 
 ## 변경 이력
 

@@ -105,6 +105,20 @@ Chronological history of changes to this knowledge bundle.
 - **Sync**: `docs/experiment-log.md`, `docs/log.md` 모두 동일 항목 반영
 - **Files modified**: `docs/log.md`, `docs/experiment-log.md`
 
+## 2026-07-29 (수) — Task 00 Hermes Agent 플랫폼 실험 태스크 신설
+
+- **Task**: `tasks/00-hermes/`
+- **Type**: Creation
+- **Status**: 🟢 완료 (기록 시스템 구축)
+- **Details**:
+  - Hermes Agent 플랫폼을 Solar Open 2 백엔드로 연동하기 위한 전용 태스크 디렉토리 생성
+  - 구조: `sessions/`, `context-snapshots/`, `playbooks/`, `models/`, `references/` (OKF + LLM-Wiki 스타일)
+  - 기록 원칙: 단일 소스 오브 트루스, OKF frontmatter 필수, 세션 기반 기록, 기존 세션 덮어쓰기 금지
+  - 산출물: 첫 세션 기록, 초기 컨텍스트 스냅샷, OKF 문서 작성 플레이북, 참고 자료(OKF 스펙, LLM-Wiki 가이드)
+  - 목적: Claude Code CLI 외에 Hermes Agent 플랫폼 추가 연동, 다중 에이전트 플랫폼 비교 실험 환경 구축
+  - **복원 기록**: 초기 `context-snapshots/2026-07-29-initial-context.md`와 `references/llm-wiki-guide.md`는 첫 세션 이후 누락이 확인되어 2026-07-29에 provenance(`reconstructed-after-session`)를 명시해 사후 복원됨
+- **Reference**: `tasks/00-hermes/AGENTS.md`, `tasks/00-hermes/index.md`, `tasks/00-hermes/log.md`
+
 ## 2026-07-26 (일) — Task 05 Ralphthon 철자 인식 오류 재현 실험 태스크 신설
 
 - **Creation**: `tasks/05-ralphthon-spelling-evaluation/` 디렉토리 및 하위 구조 생성

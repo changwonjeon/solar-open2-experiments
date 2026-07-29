@@ -39,7 +39,7 @@ timestamp: 2026-07-23T15:26:14Z
 
 - [실행 명세](../../EXECUTION_PLAN.md) — 실험의 전체 실행 명세
 - [실험 결과](results.md) — 조건별 결과와 통계
-- [상위 Task 01](../01-ralphthon/docs/ralphthon/) — 랄프루프 실험 결과
+- [상위 Task 01](../../../01-ralphthon/docs/ralphthon/) — 랄프루프 실험 결과
 - [상위 README](../../README.md) — 프로젝트 개요
 
 ## 보호 범위
